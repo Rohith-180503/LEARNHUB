@@ -1,67 +1,88 @@
 const fakeData = [
   {
     id: 1,
-    title: "Complete Web Development Bootcamp",
-    instructor: "John Doe",
+    title: "Complete Linux Training",
+    instructor: "Jason Cannon",
     price: 49.99,
-    img: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=400&q=80",
+    img: "https://raw.githubusercontent.com/marwin1991/profile-technology-icons/main/icons/linux.png"
   },
   {
     id: 2,
-    title: "React JS for Beginners",
-    instructor: "Alice Johnson",
-    price: 44.99,
-    img: "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=400&q=80",
+    title: "Modern JavaScript from Scratch",
+    instructor: "Jonas Schmedtmann",
+    price: 39.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
   },
   {
     id: 3,
-    title: "Data Science & Machine Learning",
-    instructor: "Michael Johnson",
-    price: 59.99,
-    img: "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=400&q=80",
+    title: "HTML & CSS Bootcamp",
+    instructor: "Colt Steele",
+    price: 29.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
   },
   {
     id: 4,
-    title: "Digital Marketing Mastery",
-    instructor: "Emily Davis",
-    price: 29.99,
-    img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80",
+    title: "React.js Complete Guide",
+    instructor: "Maximilian Schwarzmüller",
+    price: 44.99,
+    img: "https://logo.svgcdn.com/logos/react.svg"
   },
   {
     id: 5,
-    title: "Graphic Design Essentials",
-    instructor: "Robert Brown",
-    price: 19.99,
-    img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80",
+    title: "Node.js Backend Development",
+    instructor: "Andrew Mead",
+    price: 42.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
   },
   {
     id: 6,
-    title: "iOS App Development with Swift",
-    instructor: "Sophia Lee",
-    price: 69.99,
-    img: "https://images.unsplash.com/photo-1517433456452-f9633a875f6f?auto=format&fit=crop&w=400&q=80",
+    title: "Python for Everybody",
+    instructor: "Dr. Charles Severance",
+    price: 34.99,
+    img: "https://raw.githubusercontent.com/marwin1991/profile-technology-icons/main/icons/python.png"
   },
   {
     id: 7,
-    title: "Android App Development",
-    instructor: "David Wilson",
-    price: 64.99,
-    img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
+    title: "Data Structures & Algorithms",
+    instructor: "Abdul Bari",
+    price: 54.99,
+    img: "https://raw.githubusercontent.com/marwin1991/profile-technology-icons/main/icons/algorithm.png"
   },
   {
     id: 8,
-    title: "Cloud Computing Fundamentals",
-    instructor: "Olivia White",
-    price: 44.99,
-    img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80",
+    title: "SQL & Database Design",
+    instructor: "Tim Buchalka",
+    price: 31.99,
+    img: "https://raw.githubusercontent.com/marwin1991/profile-technology-icons/main/icons/sql.png"
   },
   {
     id: 9,
-    title: "Cyber Security Basics",
-    instructor: "James Miller",
-    price: 54.99,
-    img: "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=400&q=80",
+    title: "Full Stack Web Development",
+    instructor: "Angela Yu",
+    price: 59.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
   },
+  {
+    id: 10,
+    title: "Git & GitHub Masterclass",
+    instructor: "Brad Traversy",
+    price: 24.99,
+    img: "https://raw.githubusercontent.com/marwin1991/profile-technology-icons/main/icons/git.png"
+  },
+  {
+    id: 11,
+    title: "DevOps Fundamentals",
+    instructor: "Kunal Kushwaha",
+    price: 47.99,
+    img: "https://raw.githubusercontent.com/marwin1991/profile-technology-icons/main/icons/devops.png"
+  },
+  {
+    id: 12,
+    title: "Cloud Computing with AWS",
+    instructor: "Stephane Maarek",
+    price: 64.99,
+    img: "https://raw.githubusercontent.com/marwin1991/profile-technology-icons/main/icons/aws.png"
+  }
 ];
 
 export default fakeData;
