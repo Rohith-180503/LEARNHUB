@@ -1,7 +1,9 @@
-import React from 'react';
 
-const Course = ({ course, addToCart }) => {
+
+const Course = ({ course, addToCart, cart }) => {
   const { title, instructor, price, img } = course;
+
+  const isEnrolled = cart.some(item => item.id === course.id);
 
   return (
     <div className="course-card">
@@ -9,7 +11,13 @@ const Course = ({ course, addToCart }) => {
       <h3>{title}</h3>
       <p>Instructor: {instructor}</p>
       <p>${price}</p>
-      <button onClick={() => addToCart(course)}>Enroll</button>
+
+      <button
+        onClick={() => addToCart(course)}
+        disabled={isEnrolled}
+      >
+        {isEnrolled ? "Enrolled" : "Enroll"}
+      </button>
     </div>
   );
 };
