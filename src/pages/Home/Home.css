@@ -1,0 +1,114 @@
+.home-page {
+  background-color: var(--surface-page);
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.home-hero {
+  position: relative;
+  padding: 8rem 2rem 6rem;
+  background-color: var(--surface-elevated);
+  overflow: hidden;
+  text-align: center;
+}
+
+.home-hero__glow {
+  position: absolute;
+  top: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  filter: blur(60px);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.home-hero__content {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.home-hero__eyebrow {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-color);
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--accent-muted);
+  border-radius: 100px;
+}
+
+.home-hero__title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+}
+
+.home-hero__title-accent {
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.home-hero__lead {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--secondary-text-color);
+  margin-bottom: 2rem;
+}
+
+/* Catalog Section */
+.home-catalog {
+  padding: 6rem 2rem;
+}
+
+.home-catalog__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.home-catalog__header {
+  margin-bottom: 4rem;
+  text-align: left;
+}
+
+.home-catalog__title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.home-catalog__subtitle {
+  font-size: 1.125rem;
+  color: var(--secondary-text-color);
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .home-hero {
+    padding: 6rem 1.5rem 4rem;
+  }
+
+  .home-catalog {
+    padding: 4rem 1.5rem;
+  }
+
+  .home-catalog__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+}

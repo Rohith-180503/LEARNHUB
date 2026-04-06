@@ -1,8 +1,8 @@
 import fakeData from "../../fakeData/fakeData";
-import Course from "../Course/Course";
-import "./CourseInfo.css";
+import Course from "../../Components/Course/Course";
+import "./Home.css";
 
-const CourseInfo = () => {
+const Home = () => {
   return (
     <main className="home-page">
       <section className="home-hero" aria-labelledby="home-heading">
@@ -42,4 +42,4 @@ const CourseInfo = () => {
   );
 };
 
-export default CourseInfo;
+export default Home;

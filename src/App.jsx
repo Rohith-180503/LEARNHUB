@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import "./App.css";
+import "./styles/App.css";
 import { CartProvider } from "./context/CartContext";
 import Navbar from "./Components/Navbar/Navbar";
 import Cart from "./Components/Cart/Cart";
-import CourseInfo from "./Components/CourseInfo/CourseInfo";
+import Home from "./pages/Home/Home";
 import {
   AllCourses,
   WebDevelopment,
@@ -16,7 +16,7 @@ import {
   SuccessStories,
   Documentation,
   Instructors,
-} from "./Pages/ContentPages";
+} from "./pages/Content/ContentPages";
 
 function AppShell() {
   return (
@@ -24,7 +24,7 @@ function AppShell() {
       <Navbar />
       <Cart />
       <Routes>
-        <Route path="/" element={<CourseInfo />} />
+        <Route path="/" element={<Home />} />
         <Route path="/explore/all" element={<AllCourses />} />
         <Route path="/explore/web-development" element={<WebDevelopment />} />
         <Route path="/explore/data-science" element={<DataScience />} />
