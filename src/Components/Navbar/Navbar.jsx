@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useCart } from "../../context/CartContext";
@@ -26,6 +26,7 @@ const navLinkClass = ({ isActive }) =>
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [cartPanelOpen, setCartPanelOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(
     () => typeof window !== "undefined" && localStorage.getItem("theme") === "dark"
   );
@@ -35,6 +36,15 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { cart, cartCount, cartTotal, removeFromCart, clearCart } = useCart();
+  const cartPanelRef = useRef(null);
+
+  const cartPricing = useMemo(() => {
+    const subtotal = Number(cartTotal);
+    const discount = subtotal >= 100 ? subtotal * 0.08 : 0;
+    const platformFee = cartCount > 0 ? 2.99 : 0;
+    const totalPayable = Math.max(subtotal - discount + platformFee, 0);
+    return { subtotal, discount, platformFee, totalPayable };
+  }, [cartCount, cartTotal]);
 
   const scrollToMainCart = () => {
     document.getElementById(CART_ANCHOR)?.scrollIntoView({
@@ -44,7 +54,7 @@ const Navbar = () => {
   };
 
   const goToMainCart = () => {
-    setActiveDropdown(null);
+    setCartPanelOpen(false);
     if (location.pathname === "/") {
       scrollToMainCart();
     } else {
@@ -54,7 +64,7 @@ const Navbar = () => {
 
   const handleNavbarRemove = (item) => {
     removeFromCart(item.id);
-    toast.success(`Removed from cart`);
+    toast.success(`Removed "${item.title}" from cart`);
   };
 
   const handleNavbarClear = () => {
@@ -66,13 +76,20 @@ const Navbar = () => {
       return;
     }
     clearCart();
-    setActiveDropdown(null);
+    setCartPanelOpen(false);
     toast.info("Cart cleared");
+  };
+
+  const handlePlaceOrder = () => {
+    if (cartCount === 0) return;
+    toast.success("Order review started. Payment integration coming soon.");
+    setCartPanelOpen(false);
   };
 
   useEffect(() => {
     setMobileOpen(false);
     setActiveDropdown(null);
+    setCartPanelOpen(false);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -85,6 +102,7 @@ const Navbar = () => {
       if (e.key === "Escape") {
         setMobileOpen(false);
         setActiveDropdown(null);
+        setCartPanelOpen(false);
       }
     };
     document.addEventListener("keydown", onKey);
@@ -96,6 +114,7 @@ const Navbar = () => {
       const t = e.target;
       if (navRef.current?.contains(t)) return;
       if (drawerRef.current?.contains(t)) return;
+      if (cartPanelRef.current?.contains(t)) return;
       setActiveDropdown(null);
       setMobileOpen(false);
     };
@@ -108,13 +127,13 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    if (!mobileOpen) return;
+    if (!mobileOpen && !cartPanelOpen) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = prev;
     };
-  }, [mobileOpen]);
+  }, [mobileOpen, cartPanelOpen]);
 
   const toggleDropdown = (key) => {
     setActiveDropdown((prev) => (prev === key ? null : key));
@@ -122,6 +141,7 @@ const Navbar = () => {
 
   const openMobile = () => {
     setActiveDropdown(null);
+    setCartPanelOpen(false);
     setMobileOpen(true);
   };
 
@@ -241,87 +261,21 @@ const Navbar = () => {
                 type="button"
                 className="cart-btn"
                 id="navbar-cart-button"
-                aria-expanded={activeDropdown === "cart"}
-                aria-haspopup="true"
-                aria-controls="navbar-cart-menu"
+                aria-expanded={cartPanelOpen}
+                aria-haspopup="dialog"
+                aria-controls="navbar-cart-panel"
                 aria-label={`Shopping cart, ${cartCount} item${cartCount === 1 ? "" : "s"}`}
-                onClick={() => toggleDropdown("cart")}
+                onClick={() => {
+                  setActiveDropdown(null);
+                  setMobileOpen(false);
+                  setCartPanelOpen((prev) => !prev);
+                }}
               >
                 Cart ({cartCount})
                 <span className="cart-icon" aria-hidden="true">
                   🛒
                 </span>
               </button>
-
-              {activeDropdown === "cart" && (
-                <div
-                  id="navbar-cart-menu"
-                  role="region"
-                  aria-label="Cart contents"
-                  className="dropdown-menu glassmorphism dropdown-menu--active dropdown-menu--cart"
-                >
-                  {cartCount === 0 ? (
-                    <div className="navbar-cart-empty">
-                      <p className="navbar-cart-empty-text">Your cart is empty</p>
-                      <Link
-                        to="/"
-                        className="navbar-cart-browse"
-                        onClick={() => setActiveDropdown(null)}
-                      >
-                        Browse courses
-                      </Link>
-                    </div>
-                  ) : (
-                    <>
-                      <ul className="navbar-cart-list">
-                        {cart.map((item) => (
-                          <li key={item.id} className="navbar-cart-row">
-                            <span className="navbar-cart-title">{item.title}</span>
-                            <div className="navbar-cart-meta">
-                              <span className="navbar-cart-price">
-                                ${Number(item.price).toFixed(2)}
-                              </span>
-                              <button
-                                type="button"
-                                className="navbar-cart-remove"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleNavbarRemove(item);
-                                }}
-                                aria-label={`Remove ${item.title} from cart`}
-                              >
-                                ✕
-                              </button>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="navbar-cart-total">
-                        <span>Estimated total</span>
-                        <span className="navbar-cart-total-value">
-                          ${cartTotal.toFixed(2)}
-                        </span>
-                      </div>
-                      <div className="navbar-cart-footer">
-                        <button
-                          type="button"
-                          className="navbar-cart-linkish"
-                          onClick={goToMainCart}
-                        >
-                          View full cart
-                        </button>
-                        <button
-                          type="button"
-                          className="navbar-cart-clear"
-                          onClick={handleNavbarClear}
-                        >
-                          Clear all
-                        </button>
-                      </div>
-                    </>
-                  )}
-                </div>
-              )}
             </div>
 
             <button
@@ -410,6 +364,140 @@ const Navbar = () => {
                 Instructors
               </NavLink>
             </nav>
+          </aside>
+        </>
+      )}
+
+      {cartPanelOpen && (
+        <>
+          <div
+            className="navbar-cart-overlay"
+            aria-hidden="true"
+            onClick={() => setCartPanelOpen(false)}
+          />
+          <aside
+            ref={cartPanelRef}
+            id="navbar-cart-panel"
+            className="navbar-cart-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Shopping cart"
+          >
+            <header className="navbar-cart-panel__header">
+              <div>
+                <h3 className="navbar-cart-panel__title">My Cart</h3>
+                <p className="navbar-cart-panel__subtitle">
+                  {cartCount} course{cartCount === 1 ? "" : "s"} selected
+                </p>
+              </div>
+              <button
+                type="button"
+                className="navbar-cart-panel__close"
+                onClick={() => setCartPanelOpen(false)}
+                aria-label="Close cart"
+              >
+                ✕
+              </button>
+            </header>
+
+            <div className="navbar-cart-panel__content">
+              {cartCount === 0 ? (
+                <div className="navbar-cart-empty">
+                  <p className="navbar-cart-empty-text">Your cart is empty</p>
+                  <Link
+                    to="/"
+                    className="navbar-cart-browse"
+                    onClick={() => setCartPanelOpen(false)}
+                  >
+                    Browse courses
+                  </Link>
+                </div>
+              ) : (
+                <ul className="navbar-cart-list navbar-cart-list--panel">
+                  {cart.map((item) => (
+                    <li key={item.id} className="navbar-cart-row navbar-cart-row--panel">
+                      <div className="navbar-cart-item-main">
+                        <p className="navbar-cart-title navbar-cart-title--panel">
+                          {item.title}
+                        </p>
+                        <p className="navbar-cart-instructor">{item.instructor}</p>
+                        <p className="navbar-cart-qty">Qty: 1</p>
+                      </div>
+                      <div className="navbar-cart-meta navbar-cart-meta--panel">
+                        <span className="navbar-cart-price">
+                          ${Number(item.price).toFixed(2)}
+                        </span>
+                        <button
+                          type="button"
+                          className="navbar-cart-linkish"
+                          onClick={() => toast.info("Saved for later coming soon")}
+                        >
+                          Save for later
+                        </button>
+                        <button
+                          type="button"
+                          className="navbar-cart-remove"
+                          onClick={() => handleNavbarRemove(item)}
+                          aria-label={`Remove ${item.title} from cart`}
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <footer className="navbar-cart-panel__footer">
+              <div className="navbar-price-box">
+                <h4 className="navbar-price-box__title">Price Details</h4>
+                <div className="navbar-price-row">
+                  <span>Subtotal</span>
+                  <span>${cartPricing.subtotal.toFixed(2)}</span>
+                </div>
+                <div className="navbar-price-row">
+                  <span>Discount</span>
+                  <span className="navbar-price-row__discount">
+                    -${cartPricing.discount.toFixed(2)}
+                  </span>
+                </div>
+                <div className="navbar-price-row">
+                  <span>Platform fee</span>
+                  <span>${cartPricing.platformFee.toFixed(2)}</span>
+                </div>
+                <div className="navbar-price-row navbar-price-row--total">
+                  <span>Total Amount</span>
+                  <span>${cartPricing.totalPayable.toFixed(2)}</span>
+                </div>
+              </div>
+
+              <div className="navbar-cart-panel__actions">
+                <button
+                  type="button"
+                  className="navbar-cart-secondary"
+                  onClick={goToMainCart}
+                >
+                  View full cart
+                </button>
+                <button
+                  type="button"
+                  className="navbar-cart-secondary navbar-cart-danger"
+                  onClick={handleNavbarClear}
+                  disabled={cartCount === 0}
+                >
+                  Clear all
+                </button>
+                <button
+                  type="button"
+                  className="navbar-cart-place-order"
+                  onClick={handlePlaceOrder}
+                  disabled={cartCount === 0}
+                >
+                  Place Order
+                </button>
+              </div>
+            </footer>
           </aside>
         </>
       )}
