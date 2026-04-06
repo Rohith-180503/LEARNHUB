@@ -12,47 +12,7 @@
 }
 
 
-/* ---------- COURSE CARD STYLING ---------- */
-.course-card {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  background-color: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  transition: transform 0.3s, box-shadow 0.3s;
-  height: 100%; /* forces all cards in grid row to be same height */
-}
-
-.course-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-}
-
-.course-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: contain;
-  padding-top: 1rem;
-}
-
-.course-card h3 {
-  font-size: 1.2rem;
-  margin: 1rem 0 0.5rem;
-  color: #333;
-}
-
-.course-card p {
-  margin: 0.2rem 0;
-  color: #666;
-  font-size: 0.95rem;
-}
-
-.course-card button {
-  margin: auto auto 1.5rem auto; /* pushes button to bottom */
-}
+/* Home course cards: see Components/Course/Course.css */
 
 /* ---------- CART PANEL ---------- */
 .cart-panel {

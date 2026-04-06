@@ -24,8 +24,10 @@ describe("Online Learning App", () => {
     ).toBeInTheDocument();
   });
 
-  test("Enroll button is present", () => {
+  test("Add to cart button is present", () => {
     renderApp("/");
-    expect(screen.getAllByRole("button", { name: /^enroll$/i })[0]).toBeInTheDocument();
+    expect(
+      screen.getAllByRole("button", { name: /add to cart/i })[0]
+    ).toBeInTheDocument();
   });
 });

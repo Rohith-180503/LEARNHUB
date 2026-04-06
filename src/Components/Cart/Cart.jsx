@@ -1,26 +1,85 @@
-import './Cart.css';
+import { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useCart } from "../../context/CartContext";
+import "./Cart.css";
 
-const Cart = ({ cart, removeFromCart }) => {
-  const total = cart.reduce((sum, course) => sum + course.price, 0);
+const CART_ANCHOR = "learning-cart";
+
+export default function Cart() {
+  const { cart, cartTotal, removeFromCart, clearCart } = useCart();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.hash !== `#${CART_ANCHOR}`) return;
+    const el = document.getElementById(CART_ANCHOR);
+    if (!el) return;
+    const t = requestAnimationFrame(() => {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    return () => cancelAnimationFrame(t);
+  }, [location.pathname, location.hash]);
+
+  const handleClear = () => {
+    if (cart.length === 0) return;
+    if (
+      typeof window !== "undefined" &&
+      !window.confirm("Remove all courses from your cart?")
+    ) {
+      return;
+    }
+    clearCart();
+    toast.info("Cart cleared");
+  };
+
+  const handleRemoveOne = (course) => {
+    removeFromCart(course.id);
+    toast.success(`Removed “${course.title}” from cart`);
+  };
 
   return (
-    <div className="horizontal-cart">
+    <section
+      id={CART_ANCHOR}
+      className="horizontal-cart"
+      aria-labelledby="cart-heading"
+    >
       <div className="cart-left">
-        <h3 className="cart-title">
-          <span>🛒</span> My Cart
-        </h3>
-        
+        <div className="cart-heading-row">
+          <h2 id="cart-heading" className="cart-title">
+            <span aria-hidden="true">🛒</span> My cart
+          </h2>
+          <span className="cart-count-pill" aria-live="polite">
+            {cart.length === 0
+              ? "0 courses"
+              : `${cart.length} course${cart.length === 1 ? "" : "s"}`}
+          </span>
+        </div>
+
         <div className="cart-items-container">
           {cart.length === 0 ? (
-            <span className="cart-empty">No courses enrolled yet.</span>
+            <div className="cart-empty-block">
+              <p className="cart-empty">Your cart is empty.</p>
+              <Link className="cart-empty-cta" to="/">
+                Browse courses
+              </Link>
+            </div>
           ) : (
-            cart.map(course => (
-              <div key={course.id} className="course-chip">
-                <span>{course.title}</span>
+            cart.map((course) => (
+              <div key={course.id} className="course-chip course-chip--rich">
+                <div className="course-chip__text">
+                  <span className="course-chip__title">{course.title}</span>
+                  <span className="course-chip__meta">
+                    {course.instructor} · $
+                    {Number(course.price).toFixed(2)}
+                  </span>
+                </div>
                 <button
+                  type="button"
                   className="remove-btn"
-                  onClick={() => removeFromCart(course.id)}
-                  title="Remove Course"
+                  onClick={() => handleRemoveOne(course)}
+                  title="Remove from cart"
+                  aria-label={`Remove ${course.title} from cart`}
                 >
                   ✕
                 </button>
@@ -31,13 +90,43 @@ const Cart = ({ cart, removeFromCart }) => {
       </div>
 
       <div className="cart-right">
-        <span className="cart-total-label">Total:</span>
-        <span className="cart-total-price">
-          ${total.toFixed(2)}
-        </span>
+        <div className="cart-right-summary">
+          <span className="cart-total-label">Estimated total</span>
+          <span className="cart-total-price">${cartTotal.toFixed(2)}</span>
+        </div>
+        <div className="cart-actions">
+          {cart.length > 0 && (
+            <>
+              <button
+                type="button"
+                className="cart-btn-secondary"
+                onClick={handleClear}
+              >
+                Clear cart
+              </button>
+              <button
+                type="button"
+                className="cart-btn-checkout"
+                disabled
+                title="Checkout is not wired to a payment provider in this demo"
+              >
+                Checkout
+              </button>
+            </>
+          )}
+          {location.pathname !== "/" && (
+            <button
+              type="button"
+              className="cart-btn-text"
+              onClick={() =>
+                navigate({ pathname: "/", hash: CART_ANCHOR })
+              }
+            >
+              Back to catalog
+            </button>
+          )}
+        </div>
       </div>
-    </div>
+    </section>
   );
-};
-
-export default Cart;
+}

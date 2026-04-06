@@ -4,85 +4,314 @@ const fakeData = [
     title: "Complete Linux Training",
     instructor: "Jason Cannon",
     price: 49.99,
-    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg"
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
   },
   {
     id: 2,
     title: "Modern JavaScript from Scratch",
     instructor: "Jonas Schmedtmann",
     price: 39.99,
-    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg"
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
   },
   {
     id: 3,
     title: "HTML & CSS Bootcamp",
     instructor: "Colt Steele",
     price: 29.99,
-    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg"
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg",
   },
   {
     id: 4,
     title: "React.js Complete Guide",
     instructor: "Maximilian Schwarzmüller",
     price: 44.99,
-    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
   },
   {
     id: 5,
     title: "Node.js Backend Development",
     instructor: "Andrew Mead",
     price: 42.99,
-    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg"
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
   },
   {
     id: 6,
     title: "Python for Everybody",
     instructor: "Dr. Charles Severance",
     price: 34.99,
-    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
   },
   {
     id: 7,
     title: "Data Structures & Algorithms",
     instructor: "Abdul Bari",
     price: 54.99,
-    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg"
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",
   },
   {
     id: 8,
     title: "SQL & Database Design",
     instructor: "Tim Buchalka",
     price: 31.99,
-    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg"
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg",
   },
   {
     id: 9,
     title: "Full Stack Web Development",
     instructor: "Angela Yu",
     price: 59.99,
-    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
   },
   {
     id: 10,
     title: "Git & GitHub Masterclass",
     instructor: "Brad Traversy",
     price: 24.99,
-    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg"
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
   },
   {
     id: 11,
     title: "DevOps Fundamentals",
     instructor: "Kunal Kushwaha",
     price: 47.99,
-    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg"
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
   },
   {
     id: 12,
     title: "Cloud Computing with AWS",
     instructor: "Stephane Maarek",
     price: 64.99,
-    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"
-  }
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+  },
+  /* —— Trending tech (AI, cloud, security, modern stacks) —— */
+  {
+    id: 13,
+    title: "Generative AI, LLMs & RAG Systems",
+    instructor: "Dr. Harrison Wells",
+    price: 69.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg",
+  },
+  {
+    id: 14,
+    title: "TensorFlow & Neural Network Design",
+    instructor: "Dr. Priya Natarajan",
+    price: 64.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tensorflow/tensorflow-original.svg",
+  },
+  {
+    id: 15,
+    title: "MLOps: Deploy & Monitor Models in Production",
+    instructor: "Marcus Chen",
+    price: 62.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg",
+  },
+  {
+    id: 16,
+    title: "Cybersecurity, Zero Trust & Cloud Hardening",
+    instructor: "Elena Volkov",
+    price: 58.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg",
+  },
+  {
+    id: 17,
+    title: "Blockchain, Solidity & Smart Contracts",
+    instructor: "Jordan Okonkwo",
+    price: 55.99,
+    img: "https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/solidity.svg",
+  },
+  {
+    id: 18,
+    title: "Rust Systems Programming & Performance",
+    instructor: "Helena Müller",
+    price: 52.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg",
+  },
+  {
+    id: 19,
+    title: "Go: Microservices, gRPC & Concurrency",
+    instructor: "Sanjay Patel",
+    price: 49.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg",
+  },
+  {
+    id: 20,
+    title: "Terraform & Infrastructure as Code",
+    instructor: "Rachel Kim",
+    price: 48.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg",
+  },
+  {
+    id: 21,
+    title: "Kubernetes, Helm & GitOps Workflows",
+    instructor: "Tomás Álvarez",
+    price: 61.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg",
+  },
+  {
+    id: 22,
+    title: "Data Engineering with Apache Spark & Kafka",
+    instructor: "Amira Hassan",
+    price: 57.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apachekafka/apachekafka-original.svg",
+  },
+  {
+    id: 23,
+    title: "Full Stack with Next.js & Server Components",
+    instructor: "Alex Rivera",
+    price: 54.99,
+    img: "https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/nextdotjs.svg",
+  },
+  {
+    id: 24,
+    title: "Kotlin & Modern Android Development",
+    instructor: "Li Wei",
+    price: 46.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg",
+  },
+  {
+    id: 25,
+    title: "iOS & SwiftUI App Architecture",
+    instructor: "Grace O’Connor",
+    price: 48.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg",
+  },
+  {
+    id: 26,
+    title: "GraphQL APIs & Federation at Scale",
+    instructor: "Nate Brooks",
+    price: 43.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/graphql/graphql-plain.svg",
+  },
+  {
+    id: 27,
+    title: "MongoDB, Redis & Event-Driven Data Layers",
+    instructor: "Fatima Al-Rashid",
+    price: 45.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
+  },
+  {
+    id: 28,
+    title: "Edge AI & Embedded ML on Device",
+    instructor: "Kevin Zhou",
+    price: 59.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/arduino/arduino-original.svg",
+  },
+  /* —— Electrical & electronics —— */
+  {
+    id: 29,
+    title: "Power Electronics & Smart Grid Fundamentals",
+    instructor: "Prof. David Okoro",
+    price: 52.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg",
+  },
+  {
+    id: 30,
+    title: "Embedded Systems, RTOS & ARM Cortex",
+    instructor: "Dr. Ana Morales",
+    price: 56.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg",
+  },
+  {
+    id: 31,
+    title: "MATLAB & Simulink for Electrical Engineers",
+    instructor: "Prof. Lars Bergstrom",
+    price: 49.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matlab/matlab-original.svg",
+  },
+  {
+    id: 32,
+    title: "VLSI, Verilog & Digital Design Flow",
+    instructor: "Dr. Kavitha Iyer",
+    price: 63.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg",
+  },
+  {
+    id: 33,
+    title: "Renewable Energy, EV Drives & Motor Control",
+    instructor: "James O’Brien",
+    price: 54.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+  },
+  /* —— Mechanical & manufacturing —— */
+  {
+    id: 34,
+    title: "CAD/CAM, AutoCAD & Parametric Modeling",
+    instructor: "Michael Torres",
+    price: 47.99,
+    img: "https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/autocad.svg",
+  },
+  {
+    id: 35,
+    title: "Robotics, ROS 2 & Motion Planning",
+    instructor: "Dr. Sophie Nakamura",
+    price: 58.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+  },
+  {
+    id: 36,
+    title: "FEA, MATLAB & Structural Simulation Basics",
+    instructor: "Prof. Markus Lindholm",
+    price: 51.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matlab/matlab-original.svg",
+  },
+  {
+    id: 37,
+    title: "Thermo-Fluids, CFD & Heat Transfer Essentials",
+    instructor: "Dr. Rina Kapoor",
+    price: 53.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+  },
+  {
+    id: 38,
+    title: "Additive Manufacturing & 3D Printing Workflows",
+    instructor: "Carlos Mendes",
+    price: 44.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/blender/blender-original.svg",
+  },
+  /* —— Civil & infrastructure —— */
+  {
+    id: 39,
+    title: "Structural Analysis: Steel, Concrete & Codes",
+    instructor: "Eng. Sarah Mbeki",
+    price: 50.99,
+    img: "https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/autocad.svg",
+  },
+  {
+    id: 40,
+    title: "BIM, Civil 3D & Transportation Design",
+    instructor: "Daniel Frost",
+    price: 52.99,
+    img: "https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/autodesk.svg",
+  },
+  {
+    id: 41,
+    title: "Geotechnical Engineering & Foundation Design",
+    instructor: "Prof. Yuki Tanaka",
+    price: 49.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matlab/matlab-original.svg",
+  },
+  {
+    id: 42,
+    title: "Sustainable Construction & Green Building Standards",
+    instructor: "Amelia Costa",
+    price: 46.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+  },
+  /* —— Chemical & process —— */
+  {
+    id: 43,
+    title: "Process Design, Mass Balance & Unit Operations",
+    instructor: "Dr. Omar Farouk",
+    price: 51.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+  },
+  {
+    id: 44,
+    title: "Process Safety, HAZOP & Risk in Chemical Plants",
+    instructor: "Laura Petrov",
+    price: 55.99,
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg",
+  },
 ];
 
 export default fakeData;

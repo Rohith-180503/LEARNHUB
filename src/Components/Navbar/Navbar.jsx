@@ -1,7 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useCart } from "../../context/CartContext";
 import "./Navbar.css";
 import logo from "../../assets/logo.png";
+
+const CART_ANCHOR = "learning-cart";
 
 const COURSE_LINKS = [
   { to: "/web-development", label: "Web Development" },
@@ -19,7 +23,7 @@ const RESOURCE_LINKS = [
 const navLinkClass = ({ isActive }) =>
   `nav-link${isActive ? " nav-link--active" : ""}`;
 
-const Navbar = ({ cart = [], removeFromCart }) => {
+const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [darkMode, setDarkMode] = useState(
@@ -29,9 +33,42 @@ const Navbar = ({ cart = [], removeFromCart }) => {
   const navRef = useRef(null);
   const drawerRef = useRef(null);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { cart, cartCount, cartTotal, removeFromCart, clearCart } = useCart();
 
-  const cartCount = cart.length;
-  const cartTotal = cart.reduce((sum, item) => sum + item.price, 0);
+  const scrollToMainCart = () => {
+    document.getElementById(CART_ANCHOR)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  const goToMainCart = () => {
+    setActiveDropdown(null);
+    if (location.pathname === "/") {
+      scrollToMainCart();
+    } else {
+      navigate({ pathname: "/", hash: CART_ANCHOR });
+    }
+  };
+
+  const handleNavbarRemove = (item) => {
+    removeFromCart(item.id);
+    toast.success(`Removed from cart`);
+  };
+
+  const handleNavbarClear = () => {
+    if (cartCount === 0) return;
+    if (
+      typeof window !== "undefined" &&
+      !window.confirm("Remove all courses from your cart?")
+    ) {
+      return;
+    }
+    clearCart();
+    setActiveDropdown(null);
+    toast.info("Cart cleared");
+  };
 
   useEffect(() => {
     setMobileOpen(false);
@@ -210,7 +247,7 @@ const Navbar = ({ cart = [], removeFromCart }) => {
                 aria-label={`Shopping cart, ${cartCount} item${cartCount === 1 ? "" : "s"}`}
                 onClick={() => toggleDropdown("cart")}
               >
-                My Cart ({cartCount})
+                Cart ({cartCount})
                 <span className="cart-icon" aria-hidden="true">
                   🛒
                 </span>
@@ -241,29 +278,45 @@ const Navbar = ({ cart = [], removeFromCart }) => {
                           <li key={item.id} className="navbar-cart-row">
                             <span className="navbar-cart-title">{item.title}</span>
                             <div className="navbar-cart-meta">
-                              <span className="navbar-cart-price">${item.price}</span>
-                              {removeFromCart && (
-                                <button
-                                  type="button"
-                                  className="navbar-cart-remove"
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    removeFromCart(item.id);
-                                  }}
-                                  aria-label={`Remove ${item.title} from cart`}
-                                >
-                                  ✕
-                                </button>
-                              )}
+                              <span className="navbar-cart-price">
+                                ${Number(item.price).toFixed(2)}
+                              </span>
+                              <button
+                                type="button"
+                                className="navbar-cart-remove"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleNavbarRemove(item);
+                                }}
+                                aria-label={`Remove ${item.title} from cart`}
+                              >
+                                ✕
+                              </button>
                             </div>
                           </li>
                         ))}
                       </ul>
                       <div className="navbar-cart-total">
-                        <span>Total:</span>
+                        <span>Estimated total</span>
                         <span className="navbar-cart-total-value">
                           ${cartTotal.toFixed(2)}
                         </span>
+                      </div>
+                      <div className="navbar-cart-footer">
+                        <button
+                          type="button"
+                          className="navbar-cart-linkish"
+                          onClick={goToMainCart}
+                        >
+                          View full cart
+                        </button>
+                        <button
+                          type="button"
+                          className="navbar-cart-clear"
+                          onClick={handleNavbarClear}
+                        >
+                          Clear all
+                        </button>
                       </div>
                     </>
                   )}
