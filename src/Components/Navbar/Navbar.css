@@ -148,7 +148,7 @@ button.nav-link:focus-visible {
 /* Dropdown Menu - Glassmorphism Effect */
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + 10px);
+  top: 100%;
   left: 0;
   background: var(--dropdown-bg);
   box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15);
@@ -166,15 +166,6 @@ button.nav-link:focus-visible {
   z-index: 1001;
 }
 
-.dropdown-menu::before {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: 0;
-  width: 100%;
-  height: 10px;
-}
-
 body.dark-mode .dropdown-menu {
   border-color: var(--border-subtle);
   box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
@@ -187,17 +178,9 @@ body.dark-mode .dropdown-menu {
   transform: translateY(0);
 }
 
-@media (min-width: 769px) {
-  .nav-item--dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(0);
-  }
-  .nav-item--dropdown:hover .nav-link--trigger {
-    background: var(--nav-hover-bg);
-    color: var(--accent-color);
-  }
+.nav-item--dropdown:hover .nav-link--trigger {
+  background: var(--nav-hover-bg);
+  color: var(--accent-color);
 }
 
 .dropdown-item {

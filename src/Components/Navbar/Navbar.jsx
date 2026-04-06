@@ -165,7 +165,11 @@ const Navbar = () => {
               </NavLink>
             </li>
 
-            <li className="nav-item nav-item--dropdown">
+            <li 
+              className="nav-item nav-item--dropdown"
+              onMouseEnter={() => !mobileOpen && setActiveDropdown("courses")}
+              onMouseLeave={() => !mobileOpen && setActiveDropdown(null)}
+            >
               <button
                 type="button"
                 className="nav-link nav-link--trigger"
@@ -173,7 +177,7 @@ const Navbar = () => {
                 aria-haspopup="true"
                 aria-controls="navbar-courses-menu"
                 id="navbar-courses-button"
-                onClick={() => toggleDropdown("courses")}
+                onClick={() => mobileOpen && toggleDropdown("courses")}
               >
                 Explore Courses
                 <span className="dropdown-icon" aria-hidden="true">
@@ -184,7 +188,7 @@ const Navbar = () => {
                 id="navbar-courses-menu"
                 role="menu"
                 aria-labelledby="navbar-courses-button"
-                className={`dropdown-menu glassmorphism${activeDropdown === "courses" ? " dropdown-menu--active" : ""}`}
+                className={`dropdown-menu glassmorphism ${activeDropdown === "courses" ? "dropdown-menu--active" : ""}`}
               >
                 {COURSE_LINKS.map(({ to, label, desc }) => (
                   <Link
@@ -201,7 +205,11 @@ const Navbar = () => {
               </div>
             </li>
 
-            <li className="nav-item nav-item--dropdown">
+            <li 
+              className="nav-item nav-item--dropdown"
+              onMouseEnter={() => !mobileOpen && setActiveDropdown("resources")}
+              onMouseLeave={() => !mobileOpen && setActiveDropdown(null)}
+            >
               <button
                 type="button"
                 className="nav-link nav-link--trigger"
@@ -209,7 +217,7 @@ const Navbar = () => {
                 aria-haspopup="true"
                 aria-controls="navbar-resources-menu"
                 id="navbar-resources-button"
-                onClick={() => toggleDropdown("resources")}
+                onClick={() => mobileOpen && toggleDropdown("resources")}
               >
                 Resources
                 <span className="dropdown-icon" aria-hidden="true">
@@ -220,7 +228,7 @@ const Navbar = () => {
                 id="navbar-resources-menu"
                 role="menu"
                 aria-labelledby="navbar-resources-button"
-                className={`dropdown-menu glassmorphism${activeDropdown === "resources" ? " dropdown-menu--active" : ""}`}
+                className={`dropdown-menu glassmorphism ${activeDropdown === "resources" ? "dropdown-menu--active" : ""}`}
               >
                 {RESOURCE_LINKS.map(({ to, label, desc }) => (
                   <Link
