@@ -456,6 +456,126 @@ export const Instructors = () => (
           </div>
         </div>
       </div>
+      <div className="instructor-hero-card">
+        <div className="hero-content">
+          <h3>Elena Volkov</h3>
+          <h4>Cybersecurity Director • Zero Trust Specialist</h4>
+          <p>A veteran security consultant for Fortune 500 companies, Elena specializes in defensive operations and zero-trust architecture. She is a core contributor to several open-source penetration testing frameworks.</p>
+          <div className="expertise-tags">
+            <span>Cybersecurity</span>
+            <span>Pen-Testing</span>
+            <span>Zero Trust</span>
+          </div>
+        </div>
+      </div>
+      <div className="instructor-hero-card">
+        <div className="hero-content">
+          <h3>Marcus Chen</h3>
+          <h4>Head of MLOps • Deployment Strategist</h4>
+          <p>Formerly at Uber's Michelangelo team, Marcus has spent years perfecting the lifecycle of machine learning models. He focuses on model observability, latency optimization, and automated retraining pipelines at scale.</p>
+          <div className="expertise-tags">
+            <span>MLOps</span>
+            <span>Kubernetes</span>
+            <span>Scalability</span>
+          </div>
+        </div>
+      </div>
+      <div className="instructor-hero-card">
+        <div className="hero-content">
+          <h3>Jordan Okonkwo</h3>
+          <h4>Blockchain Architect • Smart Contract Lead</h4>
+          <p>Jordan is a pioneer in decentralized finance (DeFi) architectures. He has audited smart contracts securing billions in assets and leads our research into layer-2 scaling solutions and cryptographic security.</p>
+          <div className="expertise-tags">
+            <span>Blockchain</span>
+            <span>Solidity</span>
+            <span>Cryptography</span>
+          </div>
+        </div>
+      </div>
+      <div className="instructor-hero-card">
+        <div className="hero-content">
+          <h3>Rachel Kim</h3>
+          <h4>Principal Infrastructure Engineer • IaC Expert</h4>
+          <p>With a focus on declarative infrastructure, Rachel has led multi-cloud migrations for global enterprises. She is a recognized expert in Terraform and Pulumi, focusing on immutable infrastructure patterns.</p>
+          <div className="expertise-tags">
+            <span>Terraform</span>
+            <span>Cloud Engineering</span>
+            <span>DevOps</span>
+          </div>
+        </div>
+      </div>
+      <div className="instructor-hero-card">
+        <div className="hero-content">
+          <h3>Tomás Álvarez</h3>
+          <h4>Kubernetes Specialist • Cloud Native Lead</h4>
+          <p>A CNCF ambassador and frequent speaker at KubeCon, Tomás specializes in service mesh architectures and container security. He has designed planet-scale orchestration systems for leading streaming services.</p>
+          <div className="expertise-tags">
+            <span>Kubernetes</span>
+            <span>Istio</span>
+            <span>Cloud Native</span>
+          </div>
+        </div>
+      </div>
+      <div className="instructor-hero-card">
+        <div className="hero-content">
+          <h3>Amira Hassan</h3>
+          <h4>Big Data Architect • Streaming Analytics Lead</h4>
+          <p>Amira has designed real-time data processing engines for high-frequency trading and IoT platforms. She specializes in Apache Spark, Kafka, and building resilient data lakes for petabyte-scale analytics.</p>
+          <div className="expertise-tags">
+            <span>Big Data</span>
+            <span>Apache Kafka</span>
+            <span>Spark</span>
+          </div>
+        </div>
+      </div>
+      <div className="instructor-hero-card">
+        <div className="hero-content">
+          <h3>Alex Rivera</h3>
+          <h4>Full Stack Architect • Next.js Core Contributor</h4>
+          <p>A recognized leader in the React ecosystem, Alex focuses on performance-driven web engineering. He has architected some of the world's most visited consumer web applications with a focus on sub-second delivery.</p>
+          <div className="expertise-tags">
+            <span>Next.js</span>
+            <span>React</span>
+            <span>Web Performance</span>
+          </div>
+        </div>
+      </div>
+      <div className="instructor-hero-card">
+        <div className="hero-content">
+          <h3>Grace O’Connor</h3>
+          <h4>Lead iOS Architect • SwiftUI Pioneer</h4>
+          <p>Grace has led mobile engineering teams at top-tier tech firms, focusing on high-performance iOS applications. She is a pioneer in SwiftUI and modern mobile architecture patterns like Composable Architecture.</p>
+          <div className="expertise-tags">
+            <span>iOS Development</span>
+            <span>SwiftUI</span>
+            <span>Mobile UX</span>
+          </div>
+        </div>
+      </div>
+      <div className="instructor-hero-card">
+        <div className="hero-content">
+          <h3>Sanjay Patel</h3>
+          <h4>Go Backend Lead • Microservices Specialist</h4>
+          <p>Sanjay specializes in building high-concurrency systems using Go. He has designed distributed backend architectures for global fintech platforms, focusing on reliability, throughput, and gRPC communication.</p>
+          <div className="expertise-tags">
+            <span>Go Programming</span>
+            <span>Microservices</span>
+            <span>gRPC</span>
+          </div>
+        </div>
+      </div>
+      <div className="instructor-hero-card">
+        <div className="hero-content">
+          <h3>Li Wei</h3>
+          <h4>Android Engineering Lead • Kotlin Expert</h4>
+          <p>A Kotlin GDE (Google Developer Expert), Li focuses on modern Android development. He has led the transition to Jetpack Compose for several major apps and specializes in offline-first architecture and performance.</p>
+          <div className="expertise-tags">
+            <span>Android</span>
+            <span>Kotlin</span>
+            <span>Jetpack Compose</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 );
