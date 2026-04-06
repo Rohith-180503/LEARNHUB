@@ -165,11 +165,7 @@ const Navbar = () => {
               </NavLink>
             </li>
 
-            <li 
-              className="nav-item nav-item--dropdown"
-              onMouseEnter={() => !mobileOpen && setActiveDropdown("courses")}
-              onMouseLeave={() => !mobileOpen && setActiveDropdown(null)}
-            >
+            <li className="nav-item nav-item--dropdown">
               <button
                 type="button"
                 className="nav-link nav-link--trigger"
@@ -177,41 +173,35 @@ const Navbar = () => {
                 aria-haspopup="true"
                 aria-controls="navbar-courses-menu"
                 id="navbar-courses-button"
-                onClick={() => mobileOpen && toggleDropdown("courses")}
+                onClick={() => toggleDropdown("courses")}
               >
                 Explore Courses
                 <span className="dropdown-icon" aria-hidden="true">
                   ▾
                 </span>
               </button>
-              {activeDropdown === "courses" && (
-                <div
-                  id="navbar-courses-menu"
-                  role="menu"
-                  aria-labelledby="navbar-courses-button"
-                  className="dropdown-menu glassmorphism dropdown-menu--active"
-                >
-                  {COURSE_LINKS.map(({ to, label, desc }) => (
-                    <Link
-                      key={to}
-                      to={to}
-                      role="menuitem"
-                      className="dropdown-item"
-                      onClick={() => setActiveDropdown(null)}
-                    >
-                      <span className="dropdown-item-title">{label}</span>
-                      <span className="dropdown-item-desc">{desc}</span>
-                    </Link>
-                  ))}
-                </div>
-              )}
+              <div
+                id="navbar-courses-menu"
+                role="menu"
+                aria-labelledby="navbar-courses-button"
+                className={`dropdown-menu glassmorphism${activeDropdown === "courses" ? " dropdown-menu--active" : ""}`}
+              >
+                {COURSE_LINKS.map(({ to, label, desc }) => (
+                  <Link
+                    key={to}
+                    to={to}
+                    role="menuitem"
+                    className="dropdown-item"
+                    onClick={() => setActiveDropdown(null)}
+                  >
+                    <span className="dropdown-item-title">{label}</span>
+                    <span className="dropdown-item-desc">{desc}</span>
+                  </Link>
+                ))}
+              </div>
             </li>
 
-            <li 
-              className="nav-item nav-item--dropdown"
-              onMouseEnter={() => !mobileOpen && setActiveDropdown("resources")}
-              onMouseLeave={() => !mobileOpen && setActiveDropdown(null)}
-            >
+            <li className="nav-item nav-item--dropdown">
               <button
                 type="button"
                 className="nav-link nav-link--trigger"
@@ -219,34 +209,32 @@ const Navbar = () => {
                 aria-haspopup="true"
                 aria-controls="navbar-resources-menu"
                 id="navbar-resources-button"
-                onClick={() => mobileOpen && toggleDropdown("resources")}
+                onClick={() => toggleDropdown("resources")}
               >
                 Resources
                 <span className="dropdown-icon" aria-hidden="true">
                   ▾
                 </span>
               </button>
-              {activeDropdown === "resources" && (
-                <div
-                  id="navbar-resources-menu"
-                  role="menu"
-                  aria-labelledby="navbar-resources-button"
-                  className="dropdown-menu glassmorphism dropdown-menu--active"
-                >
-                  {RESOURCE_LINKS.map(({ to, label, desc }) => (
-                    <Link
-                      key={to}
-                      to={to}
-                      role="menuitem"
-                      className="dropdown-item"
-                      onClick={() => setActiveDropdown(null)}
-                    >
-                      <span className="dropdown-item-title">{label}</span>
-                      <span className="dropdown-item-desc">{desc}</span>
-                    </Link>
-                  ))}
-                </div>
-              )}
+              <div
+                id="navbar-resources-menu"
+                role="menu"
+                aria-labelledby="navbar-resources-button"
+                className={`dropdown-menu glassmorphism${activeDropdown === "resources" ? " dropdown-menu--active" : ""}`}
+              >
+                {RESOURCE_LINKS.map(({ to, label, desc }) => (
+                  <Link
+                    key={to}
+                    to={to}
+                    role="menuitem"
+                    className="dropdown-item"
+                    onClick={() => setActiveDropdown(null)}
+                  >
+                    <span className="dropdown-item-title">{label}</span>
+                    <span className="dropdown-item-desc">{desc}</span>
+                  </Link>
+                ))}
+              </div>
             </li>
 
             <li className="nav-item">
