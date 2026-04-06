@@ -8,18 +8,18 @@ import logo from "../../assets/logo.png";
 const CART_ANCHOR = "learning-cart";
 
 const COURSE_LINKS = [
-  { to: "/explore/all", label: "Comprehensive Catalog", desc: "Access our entire library of professional-grade curricula." },
-  { to: "/explore/web-development", label: "Web Engineering", desc: "Master the stack from responsive design to distributed backends." },
-  { to: "/explore/data-science", label: "Intelligence & Analytics", desc: "Harness the power of neural networks and statistical modeling." },
-  { to: "/explore/cloud-computing", label: "Cloud & Infrastructure", desc: "Architect scalable systems with modern DevOps orchestration." },
-  { to: "/explore/ui-ux-design", label: "Design Experience", desc: "Craft intuitive interfaces through rigorous user-centric research." },
+  { to: "/explore/all", label: "Full Course Catalog", desc: "Comprehensive curricula from Linux training to advanced AI systems." },
+  { to: "/explore/web-development", label: "Modern Web Stack", desc: "Master JavaScript, React, and Node.js for scalable application engineering." },
+  { to: "/explore/data-science", label: "AI & Neural Systems", desc: "Deep dives into Generative AI, LLMs, and high-performance data modeling." },
+  { to: "/explore/cloud-computing", label: "Cloud & DevOps Ops", desc: "Architecting AWS infrastructure and Kubernetes-driven GitOps workflows." },
+  { to: "/explore/ui-ux-design", label: "Experience Architecture", desc: "Synthesizing Figma mastery with cognitive psychology for intuitive UI." },
 ];
 
 const RESOURCE_LINKS = [
-  { to: "/resources/blog", label: "Insight Hub", desc: "Deep dives into emerging technologies and industry trends." },
-  { to: "/resources/community", label: "Global Network", desc: "Collaborate with a diverse community of aspiring experts." },
-  { to: "/resources/success-stories", label: "Impact Gallery", desc: "Explore the transformative journeys of our global alumni." },
-  { to: "/resources/documentation", label: "Knowledge Base", desc: "Technical guides and exhaustive platform documentation." },
+  { to: "/resources/blog", label: "Tech Intelligence", desc: "Critical analysis of emerging tech like Rust, Go, and Edge AI." },
+  { to: "/resources/community", label: "Peer Network", desc: "Engage with 500k+ learners in our exclusive developer ecosystem." },
+  { to: "/resources/success-stories", label: "Career Transitions", desc: "First-hand accounts of students moving from zero to senior roles." },
+  { to: "/resources/documentation", label: "Student Playbook", desc: "Comprehensive guides for optimizing your learning and API integration." },
 ];
 
 const navLinkClass = ({ isActive }) =>
