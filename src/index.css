@@ -7,4 +7,10 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: #f8f9fa; /* light grey bootstrap bg */
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+body.dark-mode {
+  background-color: #0f172a;
+  color: #e2e8f0;
 }
