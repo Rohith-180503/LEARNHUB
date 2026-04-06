@@ -8,18 +8,18 @@ import logo from "../../assets/logo.png";
 const CART_ANCHOR = "learning-cart";
 
 const COURSE_LINKS = [
-  { to: "/explore/all", label: "All Courses", desc: "Browse our full catalog" },
-  { to: "/explore/web-development", label: "Web Development", desc: "React, Node, Fullstack" },
-  { to: "/explore/data-science", label: "Data Science & AI", desc: "Python, ML, Analytics" },
-  { to: "/explore/cloud-computing", label: "Cloud Computing", desc: "AWS, Azure, DevOps" },
-  { to: "/explore/ui-ux-design", label: "UI/UX Design", desc: "Figma, User Research" },
+  { to: "/explore/all", label: "Comprehensive Catalog", desc: "Access our entire library of professional-grade curricula." },
+  { to: "/explore/web-development", label: "Web Engineering", desc: "Master the stack from responsive design to distributed backends." },
+  { to: "/explore/data-science", label: "Intelligence & Analytics", desc: "Harness the power of neural networks and statistical modeling." },
+  { to: "/explore/cloud-computing", label: "Cloud & Infrastructure", desc: "Architect scalable systems with modern DevOps orchestration." },
+  { to: "/explore/ui-ux-design", label: "Design Experience", desc: "Craft intuitive interfaces through rigorous user-centric research." },
 ];
 
 const RESOURCE_LINKS = [
-  { to: "/resources/blog", label: "Blog & Articles", desc: "Expert insights" },
-  { to: "/resources/community", label: "Student Community", desc: "Learn together" },
-  { to: "/resources/success-stories", label: "Success Stories", desc: "Inspiration" },
-  { to: "/resources/documentation", label: "Documentation", desc: "Guides & APIs" },
+  { to: "/resources/blog", label: "Insight Hub", desc: "Deep dives into emerging technologies and industry trends." },
+  { to: "/resources/community", label: "Global Network", desc: "Collaborate with a diverse community of aspiring experts." },
+  { to: "/resources/success-stories", label: "Impact Gallery", desc: "Explore the transformative journeys of our global alumni." },
+  { to: "/resources/documentation", label: "Knowledge Base", desc: "Technical guides and exhaustive platform documentation." },
 ];
 
 const navLinkClass = ({ isActive }) =>
