@@ -6,6 +6,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Cart from "./Components/Cart/Cart";
 import CourseInfo from "./Components/CourseInfo/CourseInfo";
 import {
+  AllCourses,
   WebDevelopment,
   DataScience,
   CloudComputing,
@@ -13,6 +14,7 @@ import {
   Blog,
   Community,
   SuccessStories,
+  Documentation,
   Instructors,
 } from "./Pages/ContentPages";
 
@@ -23,13 +25,15 @@ function AppShell() {
       <Cart />
       <Routes>
         <Route path="/" element={<CourseInfo />} />
-        <Route path="/web-development" element={<WebDevelopment />} />
-        <Route path="/data-science" element={<DataScience />} />
-        <Route path="/cloud-computing" element={<CloudComputing />} />
-        <Route path="/ui-ux-design" element={<UiUxDesign />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/community" element={<Community />} />
-        <Route path="/success-stories" element={<SuccessStories />} />
+        <Route path="/explore/all" element={<AllCourses />} />
+        <Route path="/explore/web-development" element={<WebDevelopment />} />
+        <Route path="/explore/data-science" element={<DataScience />} />
+        <Route path="/explore/cloud-computing" element={<CloudComputing />} />
+        <Route path="/explore/ui-ux-design" element={<UiUxDesign />} />
+        <Route path="/resources/blog" element={<Blog />} />
+        <Route path="/resources/community" element={<Community />} />
+        <Route path="/resources/success-stories" element={<SuccessStories />} />
+        <Route path="/resources/documentation" element={<Documentation />} />
         <Route path="/instructors" element={<Instructors />} />
       </Routes>
       <ToastContainer

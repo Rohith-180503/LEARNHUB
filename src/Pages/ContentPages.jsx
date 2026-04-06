@@ -1,6 +1,30 @@
 import React from 'react';
 import './ContentPages.css';
 
+export const AllCourses = () => (
+  <div className="page-container glassmorphism">
+    <h1 className="gradient-text">All Courses</h1>
+    <p>Explore our complete catalog of professional courses.</p>
+    <div className="features-grid">
+      <div className="feature-card"><h3>Web Dev</h3><p>Frontend & Backend</p></div>
+      <div className="feature-card"><h3>Data Science</h3><p>AI & Analytics</p></div>
+      <div className="feature-card"><h3>Cloud</h3><p>AWS & Azure</p></div>
+      <div className="feature-card"><h3>Design</h3><p>UI/UX & Figma</p></div>
+    </div>
+  </div>
+);
+
+export const Documentation = () => (
+  <div className="page-container glassmorphism">
+    <h1 className="gradient-text">Documentation</h1>
+    <p>Everything you need to know about using our platform.</p>
+    <div className="features-grid">
+      <div className="feature-card"><h3>Getting Started</h3><p>Step-by-step guides</p></div>
+      <div className="feature-card"><h3>API Reference</h3><p>For developers</p></div>
+    </div>
+  </div>
+);
+
 export const WebDevelopment = () => (
   <div className="page-container glassmorphism">
     <h1 className="gradient-text">Web Development</h1>

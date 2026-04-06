@@ -8,16 +8,18 @@ import logo from "../../assets/logo.png";
 const CART_ANCHOR = "learning-cart";
 
 const COURSE_LINKS = [
-  { to: "/web-development", label: "Web Development" },
-  { to: "/data-science", label: "Data Science & AI" },
-  { to: "/cloud-computing", label: "Cloud Computing" },
-  { to: "/ui-ux-design", label: "UI/UX Design" },
+  { to: "/explore/all", label: "All Courses", desc: "Browse our full catalog" },
+  { to: "/explore/web-development", label: "Web Development", desc: "React, Node, Fullstack" },
+  { to: "/explore/data-science", label: "Data Science & AI", desc: "Python, ML, Analytics" },
+  { to: "/explore/cloud-computing", label: "Cloud Computing", desc: "AWS, Azure, DevOps" },
+  { to: "/explore/ui-ux-design", label: "UI/UX Design", desc: "Figma, User Research" },
 ];
 
 const RESOURCE_LINKS = [
-  { to: "/blog", label: "Blog & Articles" },
-  { to: "/community", label: "Student Community" },
-  { to: "/success-stories", label: "Success Stories" },
+  { to: "/resources/blog", label: "Blog & Articles", desc: "Expert insights" },
+  { to: "/resources/community", label: "Student Community", desc: "Learn together" },
+  { to: "/resources/success-stories", label: "Success Stories", desc: "Inspiration" },
+  { to: "/resources/documentation", label: "Documentation", desc: "Guides & APIs" },
 ];
 
 const navLinkClass = ({ isActive }) =>
@@ -163,7 +165,11 @@ const Navbar = () => {
               </NavLink>
             </li>
 
-            <li className="nav-item nav-item--dropdown">
+            <li 
+              className="nav-item nav-item--dropdown"
+              onMouseEnter={() => !mobileOpen && setActiveDropdown("courses")}
+              onMouseLeave={() => !mobileOpen && setActiveDropdown(null)}
+            >
               <button
                 type="button"
                 className="nav-link nav-link--trigger"
@@ -171,7 +177,7 @@ const Navbar = () => {
                 aria-haspopup="true"
                 aria-controls="navbar-courses-menu"
                 id="navbar-courses-button"
-                onClick={() => toggleDropdown("courses")}
+                onClick={() => mobileOpen && toggleDropdown("courses")}
               >
                 Explore Courses
                 <span className="dropdown-icon" aria-hidden="true">
@@ -185,7 +191,7 @@ const Navbar = () => {
                   aria-labelledby="navbar-courses-button"
                   className="dropdown-menu glassmorphism dropdown-menu--active"
                 >
-                  {COURSE_LINKS.map(({ to, label }) => (
+                  {COURSE_LINKS.map(({ to, label, desc }) => (
                     <Link
                       key={to}
                       to={to}
@@ -193,14 +199,19 @@ const Navbar = () => {
                       className="dropdown-item"
                       onClick={() => setActiveDropdown(null)}
                     >
-                      {label}
+                      <span className="dropdown-item-title">{label}</span>
+                      <span className="dropdown-item-desc">{desc}</span>
                     </Link>
                   ))}
                 </div>
               )}
             </li>
 
-            <li className="nav-item nav-item--dropdown">
+            <li 
+              className="nav-item nav-item--dropdown"
+              onMouseEnter={() => !mobileOpen && setActiveDropdown("resources")}
+              onMouseLeave={() => !mobileOpen && setActiveDropdown(null)}
+            >
               <button
                 type="button"
                 className="nav-link nav-link--trigger"
@@ -208,7 +219,7 @@ const Navbar = () => {
                 aria-haspopup="true"
                 aria-controls="navbar-resources-menu"
                 id="navbar-resources-button"
-                onClick={() => toggleDropdown("resources")}
+                onClick={() => mobileOpen && toggleDropdown("resources")}
               >
                 Resources
                 <span className="dropdown-icon" aria-hidden="true">
@@ -222,7 +233,7 @@ const Navbar = () => {
                   aria-labelledby="navbar-resources-button"
                   className="dropdown-menu glassmorphism dropdown-menu--active"
                 >
-                  {RESOURCE_LINKS.map(({ to, label }) => (
+                  {RESOURCE_LINKS.map(({ to, label, desc }) => (
                     <Link
                       key={to}
                       to={to}
@@ -230,7 +241,8 @@ const Navbar = () => {
                       className="dropdown-item"
                       onClick={() => setActiveDropdown(null)}
                     >
-                      {label}
+                      <span className="dropdown-item-title">{label}</span>
+                      <span className="dropdown-item-desc">{desc}</span>
                     </Link>
                   ))}
                 </div>
