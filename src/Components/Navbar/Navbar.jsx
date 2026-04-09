@@ -2,24 +2,63 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useCart } from "../../context/CartContext";
+import { getCartPricing } from "../../utils/cartPricing";
+import { safeReadStorage, safeWriteStorage } from "../../utils/storage";
 import "./Navbar.css";
 import logo from "../../assets/logo.png";
 
 const CART_ANCHOR = "learning-cart";
+const THEME_KEY = "theme";
 
 const COURSE_LINKS = [
-  { to: "/explore/all", label: "Full Course Catalog", desc: "Comprehensive curricula from Linux training to advanced AI systems." },
-  { to: "/explore/web-development", label: "Modern Web Stack", desc: "Master JavaScript, React, and Node.js for scalable application engineering." },
-  { to: "/explore/data-science", label: "AI & Neural Systems", desc: "Deep dives into Generative AI, LLMs, and high-performance data modeling." },
-  { to: "/explore/cloud-computing", label: "Cloud & DevOps Ops", desc: "Architecting AWS infrastructure and Kubernetes-driven GitOps workflows." },
-  { to: "/explore/ui-ux-design", label: "Experience Architecture", desc: "Synthesizing Figma mastery with cognitive psychology for intuitive UI." },
+  {
+    to: "/explore/all",
+    label: "Full Course Catalog",
+    desc: "Comprehensive curricula from Linux training to advanced AI systems.",
+  },
+  {
+    to: "/explore/web-development",
+    label: "Modern Web Stack",
+    desc: "Master JavaScript, React, and Node.js for scalable application engineering.",
+  },
+  {
+    to: "/explore/data-science",
+    label: "AI & Neural Systems",
+    desc: "Deep dives into Generative AI, LLMs, and high-performance data modeling.",
+  },
+  {
+    to: "/explore/cloud-computing",
+    label: "Cloud & DevOps",
+    desc: "Architecting AWS infrastructure and Kubernetes-driven GitOps workflows.",
+  },
+  {
+    to: "/explore/ui-ux-design",
+    label: "Experience Architecture",
+    desc: "Synthesizing Figma mastery with cognitive psychology for intuitive UI.",
+  },
 ];
 
 const RESOURCE_LINKS = [
-  { to: "/resources/blog", label: "Tech Intelligence", desc: "Critical analysis of emerging tech like Rust, Go, and Edge AI." },
-  { to: "/resources/community", label: "Peer Network", desc: "Engage with 500k+ learners in our exclusive developer ecosystem." },
-  { to: "/resources/success-stories", label: "Career Transitions", desc: "First-hand accounts of students moving from zero to senior roles." },
-  { to: "/resources/documentation", label: "Student Playbook", desc: "Comprehensive guides for optimizing your learning and API integration." },
+  {
+    to: "/resources/blog",
+    label: "Tech Intelligence",
+    desc: "Critical analysis of emerging tech like Rust, Go, and Edge AI.",
+  },
+  {
+    to: "/resources/community",
+    label: "Peer Network",
+    desc: "Engage with a large community of learners in our developer ecosystem.",
+  },
+  {
+    to: "/resources/success-stories",
+    label: "Career Transitions",
+    desc: "First-hand accounts of students moving from zero to senior roles.",
+  },
+  {
+    to: "/resources/documentation",
+    label: "Student Playbook",
+    desc: "Guides for getting more value from the platform and its tooling.",
+  },
 ];
 
 const navLinkClass = ({ isActive }) =>
@@ -30,29 +69,34 @@ const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [cartPanelOpen, setCartPanelOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(
-    () => typeof window !== "undefined" && localStorage.getItem("theme") === "dark"
+    () =>
+      typeof window !== "undefined" &&
+      safeReadStorage(THEME_KEY) === "dark"
   );
 
   const navRef = useRef(null);
   const drawerRef = useRef(null);
+  const cartPanelRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
   const { cart, cartCount, cartTotal, removeFromCart, clearCart } = useCart();
-  const cartPanelRef = useRef(null);
 
-  const cartPricing = useMemo(() => {
-    const subtotal = Number(cartTotal);
-    const discount = subtotal >= 100 ? subtotal * 0.08 : 0;
-    const platformFee = cartCount > 0 ? 2.99 : 0;
-    const totalPayable = Math.max(subtotal - discount + platformFee, 0);
-    return { subtotal, discount, platformFee, totalPayable };
-  }, [cartCount, cartTotal]);
+  const cartPricing = useMemo(
+    () => getCartPricing(cartTotal, cartCount),
+    [cartCount, cartTotal]
+  );
 
   const scrollToMainCart = () => {
     document.getElementById(CART_ANCHOR)?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
+  };
+
+  const closeAllPanels = () => {
+    setActiveDropdown(null);
+    setMobileOpen(false);
+    setCartPanelOpen(false);
   };
 
   const goToMainCart = () => {
@@ -77,6 +121,7 @@ const Navbar = () => {
     ) {
       return;
     }
+
     clearCart();
     setCartPanelOpen(false);
     toast.info("Cart cleared");
@@ -88,6 +133,16 @@ const Navbar = () => {
     setCartPanelOpen(false);
   };
 
+  const handleDropdownTrigger = (key) => {
+    setActiveDropdown((prev) => (prev === key ? null : key));
+  };
+
+  const handleDropdownBlur = (event) => {
+    const nextTarget = event.relatedTarget;
+    if (event.currentTarget.contains(nextTarget)) return;
+    setActiveDropdown(null);
+  };
+
   useEffect(() => {
     setMobileOpen(false);
     setActiveDropdown(null);
@@ -96,32 +151,33 @@ const Navbar = () => {
 
   useEffect(() => {
     document.body.classList.toggle("dark-mode", darkMode);
-    localStorage.setItem("theme", darkMode ? "dark" : "light");
+    safeWriteStorage(THEME_KEY, darkMode ? "dark" : "light");
   }, [darkMode]);
 
   useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === "Escape") {
-        setMobileOpen(false);
-        setActiveDropdown(null);
-        setCartPanelOpen(false);
+    const onKey = (event) => {
+      if (event.key === "Escape") {
+        closeAllPanels();
       }
     };
+
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, []);
 
   useEffect(() => {
-    const handler = (e) => {
-      const t = e.target;
-      if (navRef.current?.contains(t)) return;
-      if (drawerRef.current?.contains(t)) return;
-      if (cartPanelRef.current?.contains(t)) return;
+    const handler = (event) => {
+      const target = event.target;
+      if (navRef.current?.contains(target)) return;
+      if (drawerRef.current?.contains(target)) return;
+      if (cartPanelRef.current?.contains(target)) return;
       setActiveDropdown(null);
       setMobileOpen(false);
     };
+
     document.addEventListener("mousedown", handler);
     document.addEventListener("touchstart", handler);
+
     return () => {
       document.removeEventListener("mousedown", handler);
       document.removeEventListener("touchstart", handler);
@@ -130,16 +186,14 @@ const Navbar = () => {
 
   useEffect(() => {
     if (!mobileOpen && !cartPanelOpen) return;
-    const prev = document.body.style.overflow;
+
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+
     return () => {
-      document.body.style.overflow = prev;
+      document.body.style.overflow = previousOverflow;
     };
   }, [mobileOpen, cartPanelOpen]);
-
-  const toggleDropdown = (key) => {
-    setActiveDropdown((prev) => (prev === key ? null : key));
-  };
 
   const openMobile = () => {
     setActiveDropdown(null);
@@ -165,10 +219,11 @@ const Navbar = () => {
               </NavLink>
             </li>
 
-            <li 
+            <li
               className="nav-item nav-item--dropdown"
               onMouseEnter={() => !mobileOpen && setActiveDropdown("courses")}
               onMouseLeave={() => !mobileOpen && setActiveDropdown(null)}
+              onBlur={handleDropdownBlur}
             >
               <button
                 type="button"
@@ -177,11 +232,11 @@ const Navbar = () => {
                 aria-haspopup="true"
                 aria-controls="navbar-courses-menu"
                 id="navbar-courses-button"
-                onClick={() => mobileOpen && toggleDropdown("courses")}
+                onClick={() => handleDropdownTrigger("courses")}
               >
                 Explore Courses
                 <span className="dropdown-icon" aria-hidden="true">
-                  ▾
+                  v
                 </span>
               </button>
               <div
@@ -205,10 +260,11 @@ const Navbar = () => {
               </div>
             </li>
 
-            <li 
+            <li
               className="nav-item nav-item--dropdown"
               onMouseEnter={() => !mobileOpen && setActiveDropdown("resources")}
               onMouseLeave={() => !mobileOpen && setActiveDropdown(null)}
+              onBlur={handleDropdownBlur}
             >
               <button
                 type="button"
@@ -217,11 +273,11 @@ const Navbar = () => {
                 aria-haspopup="true"
                 aria-controls="navbar-resources-menu"
                 id="navbar-resources-button"
-                onClick={() => mobileOpen && toggleDropdown("resources")}
+                onClick={() => handleDropdownTrigger("resources")}
               >
                 Resources
                 <span className="dropdown-icon" aria-hidden="true">
-                  ▾
+                  v
                 </span>
               </button>
               <div
@@ -256,12 +312,12 @@ const Navbar = () => {
             <button
               type="button"
               className="navbar-theme-toggle"
-              onClick={() => setDarkMode((d) => !d)}
+              onClick={() => setDarkMode((value) => !value)}
               aria-pressed={darkMode}
               aria-label={darkMode ? "Switch to light theme" : "Switch to dark theme"}
               title={darkMode ? "Light mode" : "Dark mode"}
             >
-              <span aria-hidden="true">{darkMode ? "☀️" : "🌙"}</span>
+              <span aria-hidden="true">{darkMode ? "Light" : "Dark"}</span>
             </button>
 
             <div className="navbar-cart-wrap">
@@ -281,7 +337,7 @@ const Navbar = () => {
               >
                 Cart ({cartCount})
                 <span className="cart-icon" aria-hidden="true">
-                  🛒
+                  Bag
                 </span>
               </button>
             </div>
@@ -325,7 +381,7 @@ const Navbar = () => {
                 onClick={closeMobile}
                 aria-label="Close menu"
               >
-                ✕
+                X
               </button>
             </div>
 
@@ -404,7 +460,7 @@ const Navbar = () => {
                 onClick={() => setCartPanelOpen(false)}
                 aria-label="Close cart"
               >
-                ✕
+                X
               </button>
             </header>
 
@@ -415,7 +471,7 @@ const Navbar = () => {
                   <Link
                     to="/"
                     className="navbar-cart-browse"
-                    onClick={() => setCartPanelOpen(false)}
+                    onClick={closeAllPanels}
                   >
                     Browse courses
                   </Link>
@@ -438,7 +494,7 @@ const Navbar = () => {
                         <button
                           type="button"
                           className="navbar-cart-linkish"
-                          onClick={() => toast.info("Saved for later coming soon")}
+                          onClick={() => toast.info("Save for later is coming soon")}
                         >
                           Save for later
                         </button>

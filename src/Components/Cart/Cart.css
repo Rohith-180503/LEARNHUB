@@ -161,6 +161,12 @@ body.dark-mode .course-chip:hover {
   opacity: 1;
 }
 
+.remove-btn:focus-visible {
+  outline: 2px solid var(--danger);
+  outline-offset: 2px;
+  opacity: 1;
+}
+
 .cart-right {
   display: flex;
   flex-direction: column;
@@ -183,6 +189,15 @@ body.dark-mode .course-chip:hover {
   flex-wrap: wrap;
   gap: 0.5rem;
   justify-content: flex-end;
+}
+
+.cart-breakdown {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  color: var(--secondary-text-color);
+  font-size: 0.875rem;
 }
 
 .cart-btn-secondary {
@@ -284,6 +299,10 @@ body.dark-mode .cart-total-price {
     justify-content: space-between;
     width: 100%;
     align-items: baseline;
+  }
+
+  .cart-breakdown {
+    align-items: flex-start;
   }
 
   .cart-actions {

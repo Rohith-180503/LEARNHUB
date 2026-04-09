@@ -19,7 +19,7 @@ const Course = ({ course }) => {
   return (
     <article className="course-card">
       <div className="course-card__media">
-        <img className="course-card__img" src={img} alt="" />
+        <img className="course-card__img" src={img} alt={`${title} course`} />
       </div>
       <div className="course-card__body">
         <h3 className="course-card__title">{title}</h3>

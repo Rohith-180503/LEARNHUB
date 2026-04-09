@@ -1,9 +1,9 @@
-/* ─── LearnHub design tokens (light / dark) ─── */
+/* LearnHub design tokens (light / dark) */
 :root {
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
     sans-serif;
 
-  /* Brand — Sophisticated Slate + Indigo */
+  /* Brand - Sophisticated Slate + Indigo */
   --accent-color: #3b82f6; /* Modern Blue */
   --accent-hover: #2563eb;
   --accent-deep: #1d4ed8;
@@ -80,3 +80,4 @@ body {
   color: var(--text-color);
   transition: background-color 0.28s ease, color 0.28s ease;
 }
+

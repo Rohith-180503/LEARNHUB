@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useCart } from "../../context/CartContext";
+import { getCartPricing } from "../../utils/cartPricing";
 import "./Cart.css";
 
 const CART_ANCHOR = "learning-cart";
@@ -11,14 +12,21 @@ export default function Cart() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const pricing = useMemo(
+    () => getCartPricing(cartTotal, cart.length),
+    [cart.length, cartTotal]
+  );
+
   useEffect(() => {
     if (location.hash !== `#${CART_ANCHOR}`) return;
-    const el = document.getElementById(CART_ANCHOR);
-    if (!el) return;
-    const t = requestAnimationFrame(() => {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    const element = document.getElementById(CART_ANCHOR);
+    if (!element) return;
+
+    const frame = requestAnimationFrame(() => {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     });
-    return () => cancelAnimationFrame(t);
+
+    return () => cancelAnimationFrame(frame);
   }, [location.pathname, location.hash]);
 
   const handleClear = () => {
@@ -29,13 +37,14 @@ export default function Cart() {
     ) {
       return;
     }
+
     clearCart();
     toast.info("Cart cleared");
   };
 
   const handleRemoveOne = (course) => {
     removeFromCart(course.id);
-    toast.success(`Removed “${course.title}” from cart`);
+    toast.success(`Removed "${course.title}" from cart`);
   };
 
   return (
@@ -47,7 +56,7 @@ export default function Cart() {
       <div className="cart-left">
         <div className="cart-heading-row">
           <h2 id="cart-heading" className="cart-title">
-            <span aria-hidden="true">🛒</span> My cart
+            <span aria-hidden="true">Cart</span> My cart
           </h2>
           <span className="cart-count-pill" aria-live="polite">
             {cart.length === 0
@@ -70,8 +79,7 @@ export default function Cart() {
                 <div className="course-chip__text">
                   <span className="course-chip__title">{course.title}</span>
                   <span className="course-chip__meta">
-                    {course.instructor} · $
-                    {Number(course.price).toFixed(2)}
+                    {course.instructor} - ${Number(course.price).toFixed(2)}
                   </span>
                 </div>
                 <button
@@ -81,7 +89,7 @@ export default function Cart() {
                   title="Remove from cart"
                   aria-label={`Remove ${course.title} from cart`}
                 >
-                  ✕
+                  X
                 </button>
               </div>
             ))
@@ -91,8 +99,13 @@ export default function Cart() {
 
       <div className="cart-right">
         <div className="cart-right-summary">
-          <span className="cart-total-label">Estimated total</span>
-          <span className="cart-total-price">${cartTotal.toFixed(2)}</span>
+          <span className="cart-total-label">Order total</span>
+          <span className="cart-total-price">${pricing.totalPayable.toFixed(2)}</span>
+        </div>
+        <div className="cart-breakdown" aria-label="Cart price details">
+          <span>Subtotal: ${pricing.subtotal.toFixed(2)}</span>
+          <span>Discount: -${pricing.discount.toFixed(2)}</span>
+          <span>Platform fee: ${pricing.platformFee.toFixed(2)}</span>
         </div>
         <div className="cart-actions">
           {cart.length > 0 && (
@@ -118,9 +131,7 @@ export default function Cart() {
             <button
               type="button"
               className="cart-btn-text"
-              onClick={() =>
-                navigate({ pathname: "/", hash: CART_ANCHOR })
-              }
+              onClick={() => navigate({ pathname: "/", hash: CART_ANCHOR })}
             >
               Back to catalog
             </button>

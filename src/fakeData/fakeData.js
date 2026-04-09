@@ -23,7 +23,7 @@ const fakeData = [
   {
     id: 4,
     title: "React.js Complete Guide",
-    instructor: "Maximilian Schwarzmüller",
+    instructor: "Maximilian Schwarzmuller",
     price: 44.99,
     img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
   },
@@ -83,7 +83,7 @@ const fakeData = [
     price: 64.99,
     img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
   },
-  /* —— Trending tech (AI, cloud, security, modern stacks) —— */
+  /* Trending tech (AI, cloud, security, modern stacks) */
   {
     id: 13,
     title: "Generative AI, LLMs & RAG Systems",
@@ -122,7 +122,7 @@ const fakeData = [
   {
     id: 18,
     title: "Rust Systems Programming & Performance",
-    instructor: "Helena Müller",
+    instructor: "Helena Muller",
     price: 52.99,
     img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg",
   },
@@ -143,7 +143,7 @@ const fakeData = [
   {
     id: 21,
     title: "Kubernetes, Helm & GitOps Workflows",
-    instructor: "Tomás Álvarez",
+    instructor: "Tomas Alvarez",
     price: 61.99,
     img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg",
   },
@@ -171,7 +171,7 @@ const fakeData = [
   {
     id: 25,
     title: "iOS & SwiftUI App Architecture",
-    instructor: "Grace O’Connor",
+    instructor: "Grace O'Connor",
     price: 48.99,
     img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg",
   },
@@ -196,7 +196,7 @@ const fakeData = [
     price: 59.99,
     img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/arduino/arduino-original.svg",
   },
-  /* —— Electrical & electronics —— */
+  /* Electrical and electronics */
   {
     id: 29,
     title: "Power Electronics & Smart Grid Fundamentals",
@@ -228,11 +228,11 @@ const fakeData = [
   {
     id: 33,
     title: "Renewable Energy, EV Drives & Motor Control",
-    instructor: "James O’Brien",
+    instructor: "James O'Brien",
     price: 54.99,
     img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
   },
-  /* —— Mechanical & manufacturing —— */
+  /* Mechanical and manufacturing */
   {
     id: 34,
     title: "CAD/CAM, AutoCAD & Parametric Modeling",
@@ -268,7 +268,7 @@ const fakeData = [
     price: 44.99,
     img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/blender/blender-original.svg",
   },
-  /* —— Civil & infrastructure —— */
+  /* Civil and infrastructure */
   {
     id: 39,
     title: "Structural Analysis: Steel, Concrete & Codes",
@@ -297,7 +297,7 @@ const fakeData = [
     price: 46.99,
     img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
   },
-  /* —— Chemical & process —— */
+  /* Chemical and process */
   {
     id: 43,
     title: "Process Design, Mass Balance & Unit Operations",
@@ -315,3 +315,4 @@ const fakeData = [
 ];
 
 export default fakeData;
+
