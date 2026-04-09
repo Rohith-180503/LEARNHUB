@@ -236,7 +236,7 @@ const Navbar = () => {
               >
                 Explore Courses
                 <span className="dropdown-icon" aria-hidden="true">
-                  v
+                  ▼
                 </span>
               </button>
               <div
@@ -277,7 +277,7 @@ const Navbar = () => {
               >
                 Resources
                 <span className="dropdown-icon" aria-hidden="true">
-                  v
+                  ▼
                 </span>
               </button>
               <div
@@ -317,7 +317,7 @@ const Navbar = () => {
               aria-label={darkMode ? "Switch to light theme" : "Switch to dark theme"}
               title={darkMode ? "Light mode" : "Dark mode"}
             >
-              <span aria-hidden="true">{darkMode ? "Light" : "Dark"}</span>
+              <span aria-hidden="true">{darkMode ? "☀" : "☾"}</span>
             </button>
 
             <div className="navbar-cart-wrap">
@@ -337,7 +337,7 @@ const Navbar = () => {
               >
                 Cart ({cartCount})
                 <span className="cart-icon" aria-hidden="true">
-                  Bag
+                  🛍
                 </span>
               </button>
             </div>
