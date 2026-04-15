@@ -6,7 +6,7 @@ import { getCartPricing } from "../../utils/cartPricing";
 import { safeReadStorage, safeWriteStorage } from "../../utils/storage";
 import "./Navbar.css";
 import logo from "../../assets/logo.png";
-import cartIcon from "../../assets/cart.svg";
+import cartIcon from "../../assets/cart.webp";
 
 const CART_ANCHOR = "learning-cart";
 const THEME_KEY = "theme";
