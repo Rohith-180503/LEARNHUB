@@ -98,18 +98,3 @@ export function filterCourses(courses, filters = {}) {
 
   return filtered;
 }
-
-/**
- * Get course statistics
- * @param {Array} courses - Array of course objects
- * @returns {Object} Statistics object
- */
-export function getCourseStatistics(courses) {
-  return {
-    totalCourses: courses.length,
-    totalEnrolled: courses.reduce((sum, course) => sum + course.studentsEnrolled, 0),
-    averageRating: (courses.reduce((sum, course) => sum + course.rating, 0) / courses.length).toFixed(1),
-    categoriesCount: getUniqueCategories(courses).length,
-    averagePrice: (courses.reduce((sum, course) => sum + course.price, 0) / courses.length).toFixed(2),
-  };
-}

@@ -1,48 +1,8 @@
-/* ---------- LOGO ---------- */
-.logo {
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-  height: 120px;
-  object-fit: contain;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #17a2b8aa);
-}
-
-
-/* Home course cards: see Components/Course/Course.css */
-
-/* ---------- CART PANEL ---------- */
-.cart-panel {
-  background-color: #343a40;
-  color: #fff;
-  border-radius: 10px;
-  padding: 1.5rem;
-  position: sticky;
-  top: 2rem; /* stays fixed during scroll */
-}
-
-.cart-panel hr {
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.course-item {
+/* Main app container - flex column for navbar + content layout */
+.app-container {
+  width: 100%;
+  min-height: 100vh;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-direction: column;
 }
 
-.course-item:last-child {
-  border-bottom: none; /* remove border on last item */
-}
-
-.empty-cart-message {
-  color: rgba(255, 255, 255, 0.7);
-  font-style: italic;
-  text-align: center;
-  padding: 1rem 0;
-}

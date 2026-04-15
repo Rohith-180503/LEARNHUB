@@ -1,0 +1,327 @@
+/* ============================================
+   UTILITIES CSS - Common Patterns & Helpers
+   ============================================ */
+
+/* Button Variants */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-deep), var(--accent-color));
+  color: white;
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.btn-primary:hover:not(:disabled) {
+  box-shadow: 0 6px 16px var(--accent-glow);
+}
+
+.btn-secondary {
+  background: var(--surface-muted);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--surface-elevated);
+  border-color: var(--accent-color);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--accent-muted);
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.btn-small {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+}
+
+.btn-large {
+  padding: 1rem 2rem;
+  font-size: 1.05rem;
+}
+
+/* Card Patterns */
+.card {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+}
+
+.card-elevated {
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04), 0 12px 32px rgba(15, 23, 42, 0.06);
+}
+
+.card-interactive {
+  cursor: pointer;
+}
+
+.card-interactive:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.1);
+}
+
+/* Status Badges */
+.badge {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-beginner {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+}
+
+.badge-intermediate {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+}
+
+.badge-advanced {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+/* Flex Utilities */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-gap-sm {
+  gap: 0.5rem;
+}
+
+.flex-gap-md {
+  gap: 1rem;
+}
+
+.flex-gap-lg {
+  gap: 1.5rem;
+}
+
+/* Grid Utilities */
+.grid-cols-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.grid-cols-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.grid-cols-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+/* Spacing Utilities */
+.p-sm { padding: 0.5rem; }
+.p-md { padding: 1rem; }
+.p-lg { padding: 1.5rem; }
+.p-xl { padding: 2rem; }
+
+.m-sm { margin: 0.5rem; }
+.m-md { margin: 1rem; }
+.m-lg { margin: 1.5rem; }
+.m-xl { margin: 2rem; }
+
+.mt-sm { margin-top: 0.5rem; }
+.mt-md { margin-top: 1rem; }
+.mt-lg { margin-top: 1.5rem; }
+
+.mb-sm { margin-bottom: 0.5rem; }
+.mb-md { margin-bottom: 1rem; }
+.mb-lg { margin-bottom: 1.5rem; }
+
+.gap-sm { gap: 0.5rem; }
+.gap-md { gap: 1rem; }
+.gap-lg { gap: 1.5rem; }
+
+/* Typography Utilities */
+.text-muted {
+  color: var(--secondary-text-color);
+}
+
+.text-accent {
+  color: var(--accent-color);
+}
+
+.text-accent-deep {
+  color: var(--accent-deep);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.font-weight-medium {
+  font-weight: 500;
+}
+
+.font-weight-semibold {
+  font-weight: 600;
+}
+
+.font-weight-bold {
+  font-weight: 700;
+}
+
+/* Layout Utilities */
+.container-max {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.container-sm {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.section-padding {
+  padding: 4rem 2rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.min-fullscreen {
+  min-height: 100vh;
+}
+
+/* Visibility */
+.hidden {
+  display: none;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+@media (max-width: 768px) {
+  .grid-cols-2,
+  .grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .section-padding {
+    padding: 2rem 1.5rem;
+  }
+
+  .hide-mobile {
+    display: none;
+  }
+}
+
+/* Transitions & Effects */
+.transition-smooth {
+  transition: all 0.2s ease;
+}
+
+.transition-slow {
+  transition: all 0.3s ease;
+}
+
+.rounded-sm {
+  border-radius: 4px;
+}
+
+.rounded-md {
+  border-radius: 8px;
+}
+
+.rounded-lg {
+  border-radius: 12px;
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-xl {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}

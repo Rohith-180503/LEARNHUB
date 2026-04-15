@@ -3,9 +3,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useCart } from "../../context/CartContext";
 import { getCartPricing } from "../../utils/cartPricing";
+import { CART_ANCHOR } from "../../constants";
 import "./Cart.css";
-
-const CART_ANCHOR = "learning-cart";
 
 export default function Cart() {
   const { cart, cartTotal, removeFromCart, clearCart } = useCart();
