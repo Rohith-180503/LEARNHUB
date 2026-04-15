@@ -54,59 +54,59 @@ function InstructorCard({ name, title, body, tags }) {
 export const AllCourses = () => (
   <div className="page-container glassmorphism">
     <PageHeader
-      title="Global Academic Catalog 2026"
-      subtitle="Discover our comprehensive suite of professional learning tracks, engineered to bridge the gap between theoretical mastery and production-grade implementation."
+      title="All Courses"
+      subtitle="Explore the full LearnHub catalog across development, AI, cloud, design, and systems thinking."
     />
 
     <div className="catalog-sections">
       <section className="catalog-group">
-        <h2 className="group-title">Full-Stack & Systems Engineering</h2>
+        <h2 className="group-title">Development & Systems</h2>
         <div className="detailed-grid">
           <DetailCard
-            title="Advanced Enterprise Web Stack"
-            body="An immersive 32-week curriculum focusing on high-scale distributed systems. Master the intricacies of React 19's concurrent rendering, Go-based microservices, and multi-tenant database architectures using PostgreSQL and Redis."
+            title="Full-Stack Web Engineering"
+            body="Build modern applications with React, Node.js, REST APIs, authentication, and scalable backend services."
             tags={["React 19", "Golang", "System Design", "Kubernetes"]}
           />
           <DetailCard
             title="Systems Programming & Performance"
-            body="Delve into the low-level mechanics of computing. This track covers memory-safe systems development with Rust, high-concurrency patterns in C++23, and kernel-level optimizations for mission-critical software."
+            body="Strengthen core engineering fundamentals with performance tuning, concurrency, low-level memory safety, and efficient runtime behavior."
             tags={["Rust", "C++23", "eBPF", "Concurrency"]}
           />
           <DetailCard
             title="Mobile Architecture (iOS & Android)"
-            body="Architecting native-grade experiences using Swift, Kotlin, and React Native. Learn to manage complex offline states, hardware integrations, and cross-platform performance tuning."
+            body="Create maintainable mobile apps using Swift, Kotlin, and cross-platform patterns for smooth user experiences."
             tags={["SwiftUI", "Kotlin Multiplatform", "React Native"]}
           />
         </div>
       </section>
 
       <section className="catalog-group">
-        <h2 className="group-title">Artificial Intelligence & Neural Science</h2>
+        <h2 className="group-title">AI & Data</h2>
         <div className="detailed-grid">
           <DetailCard
-            title="Generative AI & LLM Orchestration"
-            body="Beyond prompt engineering: Build sophisticated AI agents using RAG (Retrieval-Augmented Generation), fine-tuning techniques for Llama 3 and GPT-4, and deploying vector-based knowledge graphs."
+            title="Generative AI & LLM Workflows"
+            body="Move beyond prompts into retrieval pipelines, evaluation, fine-tuning, and practical LLM-enabled product development."
             tags={["PyTorch", "LangChain", "Vector DBs", "LLMOps"]}
           />
           <DetailCard
             title="Deep Learning & Computer Vision"
-            body="Master the mathematical foundations and implementation of neural networks. Covers transformer architectures, vision transformers (ViT), and real-time object detection for autonomous systems."
+            body="Learn machine learning foundations, neural networks, transformer models, and vision systems for applied AI work."
             tags={["Deep Learning", "CNNs", "Computer Vision", "TensorFlow"]}
           />
         </div>
       </section>
 
       <section className="catalog-group">
-        <h2 className="group-title">Cloud, Security & Infrastructure</h2>
+        <h2 className="group-title">Cloud, DevOps & Infrastructure</h2>
         <div className="detailed-grid">
           <DetailCard
             title="Cloud Solutions Architecture"
-            body="Master the art of designing resilient, global-scale infrastructure on AWS, Azure, and GCP. Includes multi-region failover strategies, serverless orchestration, and cost-optimized scaling."
+            body="Design resilient infrastructure across major cloud platforms with scalable deployment, security, and reliability practices."
             tags={["AWS Certified", "Terraform", "Serverless", "SRE"]}
           />
           <DetailCard
             title="DevSecOps & GitOps Workflows"
-            body="Integrating security into every stage of the CI/CD pipeline. Automate infrastructure with Kubernetes, implement Zero Trust networking, and master automated threat detection."
+            body="Integrate delivery pipelines, observability, infrastructure automation, and security practices into one reliable engineering workflow."
             tags={["Docker", "K8s", "Jenkins", "Security"]}
           />
         </div>
@@ -118,66 +118,66 @@ export const AllCourses = () => (
 export const WebDevelopment = () => (
   <div className="page-container glassmorphism">
     <PageHeader
-      title="Full-Stack Engineering & Architecture"
-      subtitle="A masterclass in building resilient, high-performance web ecosystems from the database to the browser."
+      title="Full-Stack Development"
+      subtitle="Build production-ready web applications from frontend experience to backend architecture."
     />
 
     <section className="detailed-content">
       <div className="module-box">
-        <h2>Module 1: Advanced Frontend Systems & React 19</h2>
+        <h2>Frontend Foundations & React</h2>
         <p>
-          Moving beyond basic UI components to architecting complex, high-signal interfaces with the latest React primitives.
+          Learn how to build responsive interfaces, maintain state cleanly, and create reusable UI systems for real projects.
         </p>
         <div className="curriculum-preview">
           <div className="curriculum-item">
             <div className="step-num">1.1</div>
             <div className="step-content">
-              <h3>React Server Components (RSC) & Actions</h3>
-              <p>Master the paradigm shift in data fetching. Learn to optimize bundle sizes and improve TTI (Time to Interactive) by moving logic to the server.</p>
+              <h3>Modern React Patterns</h3>
+              <p>Work with component composition, routing, form handling, and data flow patterns that scale as your app grows.</p>
             </div>
           </div>
           <div className="curriculum-item">
             <div className="step-num">1.2</div>
             <div className="step-content">
-              <h3>State Synchronization & Persistence</h3>
-              <p>Architecting robust state management using TanStack Query for server state and Zustand for atomic client state, ensuring offline-first reliability.</p>
+              <h3>State, APIs, and Persistence</h3>
+              <p>Connect your frontend to APIs, persist key data, and keep application state predictable across navigation and refreshes.</p>
             </div>
           </div>
           <div className="curriculum-item">
             <div className="step-num">1.3</div>
             <div className="step-content">
-              <h3>Design Systems & Component Architecture</h3>
-              <p>Building accessible, themeable UI libraries using Tailwind CSS and Radix UI primitives for enterprise-grade consistency.</p>
+              <h3>Component Architecture</h3>
+              <p>Structure design systems, accessible components, and reusable layouts so teams can ship faster with less duplication.</p>
             </div>
           </div>
         </div>
       </div>
 
       <div className="module-box">
-        <h2>Module 2: Scalable Backend & Distributed Services</h2>
+        <h2>Backend & Deployment Skills</h2>
         <p>
-          Engineering the backbone of modern applications using Node.js, Go, and sophisticated data persistence strategies.
+          Round out your stack with API development, data modeling, deployment, and system design essentials.
         </p>
         <div className="curriculum-preview">
           <div className="curriculum-item">
             <div className="step-num">2.1</div>
             <div className="step-content">
-              <h3>Microservices & Event-Driven Design</h3>
-              <p>Designing decoupled systems that communicate via gRPC and RabbitMQ, ensuring horizontal scalability and fault tolerance.</p>
+              <h3>API Design & Services</h3>
+              <p>Design clean application boundaries, create dependable endpoints, and build services that are easy to extend.</p>
             </div>
           </div>
           <div className="curriculum-item">
             <div className="step-num">2.2</div>
             <div className="step-content">
-              <h3>Data Modeling & Advanced SQL</h3>
-              <p>Deep dive into PostgreSQL internals, recursive queries, and JSONB optimization for hybrid relational-document workloads.</p>
+              <h3>Databases & Data Modeling</h3>
+              <p>Choose the right data structures, write efficient queries, and build schemas that support long-term product growth.</p>
             </div>
           </div>
           <div className="curriculum-item">
             <div className="step-num">2.3</div>
             <div className="step-content">
-              <h3>API Security & Rate Limiting</h3>
-              <p>Implementing Zero Trust security at the API layer, including OAuth2/OIDC, JWT rotation, and distributed rate limiting with Redis.</p>
+              <h3>Deployment, Security & Scale</h3>
+              <p>Prepare applications for production with deployment pipelines, environment management, authentication, and performance checks.</p>
             </div>
           </div>
         </div>
@@ -185,8 +185,8 @@ export const WebDevelopment = () => (
     </section>
 
     <div className="cta-box text-center">
-      <h3>Master the Modern Web Stack</h3>
-      <p>Join 50,000+ engineers building the next generation of digital experiences.</p>
+      <h3>Start building full-stack projects</h3>
+      <p>Move from isolated tutorials to complete applications you can explain, deploy, and improve.</p>
       <button className="primary-btn">Apply for the 2026 Cohort</button>
     </div>
   </div>
@@ -195,42 +195,42 @@ export const WebDevelopment = () => (
 export const DataScience = () => (
   <div className="page-container glassmorphism">
     <PageHeader
-      title="Intelligence Systems & Neural Science"
-      subtitle="From fundamental statistics to orchestrating multi-agent AI systems in production environments."
+      title="AI & Data Science"
+      subtitle="Learn analytics, machine learning, and practical AI systems with a clear path from fundamentals to deployment."
     />
 
     <section className="detailed-content">
       <div className="module-box">
-        <h2>Phase 1: Deep Learning & Transformer Architectures</h2>
+        <h2>Core AI Foundations</h2>
         <p>
-          A rigorous journey through the mathematical foundations of AI, culminating in the implementation of custom LLM architectures.
+          Build the concepts behind predictive models, deep learning systems, and modern AI-assisted applications.
         </p>
         <div className="features-grid">
           <InfoCard
-            title="Generative AI & LLMOps"
-            body="Architecting RAG pipelines, fine-tuning Llama-3 with PEFT/LoRA, and managing model latency in high-throughput environments."
+            title="Generative AI & LLM Workflows"
+            body="Learn prompt design, retrieval pipelines, evaluation, and the operational concerns behind AI-powered product features."
             highlight
           />
           <InfoCard
-            title="Neural Architecture Design"
-            body="Implementing Attention mechanisms, Vision Transformers (ViT), and Diffusion models from scratch using PyTorch."
+            title="Machine Learning & Deep Learning"
+            body="Work through supervised learning, neural networks, transformer concepts, and practical implementation patterns."
           />
         </div>
       </div>
 
       <div className="module-box">
-        <h2>Phase 2: MLOps & Production Data Engineering</h2>
+        <h2>Production Data & Model Operations</h2>
         <p>
-          Closing the gap between research and production. Learn to deploy, monitor, and scale intelligence at the enterprise level.
+          Understand how to move from experiments to reliable deployed systems with monitoring, data quality, and feedback loops.
         </p>
         <div className="info-grid">
           <div className="info-card">
-            <h3>Vector Databases & Semantic Search</h3>
-            <p>Mastering Pinecone, Milvus, and pgvector for high-dimensional data retrieval and knowledge graph integration.</p>
+            <h3>Data Pipelines & Feature Design</h3>
+            <p>Prepare datasets, engineer useful signals, and build repeatable workflows that support training and analysis.</p>
           </div>
           <div className="info-card">
-            <h3>Model Observability & Drift Detection</h3>
-            <p>Implementing automated monitoring to detect data drift and model decay, ensuring long-term reliability of AI services.</p>
+            <h3>Monitoring & Model Reliability</h3>
+            <p>Track performance over time, catch drift early, and maintain trustworthy AI systems in changing environments.</p>
           </div>
         </div>
       </div>
@@ -241,47 +241,47 @@ export const DataScience = () => (
 export const CloudComputing = () => (
   <div className="page-container glassmorphism">
     <PageHeader
-      title="Cloud Native Infrastructure & Platform Engineering"
-      subtitle="Architecting for global scale, absolute reliability, and automated security in a multi-cloud world."
+      title="Cloud & DevOps"
+      subtitle="Learn how modern teams ship, scale, automate, and monitor software in cloud environments."
     />
 
     <section className="detailed-content">
       <div className="module-box">
-        <h2>Infrastructure as Code & GitOps</h2>
+        <h2>Cloud Infrastructure & Automation</h2>
         <p>
-          Eliminating manual configuration through declarative infrastructure and automated reconciliation loops.
+          Build a practical understanding of cloud platforms, infrastructure as code, and repeatable deployment workflows.
         </p>
         <div className="curriculum-preview">
           <div className="curriculum-item">
             <div className="step-num">IaC</div>
             <div className="step-content">
-              <h3>Enterprise Terraform & Pulumi</h3>
-              <p>Managing multi-region state, custom providers, and policy-as-code (OPA) for compliant cloud provisioning.</p>
+              <h3>Infrastructure as Code</h3>
+              <p>Provision environments with confidence using declarative tooling and workflows that reduce manual mistakes.</p>
             </div>
           </div>
           <div className="curriculum-item">
             <div className="step-num">CD</div>
             <div className="step-content">
-              <h3>ArgoCD & Flux Mastery</h3>
-              <p>Implementing GitOps workflows for Kubernetes, ensuring your cluster state always matches your repository.</p>
+              <h3>CI/CD & GitOps</h3>
+              <p>Automate delivery pipelines and use source-controlled deployment strategies to keep releases predictable.</p>
             </div>
           </div>
         </div>
       </div>
 
       <div className="module-box">
-        <h2>Kubernetes & Cloud Native Networking</h2>
+        <h2>Operations, Containers & Reliability</h2>
         <p>
-          Orchestrating containerized workloads with advanced traffic management and service-to-service security.
+          Understand how applications run in production with containers, monitoring, traffic management, and incident readiness.
         </p>
         <div className="features-grid">
           <InfoCard
-            title="Service Mesh (Istio/Linkerd)"
-            body="Implementing mTLS, circuit breaking, and canary deployments for complex microservice graphs."
+            title="Containers & Kubernetes"
+            body="Package services with containers, orchestrate them effectively, and manage deployments in dynamic environments."
           />
           <InfoCard
-            title="Cloud Security & FinOps"
-            body="Mastering Zero Trust architecture, secret management (Vault), and automated cost optimization strategies."
+            title="Observability & Reliability"
+            body="Measure application health, respond to incidents faster, and build systems that remain stable under load."
           />
         </div>
       </div>
@@ -292,46 +292,46 @@ export const CloudComputing = () => (
 export const UiUxDesign = () => (
   <div className="page-container glassmorphism">
     <PageHeader
-      title="Experience Architecture & Strategic Design"
-      subtitle="Synthesizing cognitive psychology, visual systems, and technical constraints into world-class digital products."
+      title="UI/UX Design"
+      subtitle="Design useful, intuitive digital products by combining research, visual systems, and interaction design."
     />
 
     <section className="detailed-content">
       <div className="module-box">
-        <h2>The Science of Human-Computer Interaction</h2>
+        <h2>User Experience Foundations</h2>
         <p>
-          Deep dive into the psychological principles that drive user behavior and decision-making.
+          Learn how users think, what creates friction, and how to design interfaces that feel clear and trustworthy.
         </p>
         <div className="info-grid">
           <div className="info-card">
-            <h3>Cognitive Load & Visual Hierarchy</h3>
-            <p>Reducing friction by applying Gestalt principles, Fitts's Law, and Hick's Law to interface design.</p>
+            <h3>Research & User Flows</h3>
+            <p>Map journeys, identify pain points, and translate research into flows and screens that solve real problems.</p>
           </div>
           <div className="info-card">
-            <h3>UX Research & Data-Driven Design</h3>
-            <p>Executing qualitative interviews, longitudinal studies, and A/B testing to validate design hypotheses.</p>
+            <h3>Visual Hierarchy & Accessibility</h3>
+            <p>Use spacing, contrast, typography, and inclusive design principles to make interfaces easier to navigate.</p>
           </div>
         </div>
       </div>
 
       <div className="module-box">
-        <h2>Design Systems & Technical Handover</h2>
+        <h2>Design Systems & Collaboration</h2>
         <p>
-          Bridging the gap between creative vision and engineering implementation through scalable systems.
+          Turn strong visual work into repeatable systems developers can build from with less ambiguity and rework.
         </p>
         <div className="curriculum-preview">
           <div className="curriculum-item">
             <div className="step-num">DS</div>
             <div className="step-content">
-              <h3>Atomic Design & Figma Mastery</h3>
-              <p>Building complex, multi-modal design systems with auto-layout, variables, and interactive prototyping.</p>
+              <h3>Figma, Components & Prototyping</h3>
+              <p>Create reusable libraries, high-fidelity mockups, and prototypes that communicate interaction intent clearly.</p>
             </div>
           </div>
           <div className="curriculum-item">
             <div className="step-num">HO</div>
             <div className="step-content">
-              <h3>Engineering-Design Collaboration</h3>
-              <p>Mastering the handoff process with Storybook, design tokens, and CSS-in-JS documentation.</p>
+              <h3>Developer Handoff & Design Systems</h3>
+              <p>Document components, define tokens, and keep product teams aligned on consistent patterns across screens.</p>
             </div>
           </div>
         </div>
@@ -343,8 +343,8 @@ export const UiUxDesign = () => (
 export const Blog = () => (
   <div className="page-container glassmorphism">
     <PageHeader
-      title="Tech Intelligence Hub"
-      subtitle="A stream of analysis on the systems, tooling, and product shifts shaping modern engineering work."
+      title="Blog & Insights"
+      subtitle="Practical articles on engineering, product, AI, cloud, and design trends that matter to learners and working teams."
     />
 
     <div className="article-list-detailed">
@@ -382,8 +382,8 @@ export const Blog = () => (
 export const Community = () => (
   <div className="page-container glassmorphism text-center">
     <PageHeader
-      title="The Developer Peer Network"
-      subtitle="Learn inside a community built around collaboration, review, and deliberate practice."
+      title="Community"
+      subtitle="Join a collaborative learning space built around discussion, feedback, accountability, and shared progress."
     />
 
     <div className="community-detailed">
@@ -423,8 +423,8 @@ export const Community = () => (
 export const SuccessStories = () => (
   <div className="page-container glassmorphism">
     <PageHeader
-      title="Career Transitions and Outcomes"
-      subtitle="Stories from learners who used focused practice to move into deeper technical roles."
+      title="Success Stories"
+      subtitle="See how focused learning, projects, and feedback helped students move into stronger technical careers."
     />
 
     <div className="detailed-stories">
@@ -463,8 +463,8 @@ export const SuccessStories = () => (
 export const Documentation = () => (
   <div className="page-container glassmorphism">
     <PageHeader
-      title="Student Playbook and Docs"
-      subtitle="A central knowledge base for getting started, understanding workflows, and using platform features effectively."
+      title="Docs & Guides"
+      subtitle="Find setup help, workflow references, and practical guidance for getting more value from LearnHub."
     />
 
     <div className="doc-grid-detailed">

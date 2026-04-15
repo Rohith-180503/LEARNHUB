@@ -2,8 +2,10 @@
 
 .modern-navbar {
   --transition-speed: 0.3s;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   width: 100%;
   font-family: "Inter", system-ui, sans-serif;
@@ -25,7 +27,9 @@ body.dark-mode .modern-navbar {
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
+  min-height: 5.5rem;
   padding: 1rem 2rem;
+  overflow: visible;
 }
 
 .logo-container {
@@ -56,6 +60,7 @@ body.dark-mode .modern-navbar {
   margin: 0;
   padding: 0;
   gap: 2rem;
+  overflow: visible;
 }
 
 .navbar-links--desktop {
@@ -70,6 +75,7 @@ body.dark-mode .modern-navbar {
 
 .nav-item--dropdown {
   position: relative;
+  overflow: visible;
 }
 
 .nav-link {
@@ -170,6 +176,7 @@ button.nav-link:focus-visible {
   pointer-events: none;
   transform: translateY(12px) scale(0.98);
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  isolation: isolate;
 }
 
 /* Safe bridge for hover - larger area to ensure connection */
@@ -958,6 +965,7 @@ body.dark-mode .navbar-drawer {
   }
 
   .navbar-container {
+    min-height: 4.75rem;
     padding: 0.85rem 1rem;
   }
 

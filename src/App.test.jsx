@@ -32,12 +32,12 @@ describe("Online Learning App", () => {
   test("lets keyboard users open navbar menus and reach nested routes", async () => {
     renderApp();
 
-    const exploreButton = screen.getByRole("button", { name: /explore courses/i });
+    const exploreButton = screen.getByRole("button", { name: /explore/i });
     fireEvent.click(exploreButton);
-    fireEvent.click(screen.getByRole("menuitem", { name: /modern web stack/i }));
+    fireEvent.click(screen.getByRole("menuitem", { name: /full-stack development/i }));
 
     expect(
-      screen.getByRole("heading", { name: /advanced web stack engineering/i })
+      screen.getByRole("heading", { name: /full-stack development/i })
     ).toBeInTheDocument();
   });
 

@@ -12,28 +12,28 @@ export const THEME_KEY = "theme";
 export const COURSE_LINKS = [
   {
     to: "/explore/all",
-    label: "Full Course Catalog",
-    desc: "Comprehensive curricula from Linux training to advanced AI systems.",
+    label: "All Courses",
+    desc: "Browse every program across development, data, cloud, design, and systems.",
   },
   {
     to: "/explore/web-development",
-    label: "Modern Web Stack",
-    desc: "Master JavaScript, React, and Node.js for scalable application engineering.",
+    label: "Full-Stack Development",
+    desc: "Learn React, backend APIs, databases, and production-ready architecture.",
   },
   {
     to: "/explore/data-science",
-    label: "AI & Neural Systems",
-    desc: "Deep dives into Generative AI, LLMs, and high-performance data modeling.",
+    label: "AI & Data Science",
+    desc: "Work with machine learning, LLM workflows, analytics, and model operations.",
   },
   {
     to: "/explore/cloud-computing",
     label: "Cloud & DevOps",
-    desc: "Architecting AWS infrastructure and Kubernetes-driven GitOps workflows.",
+    desc: "Build skills in AWS, Kubernetes, CI/CD, observability, and automation.",
   },
   {
     to: "/explore/ui-ux-design",
-    label: "Experience Architecture",
-    desc: "Synthesizing Figma mastery with cognitive psychology for intuitive UI.",
+    label: "UI/UX Design",
+    desc: "Design user-centered products with research, prototyping, and design systems.",
   },
 ];
 
@@ -41,22 +41,22 @@ export const COURSE_LINKS = [
 export const RESOURCE_LINKS = [
   {
     to: "/resources/blog",
-    label: "Tech Intelligence",
-    desc: "Critical analysis of emerging tech like Rust, Go, and Edge AI.",
+    label: "Blog & Insights",
+    desc: "Read practical articles on engineering trends, tools, and product thinking.",
   },
   {
     to: "/resources/community",
-    label: "Peer Network",
-    desc: "Engage with a large community of learners in our developer ecosystem.",
+    label: "Community",
+    desc: "Connect with learners, join discussions, and take part in collaborative events.",
   },
   {
     to: "/resources/success-stories",
-    label: "Career Transitions",
-    desc: "First-hand accounts of students moving from zero to senior roles.",
+    label: "Success Stories",
+    desc: "See how learners moved into stronger roles through guided practice.",
   },
   {
     to: "/resources/documentation",
-    label: "Student Playbook",
-    desc: "Guides for getting more value from the platform and its tooling.",
+    label: "Docs & Guides",
+    desc: "Find onboarding help, platform documentation, and study guidance.",
   },
 ];

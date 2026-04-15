@@ -110,9 +110,12 @@ const Navbar = () => {
   };
 
   const handleDropdownBlur = (event) => {
-    const nextTarget = event.relatedTarget;
-    if (event.currentTarget.contains(nextTarget)) return;
-    setActiveDropdown(null);
+    const dropdownNode = event.currentTarget;
+
+    window.requestAnimationFrame(() => {
+      if (dropdownNode.contains(document.activeElement)) return;
+      setActiveDropdown(null);
+    });
   };
 
   useEffect(() => {
@@ -214,7 +217,7 @@ const Navbar = () => {
                 id="navbar-courses-button"
                 onClick={() => handleDropdownTrigger("courses")}
               >
-                Explore Courses
+                Explore
                 <span className="dropdown-icon" aria-hidden="true">
                   ⌄
                 </span>
@@ -390,7 +393,7 @@ const Navbar = () => {
               </NavLink>
 
               <p className="navbar-drawer-section" id="drawer-courses-heading">
-                Explore courses
+                Explore
               </p>
               {COURSE_LINKS.map(({ to, label }) => (
                 <NavLink
