@@ -1,8 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useCart } from "../context/CartContext";
-import { getCourseById, getRelatedCourses } from "../utils/courseFilters";
-import fakeData from "../fakeData/fakeData";
-import Course from "../Components/Course/Course";
+import { useCart } from "../../context/CartContext.jsx";
+import { getCourseById, getRelatedCourses } from "../../utils/courseFilters.js";
+import fakeData from "../../fakeData/fakeData.js";
+import Course from "../../Components/Course/Course";
 import "./CourseDetail.css";
 
 export default function CourseDetail() {
