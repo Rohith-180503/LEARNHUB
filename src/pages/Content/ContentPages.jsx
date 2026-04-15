@@ -54,140 +54,130 @@ function InstructorCard({ name, title, body, tags }) {
 export const AllCourses = () => (
   <div className="page-container glassmorphism">
     <PageHeader
-      title="Academic Catalog 2026"
-      subtitle="A broad collection of professional learning tracks designed to build practical engineering depth."
+      title="Global Academic Catalog 2026"
+      subtitle="Discover our comprehensive suite of professional learning tracks, engineered to bridge the gap between theoretical mastery and production-grade implementation."
     />
 
     <div className="catalog-sections">
       <section className="catalog-group">
-        <h2 className="group-title">Software Engineering</h2>
+        <h2 className="group-title">Full-Stack & Systems Engineering</h2>
         <div className="detailed-grid">
           <DetailCard
-            title="Full-Stack Mastery"
-            body="A 24-week journey from JavaScript fundamentals to distributed application design with React, Go, and PostgreSQL."
-            tags={["React 19", "Node.js", "Distributed Systems"]}
+            title="Advanced Enterprise Web Stack"
+            body="An immersive 32-week curriculum focusing on high-scale distributed systems. Master the intricacies of React 19's concurrent rendering, Go-based microservices, and multi-tenant database architectures using PostgreSQL and Redis."
+            tags={["React 19", "Golang", "System Design", "Kubernetes"]}
           />
           <DetailCard
-            title="Systems Programming"
-            body="Learn memory management, concurrency, and performance tuning with Rust and C++ through production-style projects."
-            tags={["Rust", "Low-level IO", "Concurrency"]}
+            title="Systems Programming & Performance"
+            body="Delve into the low-level mechanics of computing. This track covers memory-safe systems development with Rust, high-concurrency patterns in C++23, and kernel-level optimizations for mission-critical software."
+            tags={["Rust", "C++23", "eBPF", "Concurrency"]}
+          />
+          <DetailCard
+            title="Mobile Architecture (iOS & Android)"
+            body="Architecting native-grade experiences using Swift, Kotlin, and React Native. Learn to manage complex offline states, hardware integrations, and cross-platform performance tuning."
+            tags={["SwiftUI", "Kotlin Multiplatform", "React Native"]}
           />
         </div>
       </section>
 
       <section className="catalog-group">
-        <h2 className="group-title">Artificial Intelligence</h2>
+        <h2 className="group-title">Artificial Intelligence & Neural Science</h2>
         <div className="detailed-grid">
           <DetailCard
-            title="Generative AI and LLMs"
-            body="Build modern AI applications with transformer models, retrieval workflows, and evaluation pipelines."
-            tags={["PyTorch", "Transformers", "Vector DBs"]}
+            title="Generative AI & LLM Orchestration"
+            body="Beyond prompt engineering: Build sophisticated AI agents using RAG (Retrieval-Augmented Generation), fine-tuning techniques for Llama 3 and GPT-4, and deploying vector-based knowledge graphs."
+            tags={["PyTorch", "LangChain", "Vector DBs", "LLMOps"]}
           />
           <DetailCard
-            title="Computer Vision"
-            body="Study image segmentation, object detection, and navigation models using CNNs and vision transformers."
-            tags={["OpenCV", "Deep Learning", "CNNs"]}
+            title="Deep Learning & Computer Vision"
+            body="Master the mathematical foundations and implementation of neural networks. Covers transformer architectures, vision transformers (ViT), and real-time object detection for autonomous systems."
+            tags={["Deep Learning", "CNNs", "Computer Vision", "TensorFlow"]}
           />
         </div>
       </section>
 
       <section className="catalog-group">
-        <h2 className="group-title">Cloud and Cybersecurity</h2>
+        <h2 className="group-title">Cloud, Security & Infrastructure</h2>
         <div className="detailed-grid">
           <DetailCard
-            title="Cloud Solutions Architect"
-            body="Design resilient infrastructure across AWS, GCP, and Azure with a focus on networking, recovery, and scaling."
-            tags={["AWS", "Terraform", "Networking"]}
+            title="Cloud Solutions Architecture"
+            body="Master the art of designing resilient, global-scale infrastructure on AWS, Azure, and GCP. Includes multi-region failover strategies, serverless orchestration, and cost-optimized scaling."
+            tags={["AWS Certified", "Terraform", "Serverless", "SRE"]}
           />
           <DetailCard
-            title="Ethical Hacking and Defense"
-            body="Cover penetration testing, digital forensics, and zero-trust architecture for modern enterprise systems."
-            tags={["Kali Linux", "Pen Testing", "Zero Trust"]}
+            title="DevSecOps & GitOps Workflows"
+            body="Integrating security into every stage of the CI/CD pipeline. Automate infrastructure with Kubernetes, implement Zero Trust networking, and master automated threat detection."
+            tags={["Docker", "K8s", "Jenkins", "Security"]}
           />
         </div>
       </section>
     </div>
-
-    <section className="content-section stats-bar">
-      <div className="stat-item">
-        <span className="stat-value">120+</span>
-        <span className="stat-label">Total Courses</span>
-      </div>
-      <div className="stat-item">
-        <span className="stat-value">500k+</span>
-        <span className="stat-label">Active Learners</span>
-      </div>
-      <div className="stat-item">
-        <span className="stat-value">98%</span>
-        <span className="stat-label">Placement Rate</span>
-      </div>
-    </section>
   </div>
 );
 
 export const WebDevelopment = () => (
   <div className="page-container glassmorphism">
     <PageHeader
-      title="Advanced Web Stack Engineering"
-      subtitle="A focused curriculum for building resilient, high-performance web applications."
+      title="Full-Stack Engineering & Architecture"
+      subtitle="A masterclass in building resilient, high-performance web ecosystems from the database to the browser."
     />
 
     <section className="detailed-content">
       <div className="module-box">
-        <h2>Module 1: Modern Frontend Systems</h2>
+        <h2>Module 1: Advanced Frontend Systems & React 19</h2>
         <p>
-          Study React 19 patterns, rendering strategies, and performance
-          optimization for real-world interfaces.
+          Moving beyond basic UI components to architecting complex, high-signal interfaces with the latest React primitives.
         </p>
         <div className="curriculum-preview">
           <div className="curriculum-item">
             <div className="step-num">1.1</div>
             <div className="step-content">
-              <h3>React Server Components</h3>
-              <p>
-                Design data-heavy apps with smaller client bundles and clearer
-                server boundaries.
-              </p>
+              <h3>React Server Components (RSC) & Actions</h3>
+              <p>Master the paradigm shift in data fetching. Learn to optimize bundle sizes and improve TTI (Time to Interactive) by moving logic to the server.</p>
             </div>
           </div>
           <div className="curriculum-item">
             <div className="step-num">1.2</div>
             <div className="step-content">
-              <h3>State Management at Scale</h3>
-              <p>
-                Compare Context, Zustand, and TanStack Query for synchronization
-                and caching tradeoffs.
-              </p>
+              <h3>State Synchronization & Persistence</h3>
+              <p>Architecting robust state management using TanStack Query for server state and Zustand for atomic client state, ensuring offline-first reliability.</p>
+            </div>
+          </div>
+          <div className="curriculum-item">
+            <div className="step-num">1.3</div>
+            <div className="step-content">
+              <h3>Design Systems & Component Architecture</h3>
+              <p>Building accessible, themeable UI libraries using Tailwind CSS and Radix UI primitives for enterprise-grade consistency.</p>
             </div>
           </div>
         </div>
       </div>
 
       <div className="module-box">
-        <h2>Module 2: Backend Architecture</h2>
+        <h2>Module 2: Scalable Backend & Distributed Services</h2>
         <p>
-          Learn Node.js internals, asynchronous system design, and scalable data
-          access patterns.
+          Engineering the backbone of modern applications using Node.js, Go, and sophisticated data persistence strategies.
         </p>
         <div className="curriculum-preview">
           <div className="curriculum-item">
             <div className="step-num">2.1</div>
             <div className="step-content">
-              <h3>Microservices and gRPC</h3>
-              <p>
-                Split services cleanly and implement typed communication with
-                protobuf-based contracts.
-              </p>
+              <h3>Microservices & Event-Driven Design</h3>
+              <p>Designing decoupled systems that communicate via gRPC and RabbitMQ, ensuring horizontal scalability and fault tolerance.</p>
             </div>
           </div>
           <div className="curriculum-item">
             <div className="step-num">2.2</div>
             <div className="step-content">
-              <h3>Database Optimization</h3>
-              <p>
-                Work through PostgreSQL indexing, Redis caching, and NoSQL
-                modeling for mixed workloads.
-              </p>
+              <h3>Data Modeling & Advanced SQL</h3>
+              <p>Deep dive into PostgreSQL internals, recursive queries, and JSONB optimization for hybrid relational-document workloads.</p>
+            </div>
+          </div>
+          <div className="curriculum-item">
+            <div className="step-num">2.3</div>
+            <div className="step-content">
+              <h3>API Security & Rate Limiting</h3>
+              <p>Implementing Zero Trust security at the API layer, including OAuth2/OIDC, JWT rotation, and distributed rate limiting with Redis.</p>
             </div>
           </div>
         </div>
@@ -195,9 +185,9 @@ export const WebDevelopment = () => (
     </section>
 
     <div className="cta-box text-center">
-      <h3>Ready to Build the Future of the Web?</h3>
-      <p>Enroll today and get lifetime access to our community and mentor network.</p>
-      <button className="primary-btn">Begin Your Engineering Journey</button>
+      <h3>Master the Modern Web Stack</h3>
+      <p>Join 50,000+ engineers building the next generation of digital experiences.</p>
+      <button className="primary-btn">Apply for the 2026 Cohort</button>
     </div>
   </div>
 );
@@ -205,50 +195,42 @@ export const WebDevelopment = () => (
 export const DataScience = () => (
   <div className="page-container glassmorphism">
     <PageHeader
-      title="Intelligence Systems and Neural Science"
-      subtitle="From raw telemetry to production ML systems, build the foundations behind modern AI."
+      title="Intelligence Systems & Neural Science"
+      subtitle="From fundamental statistics to orchestrating multi-agent AI systems in production environments."
     />
 
     <section className="detailed-content">
       <div className="module-box">
-        <h2>Phase 1: Deep Learning and Neural Architectures</h2>
+        <h2>Phase 1: Deep Learning & Transformer Architectures</h2>
         <p>
-          Start with mathematical foundations, then move into transformer and
-          diffusion model implementation with PyTorch.
+          A rigorous journey through the mathematical foundations of AI, culminating in the implementation of custom LLM architectures.
         </p>
         <div className="features-grid">
           <InfoCard
-            title="Generative AI Mastery"
-            body="Build LLM pipelines, domain adaptation flows, and retrieval-augmented generation systems."
+            title="Generative AI & LLMOps"
+            body="Architecting RAG pipelines, fine-tuning Llama-3 with PEFT/LoRA, and managing model latency in high-throughput environments."
             highlight
           />
           <InfoCard
-            title="Natural Language Processing"
-            body="Cover tokenization, embeddings, attention mechanisms, and classic text tasks."
+            title="Neural Architecture Design"
+            body="Implementing Attention mechanisms, Vision Transformers (ViT), and Diffusion models from scratch using PyTorch."
           />
         </div>
       </div>
 
       <div className="module-box">
-        <h2>Phase 2: Data Engineering and MLOps</h2>
+        <h2>Phase 2: MLOps & Production Data Engineering</h2>
         <p>
-          Learn how data platforms, feature pipelines, and monitoring systems
-          support reliable production ML.
+          Closing the gap between research and production. Learn to deploy, monitor, and scale intelligence at the enterprise level.
         </p>
         <div className="info-grid">
           <div className="info-card">
-            <h3>Real-time Streaming</h3>
-            <p>
-              Use Spark and Kafka to process high-volume event streams and feed
-              inference systems.
-            </p>
+            <h3>Vector Databases & Semantic Search</h3>
+            <p>Mastering Pinecone, Milvus, and pgvector for high-dimensional data retrieval and knowledge graph integration.</p>
           </div>
           <div className="info-card">
-            <h3>Model Observability</h3>
-            <p>
-              Track drift, bias, and retraining signals so deployed models stay
-              accurate over time.
-            </p>
+            <h3>Model Observability & Drift Detection</h3>
+            <p>Implementing automated monitoring to detect data drift and model decay, ensuring long-term reliability of AI services.</p>
           </div>
         </div>
       </div>
@@ -259,45 +241,47 @@ export const DataScience = () => (
 export const CloudComputing = () => (
   <div className="page-container glassmorphism">
     <PageHeader
-      title="Cloud and Infrastructure Engineering"
-      subtitle="Understand how modern teams design, secure, and operate large-scale infrastructure."
+      title="Cloud Native Infrastructure & Platform Engineering"
+      subtitle="Architecting for global scale, absolute reliability, and automated security in a multi-cloud world."
     />
 
     <section className="detailed-content">
       <div className="module-box">
-        <h2>Infrastructure as Code</h2>
+        <h2>Infrastructure as Code & GitOps</h2>
         <p>
-          Define infrastructure declaratively with Terraform, OpenTofu, and AWS
-          tooling to reduce manual configuration drift.
+          Eliminating manual configuration through declarative infrastructure and automated reconciliation loops.
         </p>
         <div className="curriculum-preview">
           <div className="curriculum-item">
-            <div className="step-num">TF</div>
+            <div className="step-num">IaC</div>
             <div className="step-content">
-              <h3>Terraform Mastery</h3>
-              <p>
-                Manage state safely, write reusable modules, and support team
-                workflows.
-              </p>
+              <h3>Enterprise Terraform & Pulumi</h3>
+              <p>Managing multi-region state, custom providers, and policy-as-code (OPA) for compliant cloud provisioning.</p>
+            </div>
+          </div>
+          <div className="curriculum-item">
+            <div className="step-num">CD</div>
+            <div className="step-content">
+              <h3>ArgoCD & Flux Mastery</h3>
+              <p>Implementing GitOps workflows for Kubernetes, ensuring your cluster state always matches your repository.</p>
             </div>
           </div>
         </div>
       </div>
 
       <div className="module-box">
-        <h2>Kubernetes and GitOps</h2>
+        <h2>Kubernetes & Cloud Native Networking</h2>
         <p>
-          Learn orchestration, service-to-service networking, and declarative
-          deployment workflows.
+          Orchestrating containerized workloads with advanced traffic management and service-to-service security.
         </p>
         <div className="features-grid">
           <InfoCard
-            title="Service Meshes"
-            body="Use tools like Istio and Linkerd for observability, traffic control, and policy enforcement."
+            title="Service Mesh (Istio/Linkerd)"
+            body="Implementing mTLS, circuit breaking, and canary deployments for complex microservice graphs."
           />
           <InfoCard
-            title="Cloud Security"
-            body="Apply zero-trust networking, secret management, and runtime security controls."
+            title="Cloud Security & FinOps"
+            body="Mastering Zero Trust architecture, secret management (Vault), and automated cost optimization strategies."
           />
         </div>
       </div>
@@ -308,50 +292,46 @@ export const CloudComputing = () => (
 export const UiUxDesign = () => (
   <div className="page-container glassmorphism">
     <PageHeader
-      title="Experience Architecture and Strategy"
-      subtitle="Blend research, visual systems, and technical constraints into product decisions that hold up in production."
+      title="Experience Architecture & Strategic Design"
+      subtitle="Synthesizing cognitive psychology, visual systems, and technical constraints into world-class digital products."
     />
 
     <section className="detailed-content">
       <div className="module-box">
-        <h2>The Science of User Experience</h2>
+        <h2>The Science of Human-Computer Interaction</h2>
         <p>
-          Build strong UX habits through research, requirement synthesis, and
-          measurable validation.
+          Deep dive into the psychological principles that drive user behavior and decision-making.
         </p>
         <div className="info-grid">
           <div className="info-card">
-            <h3>Cognitive Psychology</h3>
-            <p>
-              Use attention, memory, and perception principles to reduce user
-              friction.
-            </p>
+            <h3>Cognitive Load & Visual Hierarchy</h3>
+            <p>Reducing friction by applying Gestalt principles, Fitts's Law, and Hick's Law to interface design.</p>
           </div>
           <div className="info-card">
-            <h3>UX Research Methods</h3>
-            <p>
-              Practice interviews, card sorting, and remote usability studies to
-              generate actionable findings.
-            </p>
+            <h3>UX Research & Data-Driven Design</h3>
+            <p>Executing qualitative interviews, longitudinal studies, and A/B testing to validate design hypotheses.</p>
           </div>
         </div>
       </div>
 
       <div className="module-box">
-        <h2>Design Systems and Handover</h2>
+        <h2>Design Systems & Technical Handover</h2>
         <p>
-          Learn how scalable component systems improve consistency across design
-          and engineering.
+          Bridging the gap between creative vision and engineering implementation through scalable systems.
         </p>
         <div className="curriculum-preview">
           <div className="curriculum-item">
             <div className="step-num">DS</div>
             <div className="step-content">
-              <h3>Living Design Systems</h3>
-              <p>
-                Build Figma libraries and documentation that can serve as a
-                practical source of truth.
-              </p>
+              <h3>Atomic Design & Figma Mastery</h3>
+              <p>Building complex, multi-modal design systems with auto-layout, variables, and interactive prototyping.</p>
+            </div>
+          </div>
+          <div className="curriculum-item">
+            <div className="step-num">HO</div>
+            <div className="step-content">
+              <h3>Engineering-Design Collaboration</h3>
+              <p>Mastering the handoff process with Storybook, design tokens, and CSS-in-JS documentation.</p>
             </div>
           </div>
         </div>
@@ -604,6 +584,66 @@ export const Instructors = () => (
         title="Android Engineering Lead - Kotlin Expert"
         body="An Android specialist working on modern Kotlin application architecture, offline-first patterns, and performance."
         tags={["Android", "Kotlin", "Jetpack Compose"]}
+      />
+      <InstructorCard
+        name="Dr. Sarah Montgomery"
+        title="Quantum Computing Lead - Research Faculty"
+        body="Leading our quantum initiatives, Dr. Montgomery focuses on algorithm design for NISQ-era hardware and quantum-classical hybrid systems."
+        tags={["Quantum Computing", "Qiskit", "Algorithm Design"]}
+      />
+      <InstructorCard
+        name="James 'Ghost' Miller"
+        title="Offensive Security Lead - Red Team Director"
+        body="A world-renowned ethical hacker specializing in advanced persistent threats (APT) simulation and kernel-level exploit development."
+        tags={["Ethical Hacking", "Exploit Dev", "Red Teaming"]}
+      />
+      <InstructorCard
+        name="Dr. Isabella Rossi"
+        title="Bioinformatics Director - Data Science Lead"
+        body="Synthesizing biology and big data, Dr. Rossi leads our efforts in genomic sequencing pipelines and protein folding simulations."
+        tags={["Bioinformatics", "Python", "Data Science"]}
+      />
+      <InstructorCard
+        name="Vikram Sethi"
+        title="Edge Computing Specialist - IoT Architect"
+        body="Expert in low-latency processing at the edge, focusing on hardware-accelerated AI for industrial IoT ecosystems."
+        tags={["Edge AI", "C++", "Embedded Systems"]}
+      />
+      <InstructorCard
+        name="Claire Fontaine"
+        title="Product Strategy Director - Growth Lead"
+        body="Focused on the intersection of product-market fit and technical scalability, Claire teaches strategic product management for engineers."
+        tags={["Product Strategy", "Growth Hacking", "Agile"]}
+      />
+      <InstructorCard
+        name="Dr. Aris Papadopoulos"
+        title="Distributed Ledger Researcher - Protocol Lead"
+        body="Specializing in consensus mechanisms and formal verification of smart contracts for next-generation blockchain protocols."
+        tags={["Blockchain", "Formal Verification", "Cryptography"]}
+      />
+      <InstructorCard
+        name="Nadia Petrova"
+        title="AR/VR Experience Lead - Immersive Design"
+        body="Pioneering spatial interface design, Nadia focuses on the ergonomics of immersive environments and high-performance 3D rendering."
+        tags={["Unity 3D", "Spatial Design", "WebXR"]}
+      />
+      <InstructorCard
+        name="Dr. Chen Zhang"
+        title="Robotics & Control Systems Lead"
+        body="Focused on autonomous navigation, SLAM algorithms, and the integration of computer vision with robotic actuators."
+        tags={["Robotics", "ROS 2", "Control Theory"]}
+      />
+      <InstructorCard
+        name="Omar Al-Fayed"
+        title="SRE Director - Reliability Lead"
+        body="Expert in incident response, chaos engineering, and building culture around 'error budgets' and high-availability systems."
+        tags={["SRE", "Chaos Engineering", "Incident Response"]}
+      />
+      <InstructorCard
+        name="Yuki Tanaka"
+        title="NLP Specialist - Large Language Model Lead"
+        body="Focusing on the fine-tuning of multi-lingual LLMs and the ethical implications of automated reasoning systems."
+        tags={["NLP", "Transformers", "AI Ethics"]}
       />
     </div>
   </div>

@@ -25,6 +25,7 @@ const Navbar = () => {
   const navRef = useRef(null);
   const drawerRef = useRef(null);
   const cartPanelRef = useRef(null);
+  const dropdownTimeoutRef = useRef(null); // Added for smooth hover exit
   const location = useLocation();
   const navigate = useNavigate();
   const { cart, cartCount, cartTotal, removeFromCart, clearCart } = useCart();
@@ -90,7 +91,22 @@ const Navbar = () => {
   };
 
   const handleDropdownTrigger = (key) => {
+    if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
     setActiveDropdown((prev) => (prev === key ? null : key));
+  };
+
+  const handleMouseEnter = (key) => {
+    if (mobileOpen) return;
+    if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
+    setActiveDropdown(key);
+  };
+
+  const handleMouseLeave = () => {
+    if (mobileOpen) return;
+    // Add a small delay before closing to allow moving between trigger and menu
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 150);
   };
 
   const handleDropdownBlur = (event) => {
@@ -98,6 +114,12 @@ const Navbar = () => {
     if (event.currentTarget.contains(nextTarget)) return;
     setActiveDropdown(null);
   };
+
+  useEffect(() => {
+    return () => {
+      if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     setMobileOpen(false);
@@ -163,10 +185,12 @@ const Navbar = () => {
     <>
       <nav ref={navRef} className="modern-navbar" aria-label="Main">
         <div className="navbar-container">
-          <Link to="/" className="navbar-logo" aria-label="LearnHub home">
-            <img src={logo} alt="" width={40} height={40} decoding="async" />
-            <span className="logo-text">LearnHub</span>
-          </Link>
+          <div className="navbar-brand">
+            <Link to="/" className="logo-container" aria-label="LearnHub Home">
+              <img src={logo} alt="" className="logo-img" aria-hidden="true" />
+              <span className="logo-text">LearnHub</span>
+            </Link>
+          </div>
 
           <ul className="navbar-links navbar-links--desktop">
             <li className="nav-item">
@@ -177,8 +201,8 @@ const Navbar = () => {
 
             <li
               className={`nav-item nav-item--dropdown${activeDropdown === "courses" ? " nav-item--dropdown-open" : ""}`}
-              onMouseEnter={() => !mobileOpen && setActiveDropdown("courses")}
-              onMouseLeave={() => !mobileOpen && setActiveDropdown(null)}
+              onMouseEnter={() => handleMouseEnter("courses")}
+              onMouseLeave={handleMouseLeave}
               onBlur={handleDropdownBlur}
             >
               <button
@@ -218,8 +242,8 @@ const Navbar = () => {
 
             <li
               className={`nav-item nav-item--dropdown${activeDropdown === "resources" ? " nav-item--dropdown-open" : ""}`}
-              onMouseEnter={() => !mobileOpen && setActiveDropdown("resources")}
-              onMouseLeave={() => !mobileOpen && setActiveDropdown(null)}
+              onMouseEnter={() => handleMouseEnter("resources")}
+              onMouseLeave={handleMouseLeave}
               onBlur={handleDropdownBlur}
             >
               <button

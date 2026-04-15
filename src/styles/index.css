@@ -3,68 +3,79 @@
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
     sans-serif;
 
-  /* Brand - Sophisticated Slate + Indigo */
-  --accent-color: #3b82f6; /* Modern Blue */
-  --accent-hover: #2563eb;
-  --accent-deep: #1d4ed8;
-  --accent-violet: #6366f1;
-  --accent-muted: rgba(59, 130, 246, 0.08);
-  --accent-glow: rgba(59, 130, 246, 0.24);
-  --accent-shine: rgba(147, 197, 253, 0.4);
+  /* Brand - Elite Indigo & Slate (Academic Premium) */
+  --accent-color: #4338ca; /* Solid Indigo */
+  --accent-hover: #3730a3;
+  --accent-deep: #312e81;
+  --accent-violet: #6366f1; /* Refined Violet for better blend */
+  --accent-muted: rgba(67, 56, 202, 0.08);
+  --accent-glow: rgba(67, 56, 202, 0.18);
+  --accent-shine: rgba(99, 102, 241, 0.25);
 
-  /* Surfaces */
-  --surface-page: #f8fafc;
-  --surface-nav: rgba(255, 255, 255, 0.8);
+  /* Surfaces - Clean and Professional */
+  --surface-page: #f8fafc; /* Slightly warmer/professional slate */
+  --surface-nav: rgba(255, 255, 255, 0.85);
   --surface-elevated: #ffffff;
   --surface-muted: #f1f5f9;
 
-  /* Text */
-  --text-color: #1e293b;
-  --secondary-text-color: #64748b;
+  /* Text - Precision and Clarity */
+  --text-color: #0f172a; /* Slate 900 */
+  --secondary-text-color: #475569; /* Slate 600 */
+  --tertiary-text-color: #64748b; /* Slate 500 */
 
   /* Lines */
   --border-subtle: rgba(226, 232, 240, 0.8);
   --border-strong: #e2e8f0;
+  --border-focus: #cbd5e1;
 
   /* Semantic */
-  --danger: #e11d48;
-  --danger-muted: rgba(225, 29, 72, 0.12);
-  --success: #0f766e;
-  --success-bright: #14b8a6;
+  --danger: #ef4444;
+  --danger-muted: rgba(239, 68, 68, 0.1);
+  --success: #10b981;
+  --success-bright: #34d399;
 
   /* Glass (navbar + panels) */
-  --glass-bg: rgba(255, 255, 255, 0.72);
-  --glass-border: rgba(15, 23, 42, 0.06);
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(203, 213, 225, 0.5);
 
   /* Navbar convenience aliases */
   --nav-text-color: var(--text-color);
   --nav-hover-bg: var(--accent-muted);
   --nav-bg: var(--surface-nav);
   --dropdown-bg: var(--surface-elevated);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
 body.dark-mode {
-  --accent-color: #60a5fa;
-  --accent-hover: #93c5fd;
-  --accent-deep: #3b82f6;
-  --accent-violet: #818cf8;
-  --accent-muted: rgba(96, 165, 250, 0.12);
-  --accent-glow: rgba(59, 130, 246, 0.4);
-  --accent-shine: rgba(147, 197, 253, 0.25);
+  --accent-color: #818cf8; /* Softer Indigo for Dark Mode */
+  --accent-hover: #a5b4fc;
+  --accent-deep: #6366f1;
+  --accent-violet: #a78bfa;
+  --accent-muted: rgba(129, 140, 248, 0.15);
+  --accent-glow: rgba(99, 102, 241, 0.45);
+  --accent-shine: rgba(167, 139, 250, 0.3);
 
-  --surface-page: #0f172a;
+  /* Deep Dark Surfaces */
+  --surface-page: #020617; /* Slate 950 */
   --surface-nav: rgba(15, 23, 42, 0.85);
-  --surface-elevated: #1e293b;
-  --surface-muted: #334155;
+  --surface-elevated: #1e293b; /* Slate 800 */
+  --surface-muted: #334155; /* Slate 700 */
 
   --text-color: #f8fafc;
-  --secondary-text-color: #94a3b8;
+  --secondary-text-color: #cbd5e1;
+  --tertiary-text-color: #94a3b8;
 
-  --border-subtle: rgba(51, 65, 85, 0.5);
+  --border-subtle: rgba(71, 85, 105, 0.4);
   --border-strong: #334155;
+  --border-focus: #475569;
 
-  --glass-bg: rgba(30, 41, 59, 0.78);
-  --glass-border: rgba(248, 250, 252, 0.1);
+  --glass-bg: rgba(15, 23, 42, 0.8);
+  --glass-border: rgba(51, 65, 85, 0.6);
 
   --nav-text-color: var(--text-color);
   --nav-hover-bg: var(--accent-muted);
