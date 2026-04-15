@@ -381,8 +381,10 @@ body.dark-mode .navbar-theme-toggle {
 }
 
 .cart-icon {
-  font-size: 1.05rem;
-  line-height: 1;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
 }
 
 .navbar-cart-empty {
