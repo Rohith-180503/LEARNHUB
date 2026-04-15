@@ -73,6 +73,7 @@ const Navbar = () => {
       typeof window !== "undefined" &&
       safeReadStorage(THEME_KEY) === "dark"
   );
+  const [searchInput, setSearchInput] = useState("");
 
   const navRef = useRef(null);
   const drawerRef = useRef(null);
@@ -85,6 +86,14 @@ const Navbar = () => {
     () => getCartPricing(cartTotal, cartCount),
     [cartCount, cartTotal]
   );
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchInput.trim()) {
+      navigate(`/?q=${encodeURIComponent(searchInput.trim())}`);
+      setSearchInput("");
+    }
+  };
 
   const scrollToMainCart = () => {
     document.getElementById(CART_ANCHOR)?.scrollIntoView({
@@ -309,6 +318,25 @@ const Navbar = () => {
           </ul>
 
           <div className="navbar-actions">
+            <form className="navbar-search" onSubmit={handleSearch} aria-label="Course search">
+              <input
+                type="text"
+                className="navbar-search-input"
+                placeholder="Search courses..."
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                aria-label="Search for courses"
+              />
+              <button
+                type="submit"
+                className="navbar-search-btn"
+                aria-label="Submit search"
+                disabled={!searchInput.trim()}
+              >
+                🔍
+              </button>
+            </form>
+
             <button
               type="button"
               className="navbar-theme-toggle"
