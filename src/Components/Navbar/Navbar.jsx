@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+﻿﻿import { useState, useEffect, useRef, useMemo } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useCart } from "../../context/CartContext";
@@ -89,8 +89,9 @@ const Navbar = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchInput.trim()) {
-      navigate(`/?q=${encodeURIComponent(searchInput.trim())}`);
+    const trimmedQuery = searchInput.trim();
+    if (trimmedQuery) {
+      navigate({ pathname: "/", search: `?q=${encodeURIComponent(trimmedQuery)}` });
       setSearchInput("");
     }
   };

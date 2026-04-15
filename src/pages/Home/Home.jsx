@@ -12,6 +12,11 @@ const Home = () => {
 
   const categories = useMemo(() => getUniqueCategories(fakeData), []);
 
+  // Keep search state in sync when the query string changes externally
+  useEffect(() => {
+    setSearchQuery(searchParams.get("q") || "");
+  }, [searchParams]);
+
   // Update URL when search or categories change
   useEffect(() => {
     const params = new URLSearchParams();
