@@ -41,6 +41,23 @@ describe("Online Learning App", () => {
     ).toBeInTheDocument();
   });
 
+  test("applies navbar search to the home catalog", async () => {
+    renderApp("/");
+
+    fireEvent.change(screen.getByRole("textbox", { name: /search for courses/i }), {
+      target: { value: "React" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /submit search/i }));
+
+    expect(screen.getByDisplayValue("React")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /react\.js complete guide/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("heading", { name: /complete linux training/i })
+    ).not.toBeInTheDocument();
+  });
+
   test("adds a course to the cart and shows consistent pricing", async () => {
     renderApp("/");
 

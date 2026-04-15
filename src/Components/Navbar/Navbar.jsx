@@ -176,7 +176,7 @@ const Navbar = () => {
             </li>
 
             <li
-              className="nav-item nav-item--dropdown"
+              className={`nav-item nav-item--dropdown${activeDropdown === "courses" ? " nav-item--dropdown-open" : ""}`}
               onMouseEnter={() => !mobileOpen && setActiveDropdown("courses")}
               onMouseLeave={() => !mobileOpen && setActiveDropdown(null)}
               onBlur={handleDropdownBlur}
@@ -217,7 +217,7 @@ const Navbar = () => {
             </li>
 
             <li
-              className="nav-item nav-item--dropdown"
+              className={`nav-item nav-item--dropdown${activeDropdown === "resources" ? " nav-item--dropdown-open" : ""}`}
               onMouseEnter={() => !mobileOpen && setActiveDropdown("resources")}
               onMouseLeave={() => !mobileOpen && setActiveDropdown(null)}
               onBlur={handleDropdownBlur}

@@ -126,6 +126,7 @@ a.nav-link:hover {
 }
 
 button.nav-link {
+  appearance: none;
   border: none;
   background: transparent;
   font: inherit;
@@ -146,6 +147,7 @@ button.nav-link:focus-visible {
 }
 
 .nav-item--dropdown:focus-within > .nav-link--trigger,
+.nav-item--dropdown-open > .nav-link--trigger,
 .nav-item--dropdown > .nav-link--trigger[aria-expanded="true"] {
   background: linear-gradient(135deg, var(--accent-muted) 0%, rgba(99, 102, 241, 0.08) 100%);
   color: var(--accent-color);
@@ -177,6 +179,7 @@ button.nav-link:focus-visible {
 
 .nav-link--trigger:hover .dropdown-icon::before,
 .nav-item--dropdown:focus-within > .nav-link--trigger .dropdown-icon::before,
+.nav-item--dropdown-open > .nav-link--trigger .dropdown-icon::before,
 .nav-item--dropdown > .nav-link--trigger[aria-expanded="true"] .dropdown-icon::before {
   color: currentColor;
 }
@@ -241,6 +244,7 @@ button.nav-link:focus-visible {
 
 .nav-item--dropdown:hover > .dropdown-menu,
 .nav-item--dropdown:focus-within > .dropdown-menu,
+.nav-item--dropdown-open > .dropdown-menu,
 .nav-item--dropdown > .nav-link--trigger[aria-expanded="true"] + .dropdown-menu {
   opacity: 1;
   visibility: visible;

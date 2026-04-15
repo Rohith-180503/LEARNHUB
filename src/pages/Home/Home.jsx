@@ -31,6 +31,13 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    const queryFromUrl = searchParams.get("q") || "";
+    if (queryFromUrl !== searchQuery) {
+      setSearchQuery(queryFromUrl);
+    }
+  }, [searchParams, searchQuery]);
+
   const filteredCourses = useMemo(() => {
     return filterCourses(fakeData, {
       categories: selectedCategories.length > 0 ? selectedCategories : categories,
