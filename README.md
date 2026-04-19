@@ -9,6 +9,17 @@ LearnHub is a modern, high-performance online learning platform built with React
 
 ![LearnHub Preview](./public/screenshot.png)
 
+## 🆕 What Has Been Done Recently (Latest Updates)
+
+The project recently underwent a thorough codebase audit and structural cleanup to make the application leaner, cleaner, and error-proof. The following improvements were made:
+
+- **Dead Asset Removal**: Removed legacy boilerplate assets (`logo.svg`, `react.svg`, `cart.webp`, and `course-placeholder.svg`) that were no longer used, reducing project payload.
+- **Utility Cleanup**: Removed unused utility functions (`finance.js` and `resilientFetch.js`) that were dependent on missing third-party libraries, effectively preventing potential runtime errors.
+- **HTML Boilerplate Polish**: Updated `index.html` to reflect the actual project title (`LearnHub - Online Learning`) and fixed broken favicon paths.
+- **Quality Assurance**: Verified the stability of the project by running code linting (`eslint`), unit tests (`vitest`), and generating a successful production build.
+
+---
+
 ## 🌟 Key Features
 
 ### 🛒 **Advanced Shopping Cart System**
@@ -81,12 +92,6 @@ src/
 └── App.jsx              # Root component with routing
 ```
 
-### **Development Tools**
-- **ESLint 9.36.0**: Code linting and formatting
-- **Vitest 3.2.4**: Fast unit testing framework
-- **Testing Library**: Component testing utilities
-- **PropTypes**: Runtime type checking for components
-
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -117,162 +122,30 @@ src/
    npm run build
    ```
 
-5. **Preview production build**
-   ```bash
-   npm run preview
-   ```
-
-6. **Run tests**
+5. **Run tests**
    ```bash
    npm test
    ```
 
-7. **Lint code**
+6. **Lint code**
    ```bash
    npm run lint
    ```
 
-## 📖 Course Categories
-
-### **Web Development**
-- HTML & CSS Bootcamp
-- Modern JavaScript from Scratch
-- React.js Complete Guide
-- Node.js Backend Development
-- Full Stack Web Development
-- Full Stack with Next.js & Server Components
-
-### **Data Science & AI**
-- Python for Everybody
-- Data Structures & Algorithms
-- Generative AI, LLMs & RAG Systems
-- TensorFlow & Neural Network Design
-- MLOps: Deploy & Monitor Models
-- Data Engineering with Apache Spark & Kafka
-
-### **Cloud & DevOps**
-- Cloud Computing with AWS
-- DevOps Fundamentals
-- Terraform & Infrastructure as Code
-- Kubernetes, Helm & GitOps Workflows
-- Cybersecurity, Zero Trust & Cloud Hardening
-
-### **Mobile & Systems**
-- Kotlin & Modern Android Development
-- iOS & SwiftUI App Architecture
-- Rust Systems Programming & Performance
-- Go: Microservices, gRPC & Concurrency
-- Embedded Systems, RTOS & ARM Cortex
-
-### **Engineering Disciplines**
-- Power Electronics & Smart Grid Fundamentals
-- Robotics, ROS 2 & Motion Planning
-- CAD/CAM, AutoCAD & Parametric Modeling
-- Structural Analysis: Steel, Concrete & Codes
-- Process Design, Mass Balance & Unit Operations
-
-## 👨‍🏫 Featured Instructors
-
-LearnHub features a distinguished faculty of industry experts:
-
-- **Dr. Alexander Sterling** - Principal Systems Architect
-- **Sophia Varma** - Design Director & UX Strategy Lead
-- **Dr. Hiroshi Tanaka** - AI Research Scientist
-- **Elena Volkov** - Cybersecurity Director
-- **Marcus Chen** - Head of MLOps
-- **Jordan Okonkwo** - Blockchain Architect
-- **Rachel Kim** - Principal Infrastructure Engineer
-- **Tomas Alvarez** - Kubernetes Specialist
-- **Amira Hassan** - Big Data Architect
-- **Alex Rivera** - Full Stack Architect
-- **Grace O'Connor** - Lead iOS Architect
-- **Sanjay Patel** - Go Backend Lead
-
-## 🛠️ Development Highlights
-
-### **Performance Optimizations**
-- **Memoization**: useMemo for expensive calculations, useCallback for event handlers
-- **Code Splitting**: Dynamic imports for route-based code splitting
-- **Image Optimization**: CDN-hosted tech icons for fast loading
-- **Bundle Analysis**: Vite's built-in optimization for minimal bundle sizes
-
-### **Accessibility Features**
-- **Keyboard Navigation**: Full keyboard support for all interactive elements
-- **ARIA Labels**: Proper labeling for screen readers
-- **Focus Management**: Logical tab order and focus indicators
-- **Color Contrast**: WCAG-compliant color ratios
-
-### **Responsive Design**
-- **Mobile-First**: Progressive enhancement from mobile to desktop
-- **Flexible Grid**: CSS Grid and Flexbox for adaptive layouts
-- **Touch-Friendly**: Appropriate touch targets for mobile devices
-- **Cross-Browser**: Tested across modern browsers
-
-### **State Management Patterns**
-- **Context Provider**: Centralized cart state with reducer-like patterns
-- **Custom Hooks**: Reusable logic for cart operations
-- **Error Boundaries**: Graceful error handling for state operations
-- **Persistence Layer**: Robust localStorage with fallback mechanisms
-
-## 🧪 Testing Strategy
-
-### **Unit Tests**
-- Component rendering and props validation
-- Hook functionality and state updates
-- Utility function correctness
-- Context provider behavior
-
-### **Integration Tests**
-- Cart operations end-to-end
-- Navigation flow testing
-- Form interactions and validation
-
-## 📄 Available Scripts
-
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server with hot reload |
-| `npm run build` | Create optimized production build |
-| `npm run preview` | Preview production build locally |
-| `npm run test` | Run test suite with Vitest |
-| `npm run lint` | Check code quality with ESLint |
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **React Team** for the amazing framework
-- **Vite Team** for the blazing-fast build tool
-- **Bootstrap Team** for the utility-first CSS framework
-- **DevIcons** for the beautiful technology icons
-- **React Toastify** for the notification system
-
----
-
-**Built with ❤️ using React 19, Vite, and modern web technologies**
-- `npm run lint` runs ESLint
-
-## Testing Focus
+## 🧪 Testing Focus
 
 The test suite currently covers:
+- Home page rendering
+- Keyboard-accessible navigation to nested routes
+- Add-to-cart behavior and price calculations
+- Safe rendering when storage access throws
 
-- home page rendering
-- keyboard-accessible navigation to nested routes
-- add-to-cart behavior and price calculations
-- safe rendering when storage access throws
-
-## Notes
+## 📝 Notes
 
 - Course data is static and stored in `src/fakeData/fakeData.js`.
 - Checkout and "save for later" are intentionally placeholder interactions.
 - Images are loaded from external CDNs, so offline rendering will not show course artwork.
+
+---
+
+**Built with ❤️ using React 19, Vite, and modern web technologies**
