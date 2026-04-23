@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
     "paths": {
       "@/*": ["src/*"],
       "@components/*": ["src/Components/*"],
@@ -12,5 +15,5 @@
       "@utils/*": ["src/utils/*"]
     }
   },
-  "include": ["src/**/*"]
+  "include": ["src", "vite.config.js"]
 }

@@ -1,30 +1,32 @@
 /* LearnHub design tokens (light / dark) */
 :root {
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial,
     sans-serif;
 
-  /* Brand - Sophisticated Slate + Indigo */
-  --accent-color: #3b82f6;
-  --accent-hover: #2563eb;
-  --accent-deep: #1d4ed8;
-  --accent-violet: #6366f1;
-  --accent-muted: rgba(59, 130, 246, 0.08);
-  --accent-glow: rgba(59, 130, 246, 0.24);
-  --accent-shine: rgba(147, 197, 253, 0.4);
+  /* Brand - warm editorial + deep teal */
+  --accent-color: #2cb3a0;
+  --accent-hover: #219985;
+  --accent-deep: #1d5d68;
+  --accent-violet: #e07a5f;
+  --accent-warm: #f08a5d;
+  --accent-muted: rgba(44, 179, 160, 0.1);
+  --accent-glow: rgba(44, 179, 160, 0.22);
+  --accent-shine: rgba(240, 138, 93, 0.3);
 
   /* Surfaces */
-  --surface-page: #f8fafc;
-  --surface-nav: rgba(255, 255, 255, 0.8);
-  --surface-elevated: #ffffff;
-  --surface-muted: #f1f5f9;
+  --surface-page: #fff8ef;
+  --surface-page-alt: #f8efe4;
+  --surface-nav: rgba(255, 250, 243, 0.78);
+  --surface-elevated: #fffdf9;
+  --surface-muted: #f4ede2;
 
   /* Text */
-  --text-color: #1e293b;
-  --secondary-text-color: #64748b;
+  --text-color: #1c2b33;
+  --secondary-text-color: #5f6d72;
 
   /* Lines */
-  --border-subtle: rgba(226, 232, 240, 0.8);
-  --border-strong: #e2e8f0;
+  --border-subtle: rgba(174, 144, 109, 0.18);
+  --border-strong: rgba(174, 144, 109, 0.28);
 
   /* Semantic */
   --danger: #e11d48;
@@ -33,15 +35,15 @@
   --success-bright: #14b8a6;
 
   /* Glass (navbar + panels) */
-  --glass-bg: rgba(255, 255, 255, 0.72);
-  --glass-border: rgba(15, 23, 42, 0.06);
-  --glass-blur: blur(12px);
+  --glass-bg: rgba(255, 250, 243, 0.62);
+  --glass-border: rgba(88, 69, 44, 0.08);
+  --glass-blur: blur(16px);
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-sm: 0 1px 2px 0 rgb(56 36 17 / 0.05);
+  --shadow-md: 0 10px 20px -14px rgb(56 36 17 / 0.2), 0 6px 12px -12px rgb(56 36 17 / 0.16);
+  --shadow-lg: 0 18px 38px -20px rgb(56 36 17 / 0.22), 0 12px 20px -18px rgb(56 36 17 / 0.18);
+  --shadow-xl: 0 28px 58px -26px rgb(56 36 17 / 0.26), 0 18px 32px -24px rgb(56 36 17 / 0.22);
 
   /* Spacing & Radius */
   --radius-sm: 0.375rem;
@@ -58,33 +60,35 @@
 }
 
 body.dark-mode {
-  --accent-color: #60a5fa;
-  --accent-hover: #93c5fd;
-  --accent-deep: #3b82f6;
-  --accent-violet: #818cf8;
-  --accent-muted: rgba(96, 165, 250, 0.12);
-  --accent-glow: rgba(59, 130, 246, 0.4);
-  --accent-shine: rgba(147, 197, 253, 0.25);
+  --accent-color: #63d7c3;
+  --accent-hover: #87e6d6;
+  --accent-deep: #2a8a8d;
+  --accent-violet: #ff9a76;
+  --accent-warm: #f6b26b;
+  --accent-muted: rgba(99, 215, 195, 0.12);
+  --accent-glow: rgba(99, 215, 195, 0.28);
+  --accent-shine: rgba(255, 154, 118, 0.22);
 
-  --surface-page: #0f172a;
-  --surface-nav: rgba(15, 23, 42, 0.85);
-  --surface-elevated: #1e293b;
-  --surface-muted: #334155;
+  --surface-page: #10191f;
+  --surface-page-alt: #152127;
+  --surface-nav: rgba(15, 24, 30, 0.84);
+  --surface-elevated: #18252d;
+  --surface-muted: #23343d;
 
-  --text-color: #f8fafc;
-  --secondary-text-color: #94a3b8;
+  --text-color: #fff8f0;
+  --secondary-text-color: #d6e0de;
 
-  --border-subtle: rgba(51, 65, 85, 0.5);
-  --border-strong: #334155;
+  --border-subtle: rgba(151, 171, 169, 0.14);
+  --border-strong: rgba(151, 171, 169, 0.22);
 
-  --glass-bg: rgba(30, 41, 59, 0.78);
-  --glass-border: rgba(248, 250, 252, 0.1);
+  --glass-bg: rgba(24, 37, 45, 0.72);
+  --glass-border: rgba(245, 239, 230, 0.08);
 
   /* Shadows for dark mode */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.6), 0 8px 10px -6px rgb(0 0 0 / 0.6);
+  --shadow-md: 0 10px 22px -14px rgb(0 0 0 / 0.42), 0 6px 12px -12px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 18px 38px -18px rgb(0 0 0 / 0.48), 0 12px 20px -18px rgb(0 0 0 / 0.36);
+  --shadow-xl: 0 28px 56px -22px rgb(0 0 0 / 0.58), 0 18px 30px -22px rgb(0 0 0 / 0.42);
 
   --nav-text-color: var(--text-color);
   --nav-hover-bg: var(--accent-muted);
@@ -102,6 +106,9 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: var(--surface-page);
+  background-image:
+    radial-gradient(circle at top left, rgba(240, 138, 93, 0.08), transparent 24%),
+    radial-gradient(circle at top right, rgba(44, 179, 160, 0.08), transparent 26%);
   color: var(--text-color);
   transition: background-color 0.28s ease, color 0.28s ease;
   line-height: 1.5;
@@ -115,7 +122,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-violet) 100%);
+  background: linear-gradient(135deg, var(--accent-warm) 0%, var(--accent-color) 55%, var(--accent-violet) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -130,7 +137,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .primary-btn {
-  background: linear-gradient(135deg, var(--accent-deep) 0%, var(--accent-color) 100%);
+  background: linear-gradient(135deg, var(--accent-deep) 0%, var(--accent-color) 52%, var(--accent-warm) 100%);
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -138,7 +145,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-  box-shadow: 0 4px 14px var(--accent-glow);
+  box-shadow: 0 10px 26px var(--accent-glow);
 }
 
 .primary-btn:hover {

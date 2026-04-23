@@ -15,8 +15,8 @@
   height: 100%;
   text-align: left;
   background: var(--surface-elevated);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--border-subtle);
+  border-radius: 1.6rem;
+  border: 1px solid rgba(174, 144, 109, 0.18);
   box-shadow: var(--shadow-md);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
@@ -26,7 +26,7 @@
 .course-card:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-xl);
-  border-color: var(--accent-color);
+  border-color: rgba(44, 179, 160, 0.4);
 }
 
 .course-card::after {
@@ -48,12 +48,10 @@
   flex-shrink: 0;
   margin: 0;
   padding: 1.5rem;
-  background: linear-gradient(
-    180deg,
-    var(--surface-muted) 0%,
-    var(--accent-muted) 100%
-  );
-  border-bottom: 1px solid var(--border-subtle);
+  background:
+    radial-gradient(circle at top right, rgba(240, 138, 93, 0.18), transparent 34%),
+    linear-gradient(180deg, rgba(248, 239, 228, 0.85) 0%, rgba(255, 252, 247, 0.95) 100%);
+  border-bottom: 1px solid rgba(174, 144, 109, 0.14);
   position: relative;
   overflow: hidden;
 }
@@ -102,7 +100,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--accent-color);
+  color: var(--accent-deep);
   margin-bottom: -0.25rem;
 }
 
@@ -161,7 +159,7 @@
   margin-top: 1.25rem;
   width: 100%;
   padding: 0.875rem;
-  border-radius: var(--radius-md);
+  border-radius: 999px;
   font-weight: 700;
   font-size: 0.9375rem;
   display: flex;
@@ -175,9 +173,9 @@
 }
 
 .course-card:hover .course-card__action {
-  background: var(--accent-color);
+  background: linear-gradient(135deg, var(--accent-deep), var(--accent-color), var(--accent-warm));
   color: white;
-  border-color: var(--accent-color);
+  border-color: transparent;
 }
 
 .course-card__footer {
@@ -211,6 +209,32 @@
 
 body.dark-mode .course-card__price-value {
   color: var(--accent-hover);
+}
+
+body.dark-mode .course-card {
+  border-color: rgba(214, 224, 222, 0.12);
+}
+
+body.dark-mode .course-card__media {
+  background:
+    radial-gradient(circle at top right, rgba(255, 154, 118, 0.14), transparent 34%),
+    linear-gradient(180deg, rgba(35, 52, 61, 0.92) 0%, rgba(24, 37, 45, 0.98) 100%);
+  border-bottom-color: rgba(214, 224, 222, 0.08);
+}
+
+body.dark-mode .course-card__category {
+  color: var(--accent-hover);
+}
+
+body.dark-mode .course-card__instructor,
+body.dark-mode .course-card__price {
+  color: #d6e0de;
+}
+
+body.dark-mode .course-card__action {
+  background: rgba(35, 52, 61, 0.96);
+  color: var(--text-color);
+  border-color: rgba(214, 224, 222, 0.12);
 }
 
 .course-card__cta {
