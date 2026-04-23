@@ -6,10 +6,12 @@
 /* Hero Section */
 .home-hero {
   position: relative;
-  padding: 8rem 2rem 6rem;
+  padding: 10rem 2rem 8rem;
   background-color: var(--surface-elevated);
   overflow: hidden;
   text-align: center;
+  background: radial-gradient(circle at top right, var(--accent-muted) 0%, transparent 40%),
+              radial-gradient(circle at top left, rgba(99, 102, 241, 0.05) 0%, transparent 40%);
 }
 
 .home-hero__glow {
@@ -17,57 +19,64 @@
   top: -150px;
   left: 50%;
   transform: translateX(-50%);
-  width: 600px;
-  height: 400px;
+  width: 800px;
+  height: 500px;
   background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-  filter: blur(60px);
-  opacity: 0.6;
+  filter: blur(80px);
+  opacity: 0.4;
   pointer-events: none;
 }
 
 .home-hero__content {
   position: relative;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
+  z-index: 1;
 }
 
 .home-hero__eyebrow {
   display: inline-block;
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 0.8125rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
   color: var(--accent-color);
-  margin-bottom: 1.5rem;
-  padding: 0.5rem 1rem;
+  margin-bottom: 2rem;
+  padding: 0.6rem 1.25rem;
   background-color: var(--accent-muted);
   border-radius: 100px;
+  border: 1px solid var(--accent-glow);
+  box-shadow: var(--shadow-sm);
 }
 
 .home-hero__title {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.75rem, 6vw, 4.5rem);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.05;
   color: var(--text-color);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  letter-spacing: -0.02em;
 }
 
 .home-hero__title-accent {
   background: linear-gradient(135deg, var(--accent-color), var(--accent-violet));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .home-hero__lead {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   line-height: 1.6;
   color: var(--secondary-text-color);
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  max-width: 700px;
+  margin-inline: auto;
 }
 
 /* Catalog Section */
 .home-catalog {
-  padding: 6rem 2rem;
+  padding: 5rem 2rem 8rem;
 }
 
 .home-catalog__inner {
@@ -76,15 +85,18 @@
 }
 
 .home-catalog__header {
-  margin-bottom: 4rem;
+  margin-bottom: 3.5rem;
   text-align: left;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 2rem;
 }
 
 .home-catalog__title {
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 2.25rem;
+  font-weight: 800;
   color: var(--text-color);
   margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
 }
 
 .home-catalog__subtitle {
@@ -92,60 +104,169 @@
   color: var(--secondary-text-color);
 }
 
-.course-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 2rem;
-}
-
 /* Catalog with Filters Layout */
 .catalog-with-filters {
   display: grid;
-  grid-template-columns: 250px 1fr;
-  gap: 2rem;
+  grid-template-columns: 280px 1fr;
+  gap: 3rem;
+}
+
+@media (max-width: 992px) {
+  .catalog-with-filters {
+    grid-template-columns: 1fr;
+  }
+  
+  .filter-sidebar {
+    position: relative !important;
+    top: 0 !important;
+  }
 }
 
 /* Filter Sidebar */
 .filter-sidebar {
   background: var(--surface-elevated);
-  border-radius: 12px;
-  padding: 1.5rem;
+  border-radius: var(--radius-xl);
+  padding: 2rem;
   border: 1px solid var(--border-subtle);
   height: fit-content;
   position: sticky;
   top: 100px;
+  box-shadow: var(--shadow-md);
 }
 
 .filter-section {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.filter-section:last-of-type {
+  margin-bottom: 0;
 }
 
 .filter-title {
-  font-size: 1rem;
+  font-size: 0.8125rem;
   font-weight: 700;
-  color: var(--text-color);
-  margin-bottom: 1rem;
+  color: var(--secondary-text-color);
+  margin-bottom: 1.25rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-size: 0.875rem;
+  letter-spacing: 0.1em;
   display: block;
 }
 
 /* Search Input */
 .search-input {
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.875rem 1.125rem;
   border: 1px solid var(--border-subtle);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   background: var(--surface-muted);
   color: var(--text-color);
   font-size: 0.95rem;
   font-family: inherit;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
-.search-input:hover {
+.search-input:focus {
+  outline: none;
   border-color: var(--accent-color);
+  background: var(--surface-elevated);
+  box-shadow: 0 0 0 4px var(--accent-muted);
+}
+
+/* Filter Categories */
+.filter-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filter-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
+  transition: background 0.2s ease;
+  margin-left: -0.75rem;
+  width: calc(100% + 1.5rem);
+}
+
+.filter-checkbox:hover {
+  background: var(--surface-muted);
+}
+
+.filter-checkbox input {
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-right: 0.875rem;
+  cursor: pointer;
+  accent-color: var(--accent-color);
+}
+
+.checkbox-label {
+  flex: 1;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-color);
+  text-transform: capitalize;
+}
+
+.checkbox-count {
+  font-size: 0.8125rem;
+  color: var(--secondary-text-color);
+  background: var(--border-subtle);
+  padding: 0.125rem 0.5rem;
+  border-radius: 100px;
+  font-weight: 600;
+}
+
+.btn-clear-filters {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  background: none;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-clear-filters:hover {
+  background: var(--surface-muted);
+  border-color: var(--text-color);
+}
+
+/* Course Grid */
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2.5rem;
+}
+
+.no-results {
+  text-align: center;
+  padding: 5rem 2rem;
+  background: var(--surface-muted);
+  border-radius: var(--radius-xl);
+  border: 1px dashed var(--border-strong);
+}
+
+.no-results p {
+  color: var(--secondary-text-color);
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn-reset {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .search-input:focus {

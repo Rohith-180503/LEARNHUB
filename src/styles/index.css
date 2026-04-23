@@ -4,7 +4,7 @@
     sans-serif;
 
   /* Brand - Sophisticated Slate + Indigo */
-  --accent-color: #3b82f6; /* Modern Blue */
+  --accent-color: #3b82f6;
   --accent-hover: #2563eb;
   --accent-deep: #1d4ed8;
   --accent-violet: #6366f1;
@@ -35,6 +35,20 @@
   /* Glass (navbar + panels) */
   --glass-bg: rgba(255, 255, 255, 0.72);
   --glass-border: rgba(15, 23, 42, 0.06);
+  --glass-blur: blur(12px);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* Spacing & Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
 
   /* Navbar convenience aliases */
   --nav-text-color: var(--text-color);
@@ -66,10 +80,21 @@ body.dark-mode {
   --glass-bg: rgba(30, 41, 59, 0.78);
   --glass-border: rgba(248, 250, 252, 0.1);
 
+  /* Shadows for dark mode */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.6), 0 8px 10px -6px rgb(0 0 0 / 0.6);
+
   --nav-text-color: var(--text-color);
   --nav-hover-bg: var(--accent-muted);
   --nav-bg: var(--surface-nav);
   --dropdown-bg: var(--surface-elevated);
+}
+
+/* Base resets & utilities */
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -79,5 +104,66 @@ body {
   background-color: var(--surface-page);
   color: var(--text-color);
   transition: background-color 0.28s ease, color 0.28s ease;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-violet) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glassmorphism {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-lg);
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, var(--accent-deep) 0%, var(--accent-color) 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 4px 14px var(--accent-glow);
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 6px 20px var(--accent-glow);
+}
+
+.primary-btn:active {
+  transform: translateY(0);
+}
+
+.primary-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
 }
 
