@@ -1,15 +1,15 @@
-﻿﻿import { useState, useEffect, useRef, useMemo } from "react";
+﻿import { useState, useEffect, useRef, useMemo } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useCart } from "../../context/CartContext";
 import { getCartPricing } from "../../utils/cartPricing";
-import { safeReadStorage, safeWriteStorage } from "../../utils/storage";
+import { useOnClickOutside } from "../../hooks/useOnClickOutside";
+import { useTheme } from "../../hooks/useTheme";
 import "./Navbar.css";
 import logo from "../../assets/logo.png";
 import cartIcon from "../../assets/cart.svg";
 
 const CART_ANCHOR = "learning-cart";
-const THEME_KEY = "theme";
 
 const COURSE_LINKS = [
   {
@@ -69,11 +69,7 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [cartPanelOpen, setCartPanelOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(
-    () =>
-      typeof window !== "undefined" &&
-      safeReadStorage(THEME_KEY) === "dark"
-  );
+  const { darkMode, toggleTheme } = useTheme();
   const [searchInput, setSearchInput] = useState("");
 
   const navRef = useRef(null);
@@ -160,10 +156,10 @@ const Navbar = () => {
     setCartPanelOpen(false);
   }, [location.pathname]);
 
-  useEffect(() => {
-    document.body.classList.toggle("dark-mode", darkMode);
-    safeWriteStorage(THEME_KEY, darkMode ? "dark" : "light");
-  }, [darkMode]);
+  useOnClickOutside([navRef, drawerRef, cartPanelRef], () => {
+    setActiveDropdown(null);
+    setMobileOpen(false);
+  });
 
   useEffect(() => {
     const onKey = (event) => {
@@ -171,28 +167,8 @@ const Navbar = () => {
         closeAllPanels();
       }
     };
-
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, []);
-
-  useEffect(() => {
-    const handler = (event) => {
-      const target = event.target;
-      if (navRef.current?.contains(target)) return;
-      if (drawerRef.current?.contains(target)) return;
-      if (cartPanelRef.current?.contains(target)) return;
-      setActiveDropdown(null);
-      setMobileOpen(false);
-    };
-
-    document.addEventListener("mousedown", handler);
-    document.addEventListener("touchstart", handler);
-
-    return () => {
-      document.removeEventListener("mousedown", handler);
-      document.removeEventListener("touchstart", handler);
-    };
   }, []);
 
   useEffect(() => {
@@ -342,7 +318,7 @@ const Navbar = () => {
             <button
               type="button"
               className="navbar-theme-toggle"
-              onClick={() => setDarkMode((value) => !value)}
+              onClick={toggleTheme}
               aria-pressed={darkMode}
               aria-label={darkMode ? "Switch to light theme" : "Switch to dark theme"}
               title={darkMode ? "Light mode" : "Dark mode"}
