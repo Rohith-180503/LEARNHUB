@@ -335,6 +335,25 @@ body.dark-mode .navbar-theme-toggle {
   outline-offset: 2px;
 }
 
+.navbar-login-btn {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--nav-text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-muted);
+  transition: all var(--transition-speed) ease;
+}
+
+.navbar-login-btn:hover {
+  background: var(--nav-hover-bg);
+  color: var(--accent-color);
+  border-color: var(--accent-muted);
+  transform: translateY(-1px);
+}
+
 .navbar-cart-wrap {
   position: relative;
 }

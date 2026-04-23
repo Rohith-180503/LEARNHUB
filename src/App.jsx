@@ -6,6 +6,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Cart from "./Components/Cart/Cart";
 import Home from "./pages/Home/Home";
 import CourseDetail from "./pages/CourseDetail/CourseDetail";
+import Login from "./pages/Login/Login";
 import {
   AllCourses,
   WebDevelopment,
@@ -37,6 +38,7 @@ function AppShell() {
         <Route path="/resources/success-stories" element={<SuccessStories />} />
         <Route path="/resources/documentation" element={<Documentation />} />
         <Route path="/instructors" element={<Instructors />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <ToastContainer
         position="bottom-center"

@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useCart } from "../../context/CartContext";
@@ -325,6 +325,10 @@ const Navbar = () => {
             >
               <span aria-hidden="true">{darkMode ? "☀" : "☾"}</span>
             </button>
+
+            <Link to="/login" className="navbar-login-btn">
+              Sign In
+            </Link>
 
             <div className="navbar-cart-wrap">
               <button
