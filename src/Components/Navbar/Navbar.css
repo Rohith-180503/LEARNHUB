@@ -11,56 +11,92 @@
   top: 0;
   z-index: var(--z-nav);
   width: 100%;
+  font-family: "Inter", system-ui, "Segoe UI", sans-serif;
   background: var(--nav-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border-bottom: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-sm);
-  transition: all 0.3s ease;
+  border-bottom: 1px solid var(--border-strong);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .modern-navbar {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1300px;
+  max-width: 1200px;
   margin-inline: auto;
-  padding: 0.75rem 2rem;
+  padding: 1rem 2rem;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar-logo:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+.navbar-logo img {
+  height: 40px;
+  width: auto;
+  transition: transform var(--transition-speed) ease;
+}
+
+.navbar-logo:hover img {
+  transform: scale(1.05);
 }
 
 .logo-text {
   font-size: 1.5rem;
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   color: var(--text-color);
-  background: linear-gradient(135deg, var(--accent-color), var(--accent-violet));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  border-bottom: 3px solid var(--accent-color);
+}
+
+.navbar-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+}
+
+.navbar-links--desktop {
+  align-items: center;
+}
+
+.nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-item--dropdown {
+  position: relative;
 }
 
 .nav-link {
   text-decoration: none;
-  color: var(--secondary-text-color);
-  font-weight: 600;
-  font-size: 0.9375rem;
-  padding: 0.6rem 1rem;
-  border-radius: var(--radius-md);
+  color: var(--nav-text-color);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
   transition: all var(--transition-speed) ease;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 6px;
-}
-
-.nav-link:hover {
-  color: var(--accent-color);
-  background: var(--accent-muted);
-}
-
-.nav-link--active {
-  color: var(--accent-color);
-  background: var(--accent-muted);
+  gap: 5px;
 }
 
 a.nav-link:hover {
