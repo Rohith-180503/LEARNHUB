@@ -3,6 +3,7 @@ import { useCart } from "../../context/CartContext.jsx";
 import { getCourseById, getRelatedCourses } from "../../utils/courseFilters.js";
 import fakeData from "../../fakeData/fakeData.js";
 import Course from "../../Components/Course/Course";
+import CourseReviews from "../../Components/Reviews/CourseReviews";
 import "./CourseDetail.css";
 
 export default function CourseDetail() {
@@ -109,6 +110,9 @@ export default function CourseDetail() {
           </div>
         </div>
       )}
+
+      {/* Course Reviews */}
+      <CourseReviews courseId={course.id} />
     </div>
   );
 }

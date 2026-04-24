@@ -6,6 +6,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Cart from "./Components/Cart/Cart";
 import Home from "./pages/Home/Home";
 import CourseDetail from "./pages/CourseDetail/CourseDetail";
+import CoursePlayer from "./pages/CoursePlayer/CoursePlayer";
 import Login from "./pages/Login/Login";
 import {
   AllCourses,
@@ -28,6 +29,7 @@ function AppShell() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/explore/courses/:courseId" element={<CourseDetail />} />
+        <Route path="/learn/:courseId" element={<CoursePlayer />} />
         <Route path="/explore/all" element={<AllCourses />} />
         <Route path="/explore/web-development" element={<WebDevelopment />} />
         <Route path="/explore/data-science" element={<DataScience />} />

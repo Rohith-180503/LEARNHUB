@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import "./Login.css";
 
 const Login = () => {
+  const [mode, setMode] = useState("login"); // "login" or "signup"
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -13,6 +15,9 @@ const Login = () => {
 
   const validateForm = () => {
     const newErrors = {};
+    if (mode === "signup" && !name) {
+      newErrors.name = "Name is required";
+    }
     if (!email) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
@@ -35,13 +40,19 @@ const Login = () => {
 
     setTimeout(() => {
       setIsLoading(false);
-      toast.success("Welcome back! Login successful.");
+      toast.success(mode === "login" ? "Welcome back! Login successful." : "Account created successfully!");
       navigate("/");
     }, 1500);
   };
 
   const handleSocialLogin = (provider) => {
     toast.info(`${provider} login coming soon!`);
+  };
+
+  const toggleMode = (e) => {
+    e.preventDefault();
+    setMode(mode === "login" ? "signup" : "login");
+    setErrors({});
   };
 
   return (
@@ -72,8 +83,8 @@ const Login = () => {
         <div className="login-right">
           <div className="login-form-container">
             <header className="login-header">
-              <h1 className="gradient-text">Welcome Back</h1>
-              <p>Sign in to continue your learning journey</p>
+              <h1 className="gradient-text">{mode === "login" ? "Welcome Back" : "Create Account"}</h1>
+              <p>{mode === "login" ? "Sign in to continue your learning journey" : "Join thousands of learners today"}</p>
             </header>
 
             <div className="social-login">
@@ -103,10 +114,31 @@ const Login = () => {
             </div>
 
             <div className="divider">
-              <span>or sign in with email</span>
+              <span>or {mode === "login" ? "sign in" : "sign up"} with email</span>
             </div>
 
             <form className="login-form" onSubmit={handleSubmit} noValidate>
+              {mode === "signup" && (
+                <div className="form-group">
+                  <label htmlFor="name">Full Name</label>
+                  <div className="input-wrapper">
+                    <span className="input-icon">👤</span>
+                    <input
+                      type="text"
+                      id="name"
+                      placeholder="Jane Doe"
+                      value={name}
+                      onChange={(e) => {
+                        setName(e.target.value);
+                        if (errors.name) setErrors({ ...errors, name: null });
+                      }}
+                      className={errors.name ? "input-error" : ""}
+                    />
+                  </div>
+                  {errors.name && <span className="error-message">{errors.name}</span>}
+                </div>
+              )}
+
               <div className="form-group">
                 <label htmlFor="email">Email Address</label>
                 <div className="input-wrapper">
@@ -133,7 +165,7 @@ const Login = () => {
                   <input
                     type={showPassword ? "text" : "password"}
                     id="password"
-                    placeholder="Enter your password"
+                    placeholder={mode === "login" ? "Enter your password" : "Create a password (min 6 chars)"}
                     value={password}
                     onChange={(e) => {
                       setPassword(e.target.value);
@@ -153,13 +185,15 @@ const Login = () => {
                 {errors.password && <span className="error-message">{errors.password}</span>}
               </div>
 
-              <div className="form-options">
-                <label className="remember-me">
-                  <input type="checkbox" />
-                  <span>Remember me</span>
-                </label>
-                <Link to="/forgot-password" className="forgot-link">Forgot password?</Link>
-              </div>
+              {mode === "login" && (
+                <div className="form-options">
+                  <label className="remember-me">
+                    <input type="checkbox" />
+                    <span>Remember me</span>
+                  </label>
+                  <a href="#" className="forgot-link" onClick={(e) => { e.preventDefault(); toast.info("Reset link sent!"); }}>Forgot password?</a>
+                </div>
+              )}
 
               <button
                 type="submit"
@@ -169,17 +203,20 @@ const Login = () => {
                 {isLoading ? (
                   <>
                     <span className="spinner"></span>
-                    Signing in...
+                    {mode === "login" ? "Signing in..." : "Creating account..."}
                   </>
                 ) : (
-                  "Sign In"
+                  mode === "login" ? "Sign In" : "Sign Up"
                 )}
               </button>
             </form>
 
             <footer className="login-footer">
               <p>
-                Don't have an account? <Link to="/signup" className="signup-link">Create one for free</Link>
+                {mode === "login" ? "Don't have an account?" : "Already have an account?"}
+                <a href="#" className="signup-link" onClick={toggleMode}>
+                  {mode === "login" ? "Create one for free" : "Sign in here"}
+                </a>
               </p>
             </footer>
           </div>

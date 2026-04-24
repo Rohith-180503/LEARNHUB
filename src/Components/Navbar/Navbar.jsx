@@ -330,6 +330,8 @@ const Navbar = () => {
               Sign In
             </Link>
 
+
+
             <div className="navbar-cart-wrap">
               <button
                 type="button"
