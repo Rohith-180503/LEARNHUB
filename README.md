@@ -177,6 +177,14 @@ npm run dev
 
 ---
 
+## 🔑 Demo Credentials
+
+To quickly test the platform's full-stack features without registering, you can use the following account:
+- **Email**: `sivarohithnn@gmail.com`
+- **Password**: `Rohith@123`
+
+---
+
 ## 🗺️ Development Roadmap
 
 - [x] **Phase 1**: Professional UI/UX Prototype.
