@@ -1,17 +1,45 @@
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext.jsx";
-import { getCourseById, getRelatedCourses } from "../../utils/courseFilters.js";
-import fakeData from "../../fakeData/fakeData.js";
 import Course from "../../Components/Course/Course";
 import CourseReviews from "../../Components/Reviews/CourseReviews";
+
+const API = "http://localhost:3001/api/courses";
 import "./CourseDetail.css";
 
 export default function CourseDetail() {
   const { courseId } = useParams();
   const navigate = useNavigate();
   const { addToCart, cart } = useCart();
+  const [course, setCourse] = useState(null);
+  const [relatedCourses, setRelatedCourses] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const course = getCourseById(fakeData, courseId);
+  useEffect(() => {
+    const fetchCourseData = async () => {
+      setIsLoading(true);
+      try {
+        const res = await fetch(`${API}/${courseId}`);
+        const data = await res.json();
+        if (res.ok) {
+          setCourse(data);
+          // Fetch related courses separately or use category from data
+          const relRes = await fetch(`${API}?category=${data.category}`);
+          const relData = await relRes.json();
+          setRelatedCourses(relData.filter(c => c.id !== Number(courseId)).slice(0, 4));
+        }
+      } catch (e) {
+        console.error("Failed to fetch course:", e);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchCourseData();
+  }, [courseId]);
+
+  if (isLoading) {
+    return <div className="course-detail-container loading">Loading course details...</div>;
+  }
 
   if (!course) {
     return (
@@ -28,7 +56,6 @@ export default function CourseDetail() {
   }
 
   const isInCart = cart.some(item => item.id === course.id);
-  const relatedCourses = getRelatedCourses(fakeData, course.category, course.id, 4);
 
   const handleAddToCart = () => {
     if (!isInCart) {
@@ -59,7 +86,7 @@ export default function CourseDetail() {
           <div className="course-meta">
             <span className="instructor">👤 {course.instructor}</span>
             <span className="rating">⭐ {course.rating} Rating</span>
-            <span className="students">👥 {course.studentsEnrolled.toLocaleString()} students</span>
+            <span className="students">👥 {(course.students_enrolled || 0).toLocaleString()} students</span>
           </div>
 
           <p className="course-description">{course.description}</p>
