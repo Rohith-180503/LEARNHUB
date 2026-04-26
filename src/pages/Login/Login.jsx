@@ -1,24 +1,41 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useAuth } from "../../context/AuthContext";
 import "./Login.css";
 
 const Login = () => {
-  const [mode, setMode] = useState("login"); // "login" or "signup"
+  const [mode, setMode] = useState("login"); // "login" | "signup"
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
+
+  const { login, register, loginWithGoogle, user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Redirect already-logged-in users away from the login page
+  useEffect(() => {
+    if (user) navigate("/", { replace: true });
+  }, [user, navigate]);
+
+  // Show error toast if Google OAuth redirected back with an error param
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get("error") === "google_not_configured") {
+      toast.error("Google sign-in is not configured yet. Please use email & password.");
+    }
+  }, [location.search]);
 
   const validateForm = () => {
     const newErrors = {};
-    if (mode === "signup" && !name) {
+    if (mode === "signup" && !name.trim()) {
       newErrors.name = "Name is required";
     }
-    if (!email) {
+    if (!email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = "Please enter a valid email address";
@@ -37,16 +54,25 @@ const Login = () => {
     if (!validateForm()) return;
 
     setIsLoading(true);
-
-    setTimeout(() => {
-      setIsLoading(false);
-      toast.success(mode === "login" ? "Welcome back! Login successful." : "Account created successfully!");
+    try {
+      if (mode === "login") {
+        await login(email, password);
+        toast.success("Welcome back! Login successful.");
+      } else {
+        await register(name, email, password);
+        toast.success("Account created successfully! Welcome to LearnHub 🎓");
+      }
       navigate("/");
-    }, 1500);
+    } catch (err) {
+      // Show the server's error message directly in a toast
+      toast.error(err.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleSocialLogin = (provider) => {
-    toast.info(`${provider} login coming soon!`);
+  const handleSocialLogin = () => {
+    loginWithGoogle();
   };
 
   const toggleMode = (e) => {
@@ -91,7 +117,7 @@ const Login = () => {
               <button
                 type="button"
                 className="social-btn"
-                onClick={() => handleSocialLogin("Google")}
+                onClick={handleSocialLogin}
               >
                 <svg viewBox="0 0 24 24" width="20" height="20">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -100,16 +126,6 @@ const Login = () => {
                   <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                 </svg>
                 Continue with Google
-              </button>
-              <button
-                type="button"
-                className="social-btn"
-                onClick={() => handleSocialLogin("GitHub")}
-              >
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                </svg>
-                Continue with GitHub
               </button>
             </div>
 
@@ -133,6 +149,7 @@ const Login = () => {
                         if (errors.name) setErrors({ ...errors, name: null });
                       }}
                       className={errors.name ? "input-error" : ""}
+                      autoComplete="name"
                     />
                   </div>
                   {errors.name && <span className="error-message">{errors.name}</span>}
@@ -153,6 +170,7 @@ const Login = () => {
                       if (errors.email) setErrors({ ...errors, email: null });
                     }}
                     className={errors.email ? "input-error" : ""}
+                    autoComplete="email"
                   />
                 </div>
                 {errors.email && <span className="error-message">{errors.email}</span>}
@@ -172,6 +190,7 @@ const Login = () => {
                       if (errors.password) setErrors({ ...errors, password: null });
                     }}
                     className={errors.password ? "input-error" : ""}
+                    autoComplete={mode === "login" ? "current-password" : "new-password"}
                   />
                   <button
                     type="button"
@@ -191,7 +210,16 @@ const Login = () => {
                     <input type="checkbox" />
                     <span>Remember me</span>
                   </label>
-                  <a href="#" className="forgot-link" onClick={(e) => { e.preventDefault(); toast.info("Reset link sent!"); }}>Forgot password?</a>
+                  <a
+                    href="#"
+                    className="forgot-link"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      toast.info("Password reset coming soon!");
+                    }}
+                  >
+                    Forgot password?
+                  </a>
                 </div>
               )}
 
@@ -203,7 +231,7 @@ const Login = () => {
                 {isLoading ? (
                   <>
                     <span className="spinner"></span>
-                    {mode === "login" ? "Signing in..." : "Creating account..."}
+                    {mode === "login" ? "Signing in…" : "Creating account…"}
                   </>
                 ) : (
                   mode === "login" ? "Sign In" : "Sign Up"
@@ -215,7 +243,7 @@ const Login = () => {
               <p>
                 {mode === "login" ? "Don't have an account?" : "Already have an account?"}
                 <a href="#" className="signup-link" onClick={toggleMode}>
-                  {mode === "login" ? "Create one for free" : "Sign in here"}
+                  {mode === "login" ? " Create one for free" : " Sign in here"}
                 </a>
               </p>
             </footer>

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useCart } from "../../context/CartContext";
+import { useAuth } from "../../context/AuthContext";
 import { getCartPricing } from "../../utils/cartPricing";
 import { useOnClickOutside } from "../../hooks/useOnClickOutside";
 import { useTheme } from "../../hooks/useTheme";
@@ -69,15 +70,18 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [cartPanelOpen, setCartPanelOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { darkMode, toggleTheme } = useTheme();
   const [searchInput, setSearchInput] = useState("");
 
   const navRef = useRef(null);
   const drawerRef = useRef(null);
   const cartPanelRef = useRef(null);
+  const userMenuRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
   const { cart, cartCount, cartTotal, removeFromCart, clearCart } = useCart();
+  const { user, logout } = useAuth();
 
   const cartPricing = useMemo(
     () => getCartPricing(cartTotal, cartCount),
@@ -104,6 +108,14 @@ const Navbar = () => {
     setActiveDropdown(null);
     setMobileOpen(false);
     setCartPanelOpen(false);
+    setUserMenuOpen(false);
+  };
+
+  const handleLogout = async () => {
+    setUserMenuOpen(false);
+    await logout();
+    toast.info("You have been signed out.");
+    navigate("/");
   };
 
   const goToMainCart = () => {
@@ -156,9 +168,10 @@ const Navbar = () => {
     setCartPanelOpen(false);
   }, [location.pathname]);
 
-  useOnClickOutside([navRef, drawerRef, cartPanelRef], () => {
+  useOnClickOutside([navRef, drawerRef, cartPanelRef, userMenuRef], () => {
     setActiveDropdown(null);
     setMobileOpen(false);
+    setUserMenuOpen(false);
   });
 
   useEffect(() => {
@@ -326,9 +339,55 @@ const Navbar = () => {
               <span aria-hidden="true">{darkMode ? "☀" : "☾"}</span>
             </button>
 
-            <Link to="/login" className="navbar-login-btn">
-              Sign In
-            </Link>
+            {user ? (
+              <div className="navbar-user-menu" ref={userMenuRef}>
+                <button
+                  type="button"
+                  className="navbar-user-trigger"
+                  onClick={() => setUserMenuOpen((prev) => !prev)}
+                  aria-expanded={userMenuOpen}
+                  aria-haspopup="true"
+                  aria-label="User menu"
+                >
+                  {user.avatar_url ? (
+                    <img src={user.avatar_url} alt="" className="navbar-user-avatar" />
+                  ) : (
+                    <span className="navbar-user-initials" aria-hidden="true">
+                      {user.name.charAt(0).toUpperCase()}
+                    </span>
+                  )}
+                  <span className="navbar-user-name">{user.name.split(" ")[0]}</span>
+                  <span className="dropdown-icon" aria-hidden="true">▼</span>
+                </button>
+                {userMenuOpen && (
+                  <div className="navbar-user-dropdown glassmorphism">
+                    <div className="navbar-user-dropdown__info">
+                      <strong>{user.name}</strong>
+                      <span>{user.email}</span>
+                    </div>
+                    <hr className="navbar-user-dropdown__divider" />
+                    <Link
+                      to="/explore/all"
+                      className="navbar-user-dropdown__item"
+                      onClick={() => setUserMenuOpen(false)}
+                    >
+                      📚 My Learning
+                    </Link>
+                    <button
+                      type="button"
+                      className="navbar-user-dropdown__item navbar-user-dropdown__item--logout"
+                      onClick={handleLogout}
+                    >
+                      🚪 Sign Out
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link to="/login" className="navbar-login-btn">
+                Sign In
+              </Link>
+            )}
 
 
 

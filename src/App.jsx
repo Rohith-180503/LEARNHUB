@@ -1,7 +1,8 @@
-import { Routes, Route } from "react-router-dom";
+import { Navigate, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./styles/App.css";
 import { CartProvider } from "./context/CartContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 import Navbar from "./Components/Navbar/Navbar";
 import Cart from "./Components/Cart/Cart";
 import Home from "./pages/Home/Home";
@@ -21,6 +22,30 @@ import {
   Instructors,
 } from "./pages/Content/ContentPages";
 
+/**
+ * Gates a route behind authentication.
+ * Redirects to /login and stores the intended location so the user
+ * is sent back after a successful sign-in.
+ */
+function ProtectedRoute({ children }) {
+  const { user, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="auth-loading" role="status" aria-live="polite">
+        <span className="auth-loading__spinner" aria-hidden="true" />
+        <span>Loading…</span>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+}
+
 function AppShell() {
   return (
     <div className="app-container">
@@ -29,7 +54,15 @@ function AppShell() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/explore/courses/:courseId" element={<CourseDetail />} />
-        <Route path="/learn/:courseId" element={<CoursePlayer />} />
+        {/* ── Protected: must be logged in to watch a course ── */}
+        <Route
+          path="/learn/:courseId"
+          element={
+            <ProtectedRoute>
+              <CoursePlayer />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/explore/all" element={<AllCourses />} />
         <Route path="/explore/web-development" element={<WebDevelopment />} />
         <Route path="/explore/data-science" element={<DataScience />} />
@@ -56,9 +89,11 @@ function AppShell() {
 
 function App() {
   return (
-    <CartProvider>
-      <AppShell />
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <AppShell />
+      </CartProvider>
+    </AuthProvider>
   );
 }
 

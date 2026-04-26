@@ -46,3 +46,28 @@
   text-align: center;
   padding: 1rem 0;
 }
+
+/* ---------- AUTH LOADING ---------- */
+.auth-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 60vh;
+  font-size: 1rem;
+  color: var(--text-muted, #888);
+}
+
+.auth-loading__spinner {
+  display: inline-block;
+  width: 1.4rem;
+  height: 1.4rem;
+  border: 3px solid rgba(99, 102, 241, 0.25);
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
