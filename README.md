@@ -1,151 +1,147 @@
-# LearnHub - Online Learning Platform
+# 🎓 LearnHub - Full-Stack Online Learning Platform
 
 [![React](https://img.shields.io/badge/React-19.1.1-61DAFB?style=flat&logo=react)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-7.1.14-646CFF?style=flat&logo=vite)](https://vitejs.dev/)
-[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.8-7952B3?style=flat&logo=bootstrap)](https://getbootstrap.com/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/Node.js-20+-339933?style=flat&logo=node.js)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-4.18-000000?style=flat&logo=express)](https://expressjs.com/)
+[![SQLite](https://img.shields.io/badge/SQLite-3-003B57?style=flat&logo=sqlite)](https://www.sqlite.org/)
+[![JWT](https://img.shields.io/badge/JWT-JSON%20Web%20Token-000000?style=flat&logo=json-web-tokens)](https://jwt.io/)
 
-LearnHub is a modern, high-performance online learning platform built with React 19 and Vite. It features a sophisticated user interface, dynamic course catalog, persistent shopping cart, and comprehensive content pages for resources and instructors.
+LearnHub is a premium, full-stack online learning platform. Originally a frontend-heavy React application, it has been evolved into a production-ready ecosystem featuring a secure Node.js backend, JWT-based authentication, and a persistent SQLite database.
 
 ![LearnHub Preview](./public/screenshot.png)
 
-## 🆕 What Has Been Done Recently (Latest Updates)
+---
 
-The project recently underwent a thorough codebase audit and structural cleanup to make the application leaner, cleaner, and error-proof. The following improvements were made:
+## 🚀 Recent Major Milestone: Full-Stack Evolution (Phase 3)
 
-- **Dead Asset Removal**: Removed legacy boilerplate assets (`logo.svg`, `react.svg`, `cart.webp`, and `course-placeholder.svg`) that were no longer used, reducing project payload.
-- **Utility Cleanup**: Removed unused utility functions (`finance.js` and `resilientFetch.js`) that were dependent on missing third-party libraries, effectively preventing potential runtime errors.
-- **HTML Boilerplate Polish**: Updated `index.html` to reflect the actual project title (`LearnHub - Online Learning`) and fixed broken favicon paths.
-- **Quality Assurance**: Verified the stability of the project by running code linting (`eslint`), unit tests (`vitest`), and generating a successful production build.
+The project has successfully transitioned from a static mockup to a **dynamic full-stack application**. Key technical implementations include:
+
+- **🔐 Secure Authentication System**:
+  - **JWT Cookie-based Sessions**: Authentication tokens are stored in `httpOnly` and `sameSite` cookies, protecting users from XSS and CSRF attacks.
+  - **Password Security**: Implemented high-entropy hashing using `bcryptjs` (12 salt rounds) to ensure user data remains secure.
+  - **Persistent Login**: Sessions survive page refreshes via an automated `/api/auth/me` check on app startup.
+- **🛡️ Protected Content Architecture**:
+  - **Gated Learning**: The `CoursePlayer` is now a protected route, requiring a valid session to access course videos and curriculum.
+  - **Auth-Aware UI**: The Navbar dynamically transforms based on auth state, showing a "Sign In" button when guest, and a personalized User Menu with initials-avatar and dropdown when authenticated.
+- **💾 Modern Backend Foundation**:
+  - **Node.js & Express**: A scalable REST API architecture handles authentication and user state.
+  - **SQLite with @libsql/client**: A lightweight yet powerful local database using the modern LibSQL driver (async/await compatible).
+  - **Environment Configuration**: Secure management of secrets (JWT keys, database paths) via `.env` files.
 
 ---
 
 ## 🌟 Key Features
 
+### 🔐 **Full-Stack Authentication**
+- **User Registration & Login**: Real database-backed account creation.
+- **Protected Routes**: Navigation guards that redirect unauthenticated users to login.
+- **Auto-Session Restore**: Seamless user experience using persistent cookie tokens.
+- **User Profile Menu**: Personalized dropdown with logout functionality.
+
 ### 🛒 **Advanced Shopping Cart System**
-- **Persistent Cart State**: Cart contents survive browser refreshes using localStorage
-- **Real-time Pricing**: Dynamic total calculations with tax and discounts
-- **Context API Integration**: Global state management without prop drilling
-- **Toast Notifications**: User feedback for cart actions using React Toastify
-- **Cart Flyout**: Slide-out cart preview with item management
+- **Persistent Cart State**: Cart contents survive browser refreshes.
+- **Real-time Pricing**: Dynamic total calculations including tax and platform fees.
+- **Toast Notifications**: Interactive feedback for all cart and auth actions.
+- **Cart Flyout**: Premium slide-out UI for quick item management.
 
-### 🎨 **Professional UI/UX Design**
-- **Glassmorphism Design**: Modern translucent backgrounds and subtle borders
-- **Responsive Navigation**: Desktop dropdowns and mobile drawer navigation
-- **Dark/Light Theme**: Theme persistence with localStorage fallback
-- **Accessibility**: Keyboard navigation and ARIA labels
-- **Professional Color Palette**: Custom CSS variables for consistent theming
+### 🎨 **Premium UI/UX Design**
+- **Glassmorphism Aesthetic**: Modern translucent cards, vibrant gradients, and subtle micro-animations.
+- **Dynamic Theming**: Dark/Light mode support with state persistence.
+- **Responsive Layout**: Fluid experience across mobile, tablet, and desktop.
+- **Rich Interaction**: Hover effects, smooth transitions, and intuitive navigation patterns.
 
-### 📚 **Comprehensive Course Catalog**
-- **44 Technical Courses**: Covering development, data science, cloud, AI, and more
-- **Expert Instructors**: Real instructor profiles with specializations
-- **Category Organization**: Courses grouped by technology domains
-- **Dynamic Course Cards**: Interactive cards with hover effects and pricing
-
-### 🧭 **Multi-Page Architecture**
-- **Home Page**: Hero section with course catalog grid
-- **Explore Categories**: Filtered course views (Web Dev, Data Science, Cloud, UI/UX)
-- **Resources Section**: Blog, Community, Success Stories, Documentation
-- **Instructors Page**: Detailed faculty profiles with expertise tags
-- **React Router Navigation**: Client-side routing with nested routes
-
-### 🧪 **Testing & Quality Assurance**
-- **Vitest Framework**: Modern testing with React Testing Library
-- **Component Testing**: Unit tests for core functionality
-- **ESLint Integration**: Code quality and consistency checks
-
-## 🏗️ Technical Architecture
-
-### **Frontend Stack**
-- **React 19.1.1**: Latest React with concurrent features and automatic batching
-- **Vite 7.1.14**: Ultra-fast build tool with Rolldown integration
-- **React Router DOM 7.13.2**: Declarative routing for SPA navigation
-- **Bootstrap 5.3.8**: Utility-first CSS framework for responsive design
-- **React Toastify 11.0.5**: Elegant notification system
-
-### **State Management**
-- **React Context API**: Global cart state without external libraries
-- **useState & useEffect**: Local component state management
-- **useMemo & useCallback**: Performance optimization for expensive operations
-- **localStorage**: Persistent data storage with error handling
-
-### **Project Structure**
-```
-src/
-├── Components/           # Reusable UI components
-│   ├── Cart/            # Shopping cart logic and UI
-│   ├── Course/          # Course card component
-│   └── Navbar/          # Navigation with dropdowns
-├── context/             # Global state management
-│   └── CartContext.jsx  # Cart provider and hooks
-├── fakeData/            # Mock data layer
-│   └── fakeData.js      # Courses and instructor data
-├── pages/               # Main application views
-│   ├── Home/            # Landing page with catalog
-│   └── Content/         # Explore/Resources/Instructors pages
-├── styles/              # Global styling
-│   ├── App.css          # Layout and containers
-│   └── index.css        # Color palette and variables
-├── utils/               # Helper functions
-│   ├── cartPricing.js   # Pricing calculations
-│   └── storage.js       # localStorage utilities
-└── App.jsx              # Root component with routing
-```
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js 18+ and npm
-- Modern web browser with ES6+ support
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/learnhub.git
-   cd learnhub
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Start development server**
-   ```bash
-   npm run dev
-   ```
-   Open [http://localhost:5173](http://localhost:5173) in your browser
-
-4. **Build for production**
-   ```bash
-   npm run build
-   ```
-
-5. **Run tests**
-   ```bash
-   npm test
-   ```
-
-6. **Lint code**
-   ```bash
-   npm run lint
-   ```
-
-## 🧪 Testing Focus
-
-The test suite currently covers:
-- Home page rendering
-- Keyboard-accessible navigation to nested routes
-- Add-to-cart behavior and price calculations
-- Safe rendering when storage access throws
-
-## 📝 Notes
-
-- Course data is static and stored in `src/fakeData/fakeData.js`.
-- Checkout and "save for later" are intentionally placeholder interactions.
-- Images are loaded from external CDNs, so offline rendering will not show course artwork.
+### 📚 **Rich Educational Content**
+- **Extensive Catalog**: 44+ courses across Web Dev, AI, Data Science, and Cloud Engineering.
+- **Course Player Interface**: Dedicated learning environment with module navigation and curriculum tracking.
+- **Instructor Profiles**: Deep dives into the experts behind the courses.
 
 ---
 
-**Built with ❤️ using React 19, Vite, and modern web technologies**
+## 🏗️ Technical Architecture & File Structure
+
+### **Project Directory Structure**
+```
+LEARNHUB/
+├── backend/                # Node.js Express Server
+│   ├── routes/             # API Endpoints (auth, etc.)
+│   ├── middleware/         # Auth verification logic
+│   ├── db.js               # SQLite & LibSQL initialization
+│   ├── server.js           # Server entry point & middleware
+│   └── learnhub.db         # Local SQLite database file
+├── src/                    # React Frontend
+│   ├── context/            # Global state (Auth, Cart)
+│   ├── Components/         # Shared UI (Navbar, Cart, Course)
+│   ├── pages/              # Main Views (Home, Login, Player)
+│   ├── hooks/              # Custom React hooks (Theme, ClickOutside)
+│   ├── utils/              # Logic helpers (Pricing, Filters)
+│   └── styles/             # Global CSS & Design System
+└── .gitignore              # Configured to exclude DBs and .env
+```
+
+### **The Stack**
+- **Frontend**: React 19, Vite, React Router 7, Vanilla CSS, React Toastify.
+- **Backend**: Node.js, Express, @libsql/client (SQLite).
+- **Security**: JWT (Cookies), bcryptjs, CORS, Middleware guards.
+- **Database**: SQLite (local persistence).
+
+---
+
+## 🚀 Getting Started
+
+To run this project locally, you need to start both the **Backend** and the **Frontend** servers.
+
+### 1. Prerequisites
+- Node.js 18+ and npm.
+
+### 2. Installation
+Clone the repository and install dependencies in both folders:
+
+```bash
+# Clone the repo
+git clone https://github.com/Rohith-180503/LEARNHUB.git
+cd LEARNHUB
+
+# Install Frontend dependencies
+npm install
+
+# Install Backend dependencies
+cd backend
+npm install
+```
+
+### 3. Running the Project
+Open two terminals to run the servers concurrently:
+
+**Terminal 1: Backend**
+```bash
+cd backend
+node server.js
+```
+*Backend runs on: http://localhost:3001*
+
+**Terminal 2: Frontend**
+```bash
+# Back in the root directory
+npm run dev
+```
+*Frontend runs on: http://localhost:5173*
+
+---
+
+## 🧪 Testing & Linting
+
+- **Run Tests**: `npm test` (Uses Vitest)
+- **Lint Code**: `npm run lint` (Uses ESLint)
+
+---
+
+## 📝 Roadmap & Future Phases
+- [ ] **Phase 4**: Database migration for Course Catalog (moving from `fakeData.js` to SQLite).
+- [ ] **Phase 5**: Stripe Payment Integration for the Checkout flow.
+- [ ] **Phase 6**: Instructor Dashboard & Content Management System.
+- [ ] **Phase 7**: Real-time Q&A using WebSockets.
+
+---
+
+**Crafted with excellence by Antigravity AI for Rohith-180503**
