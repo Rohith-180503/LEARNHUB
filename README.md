@@ -1,4 +1,4 @@
-# 🎓 LearnHub - Full-Stack Online Learning Platform
+# 🎓 LearnHub: The Full-Stack Education Ecosystem
 
 [![React](https://img.shields.io/badge/React-19.1.1-61DAFB?style=flat&logo=react)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-7.1.14-646CFF?style=flat&logo=vite)](https://vitejs.dev/)
@@ -7,141 +7,187 @@
 [![SQLite](https://img.shields.io/badge/SQLite-3-003B57?style=flat&logo=sqlite)](https://www.sqlite.org/)
 [![JWT](https://img.shields.io/badge/JWT-JSON%20Web%20Token-000000?style=flat&logo=json-web-tokens)](https://jwt.io/)
 
-LearnHub is a premium, full-stack online learning platform. Originally a frontend-heavy React application, it has been evolved into a production-ready ecosystem featuring a secure Node.js backend, JWT-based authentication, and a persistent SQLite database.
-
-![LearnHub Preview](./public/screenshot.png)
+LearnHub is a state-of-the-art, full-stack online learning platform designed to provide a premium, seamless educational experience. It has evolved from a sophisticated frontend prototype into a robust, secure, and dynamic web application featuring a centralized Node.js backend and persistent data storage.
 
 ---
 
-## 🚀 Recent Major Milestone: Full-Stack Evolution (Phase 3)
-
-The project has successfully transitioned from a static mockup to a **dynamic full-stack application**. Key technical implementations include:
-
-- **🔐 Secure Authentication System**:
-  - **JWT Cookie-based Sessions**: Authentication tokens are stored in `httpOnly` and `sameSite` cookies, protecting users from XSS and CSRF attacks.
-  - **Password Security**: Implemented high-entropy hashing using `bcryptjs` (12 salt rounds) to ensure user data remains secure.
-  - **Persistent Login**: Sessions survive page refreshes via an automated `/api/auth/me` check on app startup.
-- **🛡️ Protected Content Architecture**:
-  - **Gated Learning**: The `CoursePlayer` is now a protected route, requiring a valid session to access course videos and curriculum.
-  - **Auth-Aware UI**: The Navbar dynamically transforms based on auth state, showing a "Sign In" button when guest, and a personalized User Menu with initials-avatar and dropdown when authenticated.
-- **💾 Modern Backend Foundation**:
-  - **Node.js & Express**: A scalable REST API architecture handles authentication and user state.
-  - **SQLite with @libsql/client**: A lightweight yet powerful local database using the modern LibSQL driver (async/await compatible).
-  - **Environment Configuration**: Secure management of secrets (JWT keys, database paths) via `.env` files.
+## 📖 Table of Contents
+1. [Project Vision](#-project-vision)
+2. [Full-Stack Architecture](#-full-stack-architecture)
+3. [Core Technical Concepts](#-core-technical-concepts)
+4. [Detailed File Structure](#-detailed-file-structure)
+5. [Authentication & Security](#-authentication--security)
+6. [Frontend Design System](#-frontend-design-system)
+7. [Backend API Documentation](#-backend-api-documentation)
+8. [Setup & Installation](#-setup--installation)
+9. [Development Roadmap](#-development-roadmap)
 
 ---
 
-## 🌟 Key Features
+## 🎯 Project Vision
 
-### 🔐 **Full-Stack Authentication**
-- **User Registration & Login**: Real database-backed account creation.
-- **Protected Routes**: Navigation guards that redirect unauthenticated users to login.
-- **Auto-Session Restore**: Seamless user experience using persistent cookie tokens.
-- **User Profile Menu**: Personalized dropdown with logout functionality.
-
-### 🛒 **Advanced Shopping Cart System**
-- **Persistent Cart State**: Cart contents survive browser refreshes.
-- **Real-time Pricing**: Dynamic total calculations including tax and platform fees.
-- **Toast Notifications**: Interactive feedback for all cart and auth actions.
-- **Cart Flyout**: Premium slide-out UI for quick item management.
-
-### 🎨 **Premium UI/UX Design**
-- **Glassmorphism Aesthetic**: Modern translucent cards, vibrant gradients, and subtle micro-animations.
-- **Dynamic Theming**: Dark/Light mode support with state persistence.
-- **Responsive Layout**: Fluid experience across mobile, tablet, and desktop.
-- **Rich Interaction**: Hover effects, smooth transitions, and intuitive navigation patterns.
-
-### 📚 **Rich Educational Content**
-- **Extensive Catalog**: 44+ courses across Web Dev, AI, Data Science, and Cloud Engineering.
-- **Course Player Interface**: Dedicated learning environment with module navigation and curriculum tracking.
-- **Instructor Profiles**: Deep dives into the experts behind the courses.
+The goal of LearnHub is to bridge the gap between static content and interactive learning. By combining a **high-performance React frontend** with a **secure Express backend**, we provide:
+- **Persistence**: Your progress, cart, and profile are stored safely.
+- **Security**: Industry-standard protection for user credentials and sessions.
+- **Scalability**: A modular architecture ready for cloud deployment and payment integration.
 
 ---
 
-## 🏗️ Technical Architecture & File Structure
+## 🏗️ Full-Stack Architecture
 
-### **Project Directory Structure**
-```
-LEARNHUB/
-├── backend/                # Node.js Express Server
-│   ├── routes/             # API Endpoints (auth, etc.)
-│   ├── middleware/         # Auth verification logic
-│   ├── db.js               # SQLite & LibSQL initialization
-│   ├── server.js           # Server entry point & middleware
-│   └── learnhub.db         # Local SQLite database file
-├── src/                    # React Frontend
-│   ├── context/            # Global state (Auth, Cart)
-│   ├── Components/         # Shared UI (Navbar, Cart, Course)
-│   ├── pages/              # Main Views (Home, Login, Player)
-│   ├── hooks/              # Custom React hooks (Theme, ClickOutside)
-│   ├── utils/              # Logic helpers (Pricing, Filters)
-│   └── styles/             # Global CSS & Design System
-└── .gitignore              # Configured to exclude DBs and .env
-```
+LearnHub follows a modern **Client-Server Architecture**:
 
-### **The Stack**
-- **Frontend**: React 19, Vite, React Router 7, Vanilla CSS, React Toastify.
-- **Backend**: Node.js, Express, @libsql/client (SQLite).
-- **Security**: JWT (Cookies), bcryptjs, CORS, Middleware guards.
-- **Database**: SQLite (local persistence).
+### **The Frontend (React + Vite)**
+- Handles the **UI/UX**, rendering dynamic components based on the state.
+- Communicates with the backend using **Fetch API** with `credentials: "include"` to handle secure cookies.
+- Manages global state using the **React Context API** (Cart and Authentication).
+
+### **The Backend (Node.js + Express)**
+- Acts as the **REST API** gateway.
+- Manages **Authentication** logic, JWT signing, and password hashing.
+- Interfaces with the **SQLite Database** using the async `libsql` driver.
 
 ---
 
-## 🚀 Getting Started
+## 🧠 Core Technical Concepts
 
-To run this project locally, you need to start both the **Backend** and the **Frontend** servers.
+### **1. Secure JWT Auth via Cookies**
+Unlike traditional `localStorage` tokens which are vulnerable to XSS (Cross-Site Scripting), LearnHub uses **httpOnly Cookies**.
+- **Security**: JavaScript cannot access these cookies, making it impossible for malicious scripts to steal sessions.
+- **Persistence**: The browser automatically sends the cookie with every request to the backend.
 
-### 1. Prerequisites
-- Node.js 18+ and npm.
+### **2. Password Hashing (Bcrypt)**
+We never store raw passwords. Using `bcryptjs`, we perform **12 salt rounds** of hashing. Even if the database is compromised, user passwords remain mathematically unreadable.
 
-### 2. Installation
-Clone the repository and install dependencies in both folders:
+### **3. Local Persistence (SQLite)**
+For this phase, we chose **SQLite** because:
+- **Serverless**: It stores the entire database in a single file (`learnhub.db`).
+- **Speed**: Extremely fast for read-heavy applications like course catalogs.
+- **Portability**: Perfect for development and easy to migrate to PostgreSQL for production.
 
+### **4. Protected Routing**
+We implemented a custom `<ProtectedRoute />` wrapper in React. It checks the `AuthContext` state. If a user isn't logged in, they are instantly redirected to `/login`, protecting premium content like the `CoursePlayer`.
+
+---
+
+## 📁 Detailed File Structure
+
+### **📂 Root Directory**
+- `.gitignore`: Configured to ignore `node_modules`, `.env`, and `.db` files.
+- `package.json`: Manages frontend dependencies and scripts.
+
+### **📂 backend/** (The Brain)
+- `server.js`: The entry point. Configures **CORS** (to allow frontend communication), mounts routes, and initializes the database.
+- `db.js`: The database layer. Uses `@libsql/client` to initialize the `users` table and handle SQL queries.
+- `middleware/authenticate.js`: A gatekeeper that verifies the JWT token in cookies before allowing access to private data.
+- `routes/auth.js`: Contains the logic for `register`, `login`, `logout`, and `me` (checking current session).
+
+### **📂 src/** (The Heart)
+- **📂 context/**:
+  - `AuthContext.jsx`: Provides the global `user` state and functions like `login()` and `logout()`.
+  - `CartContext.jsx`: Manages the shopping cart, total price calculations, and localStorage backup.
+- **📂 components/**:
+  - `Navbar/`: The navigation bar. Now dynamic—it changes its look when you log in.
+  - `Cart/`: The premium slide-out cart UI.
+  - `Course/`: Reusable course card components.
+- **📂 pages/**:
+  - `Login/`: A multi-mode page (Login vs. Register) with real API validation.
+  - `CoursePlayer/`: The learning environment, now protected behind the Auth wall.
+  - `Home/`: The landing page showcasing the course catalog.
+
+---
+
+## 🔐 Authentication & Security
+
+### **Registration Flow**
+1. User enters name, email, and password.
+2. Frontend sends a `POST` request to `/api/auth/register`.
+3. Backend checks if the email exists, hashes the password, and saves to SQLite.
+4. Backend generates a JWT and sends it back in a secure cookie.
+
+### **Login Flow**
+1. User enters email and password.
+2. Backend compares the password hash.
+3. If valid, a new JWT cookie is issued.
+4. React `AuthContext` updates, and the user is redirected to the home page.
+
+---
+
+## 🎨 Frontend Design System
+
+LearnHub uses a **Glassmorphism Design System**:
+- **Backgrounds**: Subtle translucency using `backdrop-filter: blur()`.
+- **Typography**: Uses modern, readable fonts with hierarchical sizing.
+- **Theming**: Integrated Dark/Light mode that syncs with user preferences and survives refreshes.
+- **Grid System**: Responsive Flexbox and Grid layouts that adapt from mobile phones to 4K monitors.
+
+---
+
+## 🔌 Backend API Documentation
+
+| Method | Endpoint | Description | Auth Required |
+|---|---|---|---|
+| `POST` | `/api/auth/register` | Creates a new user account | No |
+| `POST` | `/api/auth/login` | Authenticates user & sets cookie | No |
+| `POST` | `/api/auth/logout` | Clears the session cookie | No |
+| `GET` | `/api/auth/me` | Returns current user profile | **Yes** |
+| `GET` | `/api/health` | Checks if the server is alive | No |
+
+---
+
+## 🚀 Setup & Installation
+
+Follow these steps to get your own instance of LearnHub running:
+
+### **1. Clone & Install**
 ```bash
-# Clone the repo
 git clone https://github.com/Rohith-180503/LEARNHUB.git
 cd LEARNHUB
 
-# Install Frontend dependencies
+# Install Frontend
 npm install
 
-# Install Backend dependencies
+# Install Backend
 cd backend
 npm install
 ```
 
-### 3. Running the Project
-Open two terminals to run the servers concurrently:
+### **2. Environment Configuration**
+Create a file named `.env` in the `backend/` folder:
+```env
+PORT=3001
+JWT_SECRET=your_super_secret_key_here
+FRONTEND_URL=http://localhost:5173
+```
 
-**Terminal 1: Backend**
+### **3. Execution**
+You must run both servers at the same time.
+
+**Terminal 1 (Backend):**
 ```bash
 cd backend
 node server.js
 ```
-*Backend runs on: http://localhost:3001*
 
-**Terminal 2: Frontend**
+**Terminal 2 (Frontend):**
 ```bash
-# Back in the root directory
+# In the root folder
 npm run dev
 ```
-*Frontend runs on: http://localhost:5173*
 
 ---
 
-## 🧪 Testing & Linting
+## 🗺️ Development Roadmap
 
-- **Run Tests**: `npm test` (Uses Vitest)
-- **Lint Code**: `npm run lint` (Uses ESLint)
-
----
-
-## 📝 Roadmap & Future Phases
-- [ ] **Phase 4**: Database migration for Course Catalog (moving from `fakeData.js` to SQLite).
-- [ ] **Phase 5**: Stripe Payment Integration for the Checkout flow.
-- [ ] **Phase 6**: Instructor Dashboard & Content Management System.
-- [ ] **Phase 7**: Real-time Q&A using WebSockets.
+- [x] **Phase 1**: Professional UI/UX Prototype.
+- [x] **Phase 2**: Global State (Cart & Themes).
+- [x] **Phase 3**: Full-Stack Authentication & SQLite Integration.
+- [ ] **Phase 4**: Database-backed Course Catalog & Search.
+- [ ] **Phase 5**: Stripe Payment Gateway Integration.
+- [ ] **Phase 6**: Instructor CMS (Upload & Manage Courses).
 
 ---
 
-**Crafted with excellence by Antigravity AI for Rohith-180503**
+**LearnHub is more than a project; it's a foundation for modern, scalable education technology.**
+
+*Built with ❤️ by Rohith-180503 & Antigravity AI*
