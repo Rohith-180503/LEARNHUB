@@ -4,6 +4,11 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { initDb } from "./db.js";
 import authRouter from "./routes/auth.js";
+import coursesRouter from "./routes/courses.js";
+import enrollmentsRouter from "./routes/enrollments.js";
+import progressRouter from "./routes/progress.js";
+import cartRouter from "./routes/cart.js";
+import paymentsRouter from "./routes/payments.js";
 
 const app = express();
 const PORT = process.env.PORT ?? 3001;
@@ -20,6 +25,11 @@ app.use(cookieParser());
 
 // ── Routes ────────────────────────────────────────────────────────────────────
 app.use("/api/auth", authRouter);
+app.use("/api/courses", coursesRouter);
+app.use("/api/enrollments", enrollmentsRouter);
+app.use("/api/progress", progressRouter);
+app.use("/api/cart", cartRouter);
+app.use("/api/payments", paymentsRouter);
 
 app.get("/api/health", (_, res) =>
   res.json({ status: "ok", timestamp: new Date().toISOString() })

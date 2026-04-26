@@ -6,8 +6,11 @@ import {
   useMemo,
   useState,
 } from "react";
+import { useAuth } from "./AuthContext";
 
 const STORAGE_KEY = "learnhub-cart";
+const API = "http://localhost:3001/api/cart";
+const PAY_API = "http://localhost:3001/api/payments";
 
 const CartContext = createContext(null);
 
@@ -24,6 +27,37 @@ function loadCartFromStorage() {
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState(loadCartFromStorage);
+  const { user } = useAuth();
+
+  // Sync cart when user logs in
+  useEffect(() => {
+    if (!user) return;
+
+    const syncCart = async () => {
+      try {
+        // 1. First, fetch what's on the server
+        const res = await fetch(API, { credentials: "include" });
+        const serverCart = await res.json();
+        
+        if (serverCart.length > 0) {
+          // Merge strategy: Server wins for now, or just combine
+          setCart(serverCart);
+        } else if (cart.length > 0) {
+          // If server is empty but local has items, push local to server
+          await fetch(`${API}/sync`, {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ courseIds: cart.map(i => i.id) }),
+          });
+        }
+      } catch (e) {
+        console.error("Cart sync failed:", e);
+      }
+    };
+
+    syncCart();
+  }, [user]); // Only run on login/logout
 
   useEffect(() => {
     try {
@@ -48,6 +82,28 @@ export function CartProvider({ children }) {
     setCart([]);
   }, []);
 
+  const checkout = useCallback(async () => {
+    if (!user) {
+      window.location.href = "/login";
+      return;
+    }
+    
+    try {
+      const res = await fetch(`${PAY_API}/create-checkout`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cartItems: cart }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch (e) {
+      console.error("Checkout failed:", e);
+    }
+  }, [cart, user]);
+
   const value = useMemo(() => {
     const cartTotal = cart.reduce(
       (sum, item) => sum + Number(item.price),
@@ -60,8 +116,9 @@ export function CartProvider({ children }) {
       addToCart,
       removeFromCart,
       clearCart,
+      checkout,
     };
-  }, [cart, addToCart, removeFromCart, clearCart]);
+  }, [cart, addToCart, removeFromCart, clearCart, checkout]);
 
   return (
     <CartContext.Provider value={value}>{children}</CartContext.Provider>

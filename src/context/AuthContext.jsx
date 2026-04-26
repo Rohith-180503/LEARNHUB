@@ -60,9 +60,36 @@ export function AuthProvider({ children }) {
     window.location.href = `${API}/google`;
   }, []);
 
+  const forgotPassword = useCallback(async (email) => {
+    const res = await fetch(`${API}/forgot-password`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    return res.json();
+  }, []);
+
+  const resetPassword = useCallback(async (token, newPassword) => {
+    const res = await fetch(`${API}/reset-password`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token, newPassword }),
+    });
+    return res.json();
+  }, []);
+
   const value = useMemo(
-    () => ({ user, isLoading, login, register, logout, loginWithGoogle }),
-    [user, isLoading, login, register, logout, loginWithGoogle]
+    () => ({ 
+      user, 
+      isLoading, 
+      login, 
+      register, 
+      logout, 
+      loginWithGoogle,
+      forgotPassword,
+      resetPassword
+    }),
+    [user, isLoading, login, register, logout, loginWithGoogle, forgotPassword, resetPassword]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

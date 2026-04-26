@@ -1,21 +1,50 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import fakeData from "../../fakeData/fakeData";
 import Course from "../../Components/Course/Course";
-import { filterCourses, getUniqueCategories } from "../../utils/courseFilters";
 import "./Home.css";
+
+const API = "http://localhost:3001/api/courses";
 
 const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [courses, setCourses] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
 
-  const categories = useMemo(() => getUniqueCategories(fakeData), []);
+  const categories = [
+    "web-development", "backend", "data-science", 
+    "cloud-computing", "database", "blockchain", "mobile"
+  ];
 
-  // Keep search state in sync when the query string changes externally
+  // Fetch courses from API when filters change
   useEffect(() => {
-    setSearchQuery(searchParams.get("q") || "");
-  }, [searchParams]);
+    const fetchCourses = async () => {
+      setIsLoading(true);
+      try {
+        const params = new URLSearchParams();
+        if (searchQuery) params.set("search", searchQuery);
+        if (selectedCategories.length === 1) {
+          params.set("category", selectedCategories[0]);
+        }
+
+        const res = await fetch(`${API}?${params.toString()}`);
+        const data = await res.json();
+        if (res.ok) {
+          setCourses(data);
+        } else {
+          setError(data.error);
+        }
+      } catch (e) {
+        setError("Failed to connect to the server.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, [searchQuery, selectedCategories]);
 
   // Update URL when search or categories change
   useEffect(() => {
@@ -35,13 +64,6 @@ const Home = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const filteredCourses = useMemo(() => {
-    return filterCourses(fakeData, {
-      categories: selectedCategories.length > 0 ? selectedCategories : categories,
-      searchQuery,
-    });
-  }, [selectedCategories, searchQuery, categories]);
 
   const handleCategoryToggle = (category) => {
     setSelectedCategories(prev =>
@@ -170,14 +192,12 @@ const Home = () => {
               Course catalog
             </h2>
             <p className="home-catalog__subtitle">
-              {filteredCourses.length} of {fakeData.length} programs available
+              {courses.length} programs available
             </p>
           </header>
 
-          {/* Filter Sidebar */}
           <div className="catalog-with-filters">
             <aside className="filter-sidebar" aria-label="Course filters">
-              {/* Search Input */}
               <div className="filter-section">
                 <label htmlFor="search-input" className="filter-title">
                   Search Courses
@@ -189,7 +209,7 @@ const Home = () => {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="search-input"
-                  aria-label="Search courses by title, instructor, or description"
+                  aria-label="Search courses"
                 />
               </div>
 
@@ -202,13 +222,9 @@ const Home = () => {
                         type="checkbox"
                         checked={selectedCategories.includes(category)}
                         onChange={() => handleCategoryToggle(category)}
-                        aria-label={`Filter by ${category.replace("-", " ")}`}
                       />
                       <span className="checkbox-label">
                         {category.replace("-", " ")}
-                      </span>
-                      <span className="checkbox-count">
-                        ({fakeData.filter(c => c.category === category).length})
                       </span>
                     </label>
                   ))}
@@ -222,11 +238,14 @@ const Home = () => {
               )}
             </aside>
 
-            {/* Courses Grid */}
             <div className="catalog-content">
-              {filteredCourses.length > 0 ? (
+              {isLoading ? (
+                <div className="loading-state">Loading courses...</div>
+              ) : error ? (
+                <div className="error-state">{error}</div>
+              ) : courses.length > 0 ? (
                 <div className="course-grid">
-                  {filteredCourses.map((course) => (
+                  {courses.map((course) => (
                     <Course key={course.id} course={course} />
                   ))}
                 </div>
