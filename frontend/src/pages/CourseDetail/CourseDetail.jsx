@@ -3,8 +3,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext.jsx";
 import Course from "../../Components/Course/Course";
 import CourseReviews from "../../Components/Reviews/CourseReviews";
+import { ENDPOINTS } from "../../config";
 
-const API = "http://localhost:3001/api/courses";
+const API = ENDPOINTS.COURSES;
 import "./CourseDetail.css";
 
 export default function CourseDetail() {

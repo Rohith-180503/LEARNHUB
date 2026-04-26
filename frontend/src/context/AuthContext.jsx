@@ -6,8 +6,9 @@ import {
   useMemo,
   useState,
 } from "react";
+import { ENDPOINTS } from "../config";
 
-const API = "http://localhost:3001/api/auth";
+const API = ENDPOINTS.AUTH;
 
 const AuthContext = createContext(null);
 

@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { API_BASE_URL } from "../../config";
 import "./CoursePlayer.css";
 
-const API = "http://localhost:3001/api";
+const API = API_BASE_URL;
 
 export default function CoursePlayer() {
   const { courseId } = useParams();

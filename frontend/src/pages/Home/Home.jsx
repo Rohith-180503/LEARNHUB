@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import Course from "../../Components/Course/Course";
+import { ENDPOINTS } from "../../config";
 import "./Home.css";
 
-const API = "http://localhost:3001/api/courses";
+const API = ENDPOINTS.COURSES;
 
 const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();

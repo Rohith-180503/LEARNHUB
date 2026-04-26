@@ -7,10 +7,11 @@ import {
   useState,
 } from "react";
 import { useAuth } from "./AuthContext";
+import { ENDPOINTS } from "../config";
 
 const STORAGE_KEY = "learnhub-cart";
-const API = "http://localhost:3001/api/cart";
-const PAY_API = "http://localhost:3001/api/payments";
+const API = ENDPOINTS.CART;
+const PAY_API = ENDPOINTS.PAYMENTS;
 
 const CartContext = createContext(null);
 

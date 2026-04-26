@@ -175,6 +175,22 @@ npm run dev
 
 ---
 
+## 🌐 Deployment Guide
+
+### **1. Frontend (Vercel)**
+- Connect your GitHub repo to Vercel.
+- **IMPORTANT**: Set the `Environment Variable` in Vercel:
+  - Key: `VITE_API_URL`
+  - Value: `https://your-backend-api.com/api`
+- Vercel will automatically build from the `frontend/` directory.
+
+### **2. Backend (Render / Railway / Fly.io)**
+- Since this project uses **SQLite**, the backend needs a host with a **Persistent Disk**.
+- **Recommended**: [Render.com](https://render.com) or [Railway.app](https://railway.app).
+- Set your `JWT_SECRET` and `FRONTEND_URL` (your Vercel URL) in the production environment variables.
+
+---
+
 ## 🗺️ Future Roadmap
 - [ ] **Phase 6**: Instructor CMS (Dashboard for creating content).
 - [ ] **Phase 7**: Real-time Q&A system using WebSockets.
