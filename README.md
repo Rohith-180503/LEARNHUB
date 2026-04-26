@@ -1,4 +1,4 @@
-# 🎓 LearnHub: The Full-Stack Education Ecosystem
+# 🎓 LearnHub: The Master-Class Full-Stack Education Ecosystem
 
 [![React](https://img.shields.io/badge/React-19.1.1-61DAFB?style=flat&logo=react)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-7.1.14-646CFF?style=flat&logo=vite)](https://vitejs.dev/)
@@ -6,196 +6,188 @@
 [![Express](https://img.shields.io/badge/Express-4.18-000000?style=flat&logo=express)](https://expressjs.com/)
 [![SQLite](https://img.shields.io/badge/SQLite-3-003B57?style=flat&logo=sqlite)](https://www.sqlite.org/)
 [![JWT](https://img.shields.io/badge/JWT-JSON%20Web%20Token-000000?style=flat&logo=json-web-tokens)](https://jwt.io/)
-
-LearnHub is a state-of-the-art, full-stack online learning platform designed to provide a premium, seamless educational experience. It has evolved from a sophisticated frontend prototype into a robust, secure, and dynamic web application featuring a centralized Node.js backend and persistent data storage.
-
----
-
-## 📖 Table of Contents
-1. [Project Vision](#-project-vision)
-2. [Full-Stack Architecture](#-full-stack-architecture)
-3. [Core Technical Concepts](#-core-technical-concepts)
-4. [Detailed File Structure](#-detailed-file-structure)
-5. [Authentication & Security](#-authentication--security)
-6. [Frontend Design System](#-frontend-design-system)
-7. [Backend API Documentation](#-backend-api-documentation)
-8. [Setup & Installation](#-setup--installation)
-9. [Development Roadmap](#-development-roadmap)
+[![Stripe](https://img.shields.io/badge/Stripe-Payments-008CDD?style=flat&logo=stripe)](https://stripe.com/)
 
 ---
 
-## 🎯 Project Vision
+## 📖 Complete Technical Manual
 
-The goal of LearnHub is to bridge the gap between static content and interactive learning. By combining a **high-performance React frontend** with a **secure Express backend**, we provide:
-- **Persistence**: Your progress, cart, and profile are stored safely.
-- **Security**: Industry-standard protection for user credentials and sessions.
-- **Scalability**: A modular architecture ready for cloud deployment and payment integration.
+LearnHub is a professional-grade, full-stack online learning platform. This project represents a complete transition from a static UI prototype to a high-performance, secure, and dynamic ecosystem. This document provides an exhaustive overview of the architecture, technology stack, and implementation details.
 
 ---
 
-## 🏗️ Full-Stack Architecture
-
-LearnHub follows a modern **Client-Server Architecture**:
-
-### **The Frontend (React + Vite)**
-- Handles the **UI/UX**, rendering dynamic components based on the state.
-- Communicates with the backend using **Fetch API** with `credentials: "include"` to handle secure cookies.
-- Manages global state using the **React Context API** (Cart and Authentication).
-
-### **The Backend (Node.js + Express)**
-- Acts as the **REST API** gateway.
-- Manages **Authentication** logic, JWT signing, and password hashing.
-- Interfaces with the **SQLite Database** using the async `libsql` driver.
-
----
-
-## 🧠 Core Technical Concepts
-
-### **1. Secure JWT Auth via Cookies**
-Unlike traditional `localStorage` tokens which are vulnerable to XSS (Cross-Site Scripting), LearnHub uses **httpOnly Cookies**.
-- **Security**: JavaScript cannot access these cookies, making it impossible for malicious scripts to steal sessions.
-- **Persistence**: The browser automatically sends the cookie with every request to the backend.
-
-### **2. Password Hashing (Bcrypt)**
-We never store raw passwords. Using `bcryptjs`, we perform **12 salt rounds** of hashing. Even if the database is compromised, user passwords remain mathematically unreadable.
-
-### **3. Local Persistence (SQLite)**
-For this phase, we chose **SQLite** because:
-- **Serverless**: It stores the entire database in a single file (`learnhub.db`).
-- **Speed**: Extremely fast for read-heavy applications like course catalogs.
-- **Portability**: Perfect for development and easy to migrate to PostgreSQL for production.
-
-### **4. Protected Routing**
-We implemented a custom `<ProtectedRoute />` wrapper in React. It checks the `AuthContext` state. If a user isn't logged in, they are instantly redirected to `/login`, protecting premium content like the `CoursePlayer`.
+## 🧭 Table of Contents
+1.  [🌟 Project Overview](#-project-overview)
+2.  [🛠️ The Tech Stack (In-Depth)](#-the-tech-stack-in-depth)
+3.  [🏗️ System Architecture](#-system-architecture)
+4.  [📂 Exhaustive File Structure](#-exhaustive-file-structure)
+5.  [🔐 Logic & Core Workflows](#-logic--core-workflows)
+    - [Authentication & Identity](#authentication--identity)
+    - [Course Delivery & Progress](#course-delivery--progress)
+    - [Cart Synchronization](#cart-synchronization)
+    - [Payment Processing](#payment-processing)
+6.  [🔌 API Reference](#-api-reference)
+7.  [🚀 Setup & Deployment Guide](#-setup--deployment-guide)
+8.  [🗺️ Future Roadmap](#-future-roadmap)
 
 ---
 
-## 📁 Detailed File Structure
+## 🌟 Project Overview
+
+LearnHub is designed for ambitious learners who seek a premium educational experience. The platform features:
+- **Dynamic Content**: 44+ courses with full curriculum mapping.
+- **Persistence**: Real-time progress tracking and cross-device cart synchronization.
+- **Security**: Industry-standard JWT cookie-based session management.
+- **Commercial Ready**: Integrated Stripe payment infrastructure.
+
+---
+
+## 🛠️ The Tech Stack (In-Depth)
+
+### **Frontend (The User Interface)**
+| Technology | Usage | Why? |
+| :--- | :--- | :--- |
+| **React 19** | Core UI library | High performance, component-based architecture. |
+| **Vite** | Build tool | Extremely fast HMR (Hot Module Replacement) for development. |
+| **React Router 7** | Client-side routing | Handles nested routes and navigation guards. |
+| **Context API** | Global state management | Manages `Auth` and `Cart` states without "prop drilling". |
+| **Vanilla CSS** | Styling | Maximum flexibility and design control (Glassmorphism). |
+| **React Toastify** | Notifications | Premium, non-blocking user feedback. |
+
+### **Backend (The Logic Layer)**
+| Technology | Usage | Why? |
+| :--- | :--- | :--- |
+| **Node.js** | Runtime environment | Scalable, non-blocking I/O for API handling. |
+| **Express.js** | Web Framework | Minimalist and modular REST API foundation. |
+| **JWT** | Session Tokens | Stateless authentication for high security. |
+| **Bcrypt.js** | Password Hashing | One-way encryption for user security. |
+| **Cookie-Parser** | Session Management | Handles `httpOnly` cookies for XSS protection. |
+| **CORS** | Security Policy | Manages cross-origin communication with the frontend. |
+
+### **Database (The Storage)**
+| Technology | Usage | Why? |
+| :--- | :--- | :--- |
+| **SQLite 3** | Persistence | Serverless, portable, and extremely fast for development. |
+| **@libsql/client** | Database Driver | Modern, async-first driver compatible with serverless environments. |
+
+---
+
+## 🏗️ System Architecture
+
+LearnHub uses a **Decoupled Full-Stack Architecture**:
+
+1.  **Client Layer**: React app makes secure `fetch` requests to the API.
+2.  **API Gateway**: Express server validates requests, checks JWTs, and handles business logic.
+3.  **Data Layer**: SQLite stores users, courses, and progress.
+4.  **External Services**: Stripe handles payment processing via secure webhooks.
+
+---
+
+## 📂 Exhaustive File Structure
 
 ### **📂 Root Directory**
-- `.gitignore`: Configured to ignore `node_modules`, `.env`, and `.db` files.
-- `package.json`: Manages frontend dependencies and scripts.
+- `package.json`: Main project configuration and scripts.
+- `.gitignore`: Carefully tuned to protect database files and secrets.
 
 ### **📂 backend/** (The Brain)
-- `server.js`: The entry point. Configures **CORS** (to allow frontend communication), mounts routes, and initializes the database.
-- `db.js`: The database layer. Uses `@libsql/client` to initialize the `users` table and handle SQL queries.
-- `middleware/authenticate.js`: A gatekeeper that verifies the JWT token in cookies before allowing access to private data.
-- `routes/auth.js`: Contains the logic for `register`, `login`, `logout`, and `me` (checking current session).
+- `server.js`: The heart of the backend. Registers middleware (CORS, JSON, Cookies) and mounts all feature-specific routers.
+- `db.js`: The database interface. Defines the SQL schema for 7 tables and initializes the `@libsql` client.
+- `seed.js`: An intelligent automation script that populates the DB with courses, modules, and lessons.
+- **📂 routes/**:
+  - `auth.js`: Logic for registration, login, logout, and Google OAuth callback.
+  - `courses.js`: Efficient SQL queries for fetching the catalog and course curriculum.
+  - `enrollments.js`: Manages user ownership of courses.
+  - `progress.js`: Tracks which specific lessons a user has finished.
+  - `cart.js`: Synchronizes the local browser cart with the server.
+  - `payments.js`: Interface for Stripe Checkout and Webhook listeners.
+- **📂 middleware/**:
+  - `authenticate.js`: A gatekeeper that decodes JWT cookies and attaches the `user` object to the request.
 
 ### **📂 src/** (The Heart)
 - **📂 context/**:
-  - `AuthContext.jsx`: Provides the global `user` state and functions like `login()` and `logout()`.
-  - `CartContext.jsx`: Manages the shopping cart, total price calculations, and localStorage backup.
-- **📂 components/**:
-  - `Navbar/`: The navigation bar. Now dynamic—it changes its look when you log in.
-  - `Cart/`: The premium slide-out cart UI.
-  - `Course/`: Reusable course card components.
+  - `AuthContext.jsx`: Global provider for user identity, social login, and password recovery.
+  - `CartContext.jsx`: Global manager for shopping logic and backend sync.
 - **📂 pages/**:
-  - `Login/`: A multi-mode page (Login vs. Register) with real API validation.
-  - `CoursePlayer/`: The learning environment, now protected behind the Auth wall.
-  - `Home/`: The landing page showcasing the course catalog.
+  - `Home/`: Dynamic catalog with server-side search and filtering.
+  - `CourseDetail/`: Deep-dive view with curriculum and related suggestions.
+  - `CoursePlayer/`: Secure environment for watching lessons and tracking progress.
+- **📂 Components/**: Shared UI elements like Navbar, Footer, and Course Cards.
+- **📂 styles/**: The Design System (CSS variables, animations, Glassmorphism).
 
 ---
 
-## 🔐 Authentication & Security
+## 🔐 Logic & Core Workflows
 
-### **Registration Flow**
-1. User enters name, email, and password.
-2. Frontend sends a `POST` request to `/api/auth/register`.
-3. Backend checks if the email exists, hashes the password, and saves to SQLite.
-4. Backend generates a JWT and sends it back in a secure cookie.
+### **Authentication & Identity**
+We use **httpOnly JWT Cookies**. When a user logs in, the backend signs a token and sets it in the browser cookie. This cookie is marked `httpOnly`, meaning JavaScript cannot read it, which completely eliminates XSS session theft.
 
-### **Login Flow**
-1. User enters email and password.
-2. Backend compares the password hash.
-3. If valid, a new JWT cookie is issued.
-4. React `AuthContext` updates, and the user is redirected to the home page.
+### **Course Delivery & Progress**
+1.  Frontend requests `api/courses/:id`.
+2.  Backend joins `courses`, `modules`, and `lessons` tables to build a full curriculum tree.
+3.  When a user finishes a video, a `POST` is sent to `api/progress`.
+4.  The database records the completion, which is re-applied to the UI next time the user logs in.
 
----
+### **Cart Synchronization**
+To provide a seamless experience, we implemented a **Sync-on-Login** strategy. If a user adds items as a guest and then logs in, the platform automatically pushes those items to the database so their cart follows them to any other device.
 
-## 🎨 Frontend Design System
-
-LearnHub uses a **Glassmorphism Design System**:
-- **Backgrounds**: Subtle translucency using `backdrop-filter: blur()`.
-- **Typography**: Uses modern, readable fonts with hierarchical sizing.
-- **Theming**: Integrated Dark/Light mode that syncs with user preferences and survives refreshes.
-- **Grid System**: Responsive Flexbox and Grid layouts that adapt from mobile phones to 4K monitors.
+### **Payment Processing**
+Using **Stripe Checkout**, the backend generates a secure URL for the user. Once the payment is confirmed, a Stripe Webhook sends a message back to our server, which automatically grants the user access to the courses in the `enrollments` table.
 
 ---
 
-## 🔌 Backend API Documentation
+## 🔌 API Reference
 
-| Method | Endpoint | Description | Auth Required |
-|---|---|---|---|
-| `POST` | `/api/auth/register` | Creates a new user account | No |
-| `POST` | `/api/auth/login` | Authenticates user & sets cookie | No |
-| `POST` | `/api/auth/logout` | Clears the session cookie | No |
-| `GET` | `/api/auth/me` | Returns current user profile | **Yes** |
-| `GET` | `/api/health` | Checks if the server is alive | No |
+| Endpoint | Method | Purpose | Auth Required |
+| :--- | :--- | :--- | :--- |
+| `/api/auth/register` | `POST` | Create a new user | No |
+| `/api/auth/login` | `POST` | Auth & set JWT cookie | No |
+| `/api/courses` | `GET` | Fetch catalog (w/ filters) | No |
+| `/api/courses/:id` | `GET` | Get full curriculum | No |
+| `/api/enrollments/me` | `GET` | Get owned courses | **Yes** |
+| `/api/progress/:id` | `POST` | Mark lesson completed | **Yes** |
+| `/api/cart/sync` | `POST` | Sync cart to DB | **Yes** |
+| `/api/payments/create` | `POST` | Start Stripe checkout | **Yes** |
 
 ---
 
-## 🚀 Setup & Installation
+## 🚀 Setup & Deployment Guide
 
-Follow these steps to get your own instance of LearnHub running:
-
-### **1. Clone & Install**
+### **1. Local Installation**
 ```bash
+# Clone the repo
 git clone https://github.com/Rohith-180503/LEARNHUB.git
 cd LEARNHUB
 
-# Install Frontend
+# Install all dependencies
 npm install
-
-# Install Backend
-cd backend
-npm install
+cd backend && npm install
 ```
 
-### **2. Environment Configuration**
-Create a file named `.env` in the `backend/` folder:
-```env
-PORT=3001
-JWT_SECRET=your_super_secret_key_here
-FRONTEND_URL=http://localhost:5173
-```
-
-### **3. Execution**
-You must run both servers at the same time.
-
-**Terminal 1 (Backend):**
+### **2. Database Initialization**
 ```bash
-cd backend
-node server.js
+# Run the seed script to populate courses
+node seed.js
 ```
 
-**Terminal 2 (Frontend):**
+### **3. Running the Platform**
+Run the backend on port `3001` and the frontend on port `5173`.
 ```bash
-# In the root folder
+# Terminal 1
 npm run dev
+
+# Terminal 2
+cd backend && node server.js
 ```
 
 ---
 
-## 🔑 Demo Credentials
-
-To quickly test the platform's full-stack features without registering, you can use the following account:
-- **Email**: `sivarohithnn@gmail.com`
-- **Password**: `Rohith@123`
-
----
-
-## 🗺️ Development Roadmap
-
-- [x] **Phase 1**: Professional UI/UX Prototype.
-- [x] **Phase 2**: Global State (Cart & Themes).
-- [x] **Phase 3**: Full-Stack Authentication & SQLite Integration.
-- [ ] **Phase 4**: Database-backed Course Catalog & Search.
-- [ ] **Phase 5**: Stripe Payment Gateway Integration.
-- [ ] **Phase 6**: Instructor CMS (Upload & Manage Courses).
+## 🗺️ Future Roadmap
+- [ ] **Phase 6**: Instructor CMS (Dashboard for creating content).
+- [ ] **Phase 7**: Real-time Q&A system using WebSockets.
+- [ ] **Phase 8**: AI-powered course recommendations based on progress.
 
 ---
 
-**LearnHub is more than a project; it's a foundation for modern, scalable education technology.**
+**LearnHub is a production-ready foundation for the future of digital education.**
 
-*Built with ❤️ by Rohith-180503 & Antigravity AI*
+*Crafted by Rohith-180503 & Antigravity AI*
