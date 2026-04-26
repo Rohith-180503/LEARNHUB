@@ -1,73 +1,95 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { getCourseById } from "../../utils/courseFilters";
-import fakeData from "../../fakeData/fakeData";
 import "./CoursePlayer.css";
 
-// Generate mock curriculum data if not present
-const generateMockCurriculum = () => {
-  return [
-    {
-      id: "m1",
-      title: "Module 1: Introduction",
-      lectures: [
-        { id: "l1", title: "Course Overview", duration: "05:20", completed: true },
-        { id: "l2", title: "Environment Setup", duration: "12:45", completed: true },
-        { id: "l3", title: "Basic Concepts", duration: "18:10", completed: false }
-      ]
-    },
-    {
-      id: "m2",
-      title: "Module 2: Core Fundamentals",
-      lectures: [
-        { id: "l4", title: "Deep Dive into Basics", duration: "25:30", completed: false },
-        { id: "l5", title: "Best Practices", duration: "14:15", completed: false },
-        { id: "l6", title: "Common Pitfalls", duration: "09:50", completed: false }
-      ]
-    },
-    {
-      id: "m3",
-      title: "Module 3: Advanced Topics",
-      lectures: [
-        { id: "l7", title: "Advanced Architecture", duration: "32:10", completed: false },
-        { id: "l8", title: "Performance Optimization", duration: "28:40", completed: false },
-        { id: "l9", title: "Final Project Overview", duration: "10:00", completed: false }
-      ]
-    }
-  ];
-};
+const API = "http://localhost:3001/api";
 
 export default function CoursePlayer() {
   const { courseId } = useParams();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
-  const [activeLecture, setActiveLecture] = useState("l1");
+  const [activeLecture, setActiveLecture] = useState(null);
+  const [course, setCourse] = useState(null);
+  const [curriculum, setCurriculum] = useState([]);
+  const [completedLessons, setCompletedLessons] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const course = getCourseById(fakeData, courseId);
-  const curriculum = course?.curriculum || generateMockCurriculum();
+  const fetchCourseAndProgress = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      // 1. Fetch course details (includes curriculum)
+      const cRes = await fetch(`${API}/courses/${courseId}`);
+      const cData = await cRes.json();
+      if (cRes.ok) {
+        setCourse(cData);
+        setCurriculum(cData.curriculum || []);
+        if (cData.curriculum?.length > 0 && cData.curriculum[0].lessons?.length > 0) {
+          setActiveLecture(cData.curriculum[0].lessons[0]);
+        }
+      }
 
-  if (!course) {
-    return <div className="course-player-error">Course not found.</div>;
-  }
+      // 2. Fetch progress
+      const pRes = await fetch(`${API}/progress/${courseId}`, { credentials: "include" });
+      const pData = await pRes.json();
+      if (pRes.ok) {
+        setCompletedLessons(pData); // Array of IDs
+      }
+    } catch (e) {
+      console.error("Failed to load player data:", e);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [courseId]);
 
-  // Find the active lecture details
-  let currentLectureTitle = "";
-  curriculum.forEach(mod => {
-    const found = mod.lectures.find(l => l.id === activeLecture);
-    if (found) currentLectureTitle = found.title;
-  });
+  useEffect(() => {
+    fetchCourseAndProgress();
+  }, [fetchCourseAndProgress]);
+
+  const toggleComplete = async (lessonId) => {
+    const isCompleted = completedLessons.includes(lessonId);
+    try {
+      const res = await fetch(`${API}/progress/${lessonId}`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ completed: isCompleted ? 0 : 1 }),
+      });
+      if (res.ok) {
+        setCompletedLessons(prev => 
+          isCompleted ? prev.filter(id => id !== lessonId) : [...prev, lessonId]
+        );
+      }
+    } catch (e) {
+      console.error("Progress update failed:", e);
+    }
+  };
+
+  if (isLoading) return <div className="course-player-layout loading">Loading learning environment...</div>;
+  if (!course) return <div className="course-player-error">Course not found.</div>;
+
+  const currentLecture = activeLecture;
 
   return (
     <div className="course-player-layout">
       {/* Main Content Area */}
       <div className="course-player-main">
-        {/* Video Area (Mock) */}
+        {/* Video Area */}
         <div className="video-player-container">
-          <div className="video-placeholder">
-            <span className="play-icon">▶</span>
-            <h2>{currentLectureTitle}</h2>
-            <p>Video player integration would go here</p>
-          </div>
+          {currentLecture?.video_url ? (
+            <video 
+              key={currentLecture.id}
+              className="main-video"
+              controls
+              autoPlay
+              src={currentLecture.video_url}
+            />
+          ) : (
+            <div className="video-placeholder">
+              <span className="play-icon">▶</span>
+              <h2>{currentLecture?.title}</h2>
+              <p>Video not available</p>
+            </div>
+          )}
         </div>
 
         {/* Course Info & Tabs */}
@@ -143,21 +165,28 @@ export default function CoursePlayer() {
             <div key={mod.id} className="curriculum-module">
               <div className="module-header">
                 <h4>{mod.title}</h4>
-                <span>{mod.lectures.length} lectures</span>
+                <span>{mod.lessons?.length || 0} lessons</span>
               </div>
               <ul className="module-lectures">
-                {mod.lectures.map(lecture => (
+                {mod.lessons.map(lesson => (
                   <li 
-                    key={lecture.id} 
-                    className={`lecture-item ${activeLecture === lecture.id ? "active" : ""}`}
-                    onClick={() => setActiveLecture(lecture.id)}
+                    key={lesson.id} 
+                    className={`lecture-item ${activeLecture?.id === lesson.id ? "active" : ""}`}
+                    onClick={() => setActiveLecture(lesson)}
                   >
                     <div className="lecture-status">
-                      <input type="checkbox" checked={lecture.completed} readOnly />
+                      <input 
+                        type="checkbox" 
+                        checked={completedLessons.includes(lesson.id)} 
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          toggleComplete(lesson.id);
+                        }}
+                      />
                     </div>
                     <div className="lecture-info">
-                      <span className="lecture-title">{lecture.title}</span>
-                      <span className="lecture-duration">▶ {lecture.duration}</span>
+                      <span className="lecture-title">{lesson.title}</span>
+                      <span className="lecture-duration">▶ {lesson.duration}</span>
                     </div>
                   </li>
                 ))}
