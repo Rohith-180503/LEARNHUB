@@ -83,36 +83,21 @@ LearnHub uses a **Decoupled Full-Stack Architecture**:
 
 ---
 
-## 📂 Exhaustive File Structure
+## 📂 Project Directory Structure
 
 ### **📂 Root Directory**
-- `package.json`: Main project configuration and scripts.
-- `.gitignore`: Carefully tuned to protect database files and secrets.
-
-### **📂 backend/** (The Brain)
-- `server.js`: The heart of the backend. Registers middleware (CORS, JSON, Cookies) and mounts all feature-specific routers.
-- `db.js`: The database interface. Defines the SQL schema for 7 tables and initializes the `@libsql` client.
-- `seed.js`: An intelligent automation script that populates the DB with courses, modules, and lessons.
-- **📂 routes/**:
-  - `auth.js`: Logic for registration, login, logout, and Google OAuth callback.
-  - `courses.js`: Efficient SQL queries for fetching the catalog and course curriculum.
-  - `enrollments.js`: Manages user ownership of courses.
-  - `progress.js`: Tracks which specific lessons a user has finished.
-  - `cart.js`: Synchronizes the local browser cart with the server.
-  - `payments.js`: Interface for Stripe Checkout and Webhook listeners.
-- **📂 middleware/**:
-  - `authenticate.js`: A gatekeeper that decodes JWT cookies and attaches the `user` object to the request.
-
-### **📂 src/** (The Heart)
-- **📂 context/**:
-  - `AuthContext.jsx`: Global provider for user identity, social login, and password recovery.
-  - `CartContext.jsx`: Global manager for shopping logic and backend sync.
-- **📂 pages/**:
-  - `Home/`: Dynamic catalog with server-side search and filtering.
-  - `CourseDetail/`: Deep-dive view with curriculum and related suggestions.
-  - `CoursePlayer/`: Secure environment for watching lessons and tracking progress.
-- **📂 Components/**: Shared UI elements like Navbar, Footer, and Course Cards.
-- **📂 styles/**: The Design System (CSS variables, animations, Glassmorphism).
+- `README.md`: The Master Manual.
+- `.gitignore`: Configured for multi-package protection.
+- **📂 frontend/**: The User Interface (Vite + React).
+  - `src/`: UI components, context, and styles.
+  - `public/`: Static assets and icons.
+  - `package.json`: Frontend specific dependencies.
+- **📂 backend/**: The API Gateway (Node + Express).
+  - `routes/`: Feature-specific API endpoints.
+  - `db.js`: Database layer and schema.
+  - `server.js`: Main entry point.
+  - `package.json`: Backend specific dependencies.
+- **📂 docs/**: Extended documentation and project history.
 
 ---
 
@@ -152,31 +137,40 @@ Using **Stripe Checkout**, the backend generates a secure URL for the user. Once
 
 ## 🚀 Setup & Deployment Guide
 
-### **1. Local Installation**
+### **1. Clone & Install**
 ```bash
 # Clone the repo
 git clone https://github.com/Rohith-180503/LEARNHUB.git
 cd LEARNHUB
 
-# Install all dependencies
+# Install Frontend
+cd frontend
 npm install
-cd backend && npm install
+
+# Install Backend
+cd ../backend
+npm install
 ```
 
 ### **2. Database Initialization**
 ```bash
-# Run the seed script to populate courses
+cd backend
 node seed.js
 ```
 
 ### **3. Running the Platform**
-Run the backend on port `3001` and the frontend on port `5173`.
-```bash
-# Terminal 1
-npm run dev
+You must run both servers at the same time.
 
-# Terminal 2
-cd backend && node server.js
+**Terminal 1 (Backend):**
+```bash
+cd backend
+node server.js
+```
+
+**Terminal 2 (Frontend):**
+```bash
+cd frontend
+npm run dev
 ```
 
 ---
