@@ -25,16 +25,7 @@ const ALLOWED_ORIGINS = [
 
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      const normalizedOrigin = origin.replace(/\/$/, "");
-      if (ALLOWED_ORIGINS.includes(normalizedOrigin)) {
-        callback(null, true);
-      } else {
-        console.error(`CORS Blocked: ${origin}. Allowed: ${ALLOWED_ORIGINS}`);
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: true, // This will reflect the request origin, allowing all
     credentials: true,
   })
 );
