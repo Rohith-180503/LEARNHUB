@@ -3,10 +3,12 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DB_PATH = path.join(__dirname, "learnhub.db");
+const DEFAULT_DB_PATH = path.join(__dirname, "learnhub.db");
 
-// file: URL for local SQLite file — no server needed
-export const db = createClient({ url: `file:${DB_PATH}` });
+// prioritize process.env.DATABASE_URL if provided (helpful for some cloud hosts)
+const DB_PATH = process.env.DATABASE_URL || DEFAULT_DB_PATH;
+
+export const db = createClient({ url: DB_PATH.startsWith("file:") ? DB_PATH : `file:${DB_PATH}` });
 
 /** Run schema migrations on startup */
 export async function initDb() {
