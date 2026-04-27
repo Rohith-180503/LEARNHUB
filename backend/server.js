@@ -19,16 +19,19 @@ const ALLOWED_ORIGINS = [
   "http://localhost:5174",
   "http://localhost:5175",
   process.env.FRONTEND_URL,
-].filter(Boolean);
+]
+  .filter(Boolean)
+  .map((url) => url.replace(/\/$/, ""));
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps or curl)
       if (!origin) return callback(null, true);
-      if (ALLOWED_ORIGINS.includes(origin)) {
+      const normalizedOrigin = origin.replace(/\/$/, "");
+      if (ALLOWED_ORIGINS.includes(normalizedOrigin)) {
         callback(null, true);
       } else {
+        console.error(`CORS Blocked: ${origin}. Allowed: ${ALLOWED_ORIGINS}`);
         callback(new Error("Not allowed by CORS"));
       }
     },
