@@ -3,6 +3,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { initDb } from "./db.js";
+import { seed } from "./seed.js";
 import authRouter from "./routes/auth.js";
 import coursesRouter from "./routes/courses.js";
 import enrollmentsRouter from "./routes/enrollments.js";
@@ -51,7 +52,8 @@ app.use((req, res) => {
 
 // ── Bootstrap ─────────────────────────────────────────────────────────────────
 async function bootstrap() {
-  await initDb(); // Create tables if they don't exist
+  await initDb(); 
+  await seed(); // Auto-seed if courses table is empty
   app.listen(PORT, () => {
     console.log(`\n🚀 LearnHub API running at http://localhost:${PORT}`);
     console.log(`   Health: http://localhost:${PORT}/api/health\n`);

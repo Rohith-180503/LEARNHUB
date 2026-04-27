@@ -5,89 +5,70 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-async function seed() {
+export async function seed() {
   console.log("🌱 Starting database seed...");
   
   await initDb();
 
-  // 1. Read fakeData.js from frontend
-  // Since it's a JS file with 'export default', we'll read it as a string and parse if needed, 
-  // or better, just re-define the data here for the seed script to be self-contained.
-  
-  const FAKE_DATA_PATH = path.join(__dirname, "..", "src", "fakeData", "fakeData.js");
-  const content = fs.readFileSync(FAKE_DATA_PATH, "utf-8");
-  
-  // Extract the array using regex (simplest way without setting up a full build tool for the seed script)
-  const arrayMatch = content.match(/const fakeData = (\[[\s\S]*?\]);/);
-  if (!arrayMatch) {
-    console.error("❌ Could not find fakeData array in fakeData.js");
-    process.exit(1);
+  const coursesCount = await db.execute("SELECT COUNT(*) as count FROM courses");
+  if (coursesCount.rows[0].count > 0) {
+    console.log("⏭️ Courses already exist. Skipping seed.");
+    return;
   }
-  
-  // Clean up the string to be valid JSON (fakeData.js has trailing commas and JS objects)
-  // This is risky if the file is complex, but for this structure it should be okay with a bit of help.
-  // Alternatively, I'll just hardcode the logic to insert the known courses.
-  
-  // Actually, I'll just use the list of titles/prices/categories I saw earlier to recreate the objects 
-  // OR I can use a quick 'eval' if I'm sure of the file content (which I am, as I just read it).
-  
+
   let courses = [];
   try {
-    // Transform JS export to something eval can handle
-    const cleanContent = content.replace("export default fakeData;", "fakeData;");
-    courses = eval(cleanContent);
+    const DATA_PATH = path.join(__dirname, "coursesData.json");
+    const content = fs.readFileSync(DATA_PATH, "utf-8");
+    // The file is a JS array string, not strict JSON. We'll use a safer eval-like approach or just a simple parse.
+    // Since we know the structure, we can do a dirty parse or just write it as a .json in the first place.
+    // For now, we'll try a safe-ish eval of the array.
+    courses = eval(`(${content})`);
   } catch (e) {
-    console.error("❌ Error parsing fakeData.js:", e);
-    process.exit(1);
+    console.warn("⚠️ Could not load coursesData.json, using fallback mock data.", e);
+    courses = [
+      { title: "Introduction to Web Dev", instructor: "LearnHub", price: 0, category: "web-development", description: "Start your journey here." }
+    ];
   }
 
-  console.log(`📚 Found ${courses.length} courses. Clearing old data...`);
+  console.log(`📚 Seeding ${courses.length} courses...`);
   
-  // Clear existing data
-  await db.execute("DELETE FROM lessons");
-  await db.execute("DELETE FROM modules");
-  await db.execute("DELETE FROM courses");
-
   for (const course of courses) {
-    console.log(`   📝 Inserting: ${course.title}`);
-    
     const result = await db.execute({
       sql: `INSERT INTO courses (title, instructor, price, img, category, description, duration, level, rating, students_enrolled)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       args: [
         course.title,
-        course.instructor,
-        course.price,
-        course.img,
-        course.category,
-        course.description,
-        course.duration,
-        course.level,
-        course.rating,
-        course.studentsEnrolled
+        course.instructor || "Instructor",
+        course.price || 0,
+        course.img || "",
+        course.category || "General",
+        course.description || "",
+        course.duration || "10h",
+        course.level || "beginner",
+        course.rating || 4.5,
+        course.studentsEnrolled || 100
       ]
     });
 
     const courseId = result.lastInsertRowid;
 
-    // Create 3 mock modules for each course
     for (let m = 1; m <= 3; m++) {
       const modResult = await db.execute({
         sql: `INSERT INTO modules (course_id, title, sort_order) VALUES (?, ?, ?)`,
-        args: [courseId, `Module ${m}: ${m === 1 ? 'Getting Started' : m === 2 ? 'Core Concepts' : 'Advanced Patterns'}`, m]
+        args: [courseId, `Module ${m}: Essentials`, m]
       });
       
       const moduleId = modResult.lastInsertRowid;
 
-      // Create 4 mock lessons for each module
       for (let l = 1; l <= 4; l++) {
         await db.execute({
           sql: `INSERT INTO lessons (module_id, title, video_url, duration, sort_order) VALUES (?, ?, ?, ?, ?)`,
           args: [
             moduleId,
-            `Lesson ${l}: ${l === 1 ? 'Introduction' : l === 2 ? 'Hands-on Lab' : l === 3 ? 'Deep Dive' : 'Summary & Quiz'}`,
-            "https://www.w3schools.com/html/mov_bbb.mp4", // Mock video
-            `${5 + l} min`,
+            `Lesson ${l}: Concept & Practice`,
+            "https://www.w3schools.com/html/mov_bbb.mp4",
+            "10 min",
             l
           ]
         });
@@ -95,10 +76,10 @@ async function seed() {
     }
   }
 
-  console.log("\n✅ Seeding complete! Database is now full-fledged.");
+  console.log("✅ Seeding complete!");
 }
 
-seed().catch(err => {
-  console.error("❌ Seeding failed:", err);
-  process.exit(1);
-});
+// Run if called directly
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  seed().catch(console.error);
+}
