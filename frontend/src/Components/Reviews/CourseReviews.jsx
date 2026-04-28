@@ -7,30 +7,8 @@ const MOCK_REVIEWS = [
   { id: 3, userId: "u3", name: "Emily Rodriguez", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emily", rating: 5, date: "1 month ago", text: "The depth of this course is unmatched. Highly recommended for anyone serious about this field." },
 ];
 
-export default function CourseReviews({ courseId }) {
-  const [reviews, setReviews] = useState(MOCK_REVIEWS);
-  const [newReview, setNewReview] = useState("");
-  const [rating, setRating] = useState(5);
-  const [hoverRating, setHoverRating] = useState(0);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!newReview.trim()) return;
-
-    const review = {
-      id: Date.now(),
-      userId: "u999",
-      name: "Guest User",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Guest",
-      rating,
-      date: "Just now",
-      text: newReview
-    };
-
-    setReviews([review, ...reviews]);
-    setNewReview("");
-    setRating(5);
-  };
+export default function CourseReviews() {
+  const [reviews] = useState(MOCK_REVIEWS);
 
   const averageRating = (reviews.reduce((acc, rev) => acc + rev.rating, 0) / reviews.length).toFixed(1);
 

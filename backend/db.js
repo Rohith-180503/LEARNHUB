@@ -9,8 +9,13 @@ const DEFAULT_DB_PATH = path.join(__dirname, "learnhub.db");
 const DB_PATH = process.env.DATABASE_URL || DEFAULT_DB_PATH;
 const DB_TOKEN = process.env.LIBSQL_AUTH_TOKEN;
 
+// On Windows, absolute paths like C:\... contain a colon, which confuses the driver.
+// We only want to skip the "file:" prefix if it's already a valid URL (libsql, http, etc.)
+const isRemote = DB_PATH.startsWith("libsql:") || DB_PATH.startsWith("https:") || DB_PATH.startsWith("http:");
+const finalUrl = isRemote || DB_PATH.startsWith("file:") ? DB_PATH : `file:${DB_PATH}`;
+
 export const db = createClient({ 
-  url: DB_PATH.startsWith("file:") || DB_PATH.includes(":") ? DB_PATH : `file:${DB_PATH}`,
+  url: finalUrl,
   authToken: DB_TOKEN
 });
 

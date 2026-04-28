@@ -58,7 +58,7 @@ export function CartProvider({ children }) {
     };
 
     syncCart();
-  }, [user]); // Only run on login/logout
+  }, [user, cart]); // Run on login/logout or if local cart changes while logged in
 
   useEffect(() => {
     try {

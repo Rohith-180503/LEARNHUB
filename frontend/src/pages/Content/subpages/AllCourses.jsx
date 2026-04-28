@@ -20,7 +20,7 @@ export const AllCourses = () => {
     if (initialQuery !== searchQuery) {
       setSearchQuery(initialQuery);
     }
-  }, [initialQuery]);
+  }, [initialQuery, searchQuery]);
 
   const categories = [
     { value: "all", label: "All Categories" },

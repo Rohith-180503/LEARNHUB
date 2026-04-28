@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { API_BASE_URL } from "../../config";
 import "./CoursePlayer.css";
 
@@ -7,7 +7,6 @@ const API = API_BASE_URL;
 
 export default function CoursePlayer() {
   const { courseId } = useParams();
-  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
   const [activeLecture, setActiveLecture] = useState(null);
   const [course, setCourse] = useState(null);

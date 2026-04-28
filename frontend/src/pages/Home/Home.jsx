@@ -37,7 +37,7 @@ const Home = () => {
         } else {
           setError(data.error);
         }
-      } catch (e) {
+      } catch {
         setError("Failed to connect to the server.");
       } finally {
         setIsLoading(false);
