@@ -7,8 +7,12 @@ const DEFAULT_DB_PATH = path.join(__dirname, "learnhub.db");
 
 // prioritize process.env.DATABASE_URL if provided (helpful for some cloud hosts)
 const DB_PATH = process.env.DATABASE_URL || DEFAULT_DB_PATH;
+const DB_TOKEN = process.env.LIBSQL_AUTH_TOKEN;
 
-export const db = createClient({ url: DB_PATH.startsWith("file:") ? DB_PATH : `file:${DB_PATH}` });
+export const db = createClient({ 
+  url: DB_PATH.startsWith("file:") || DB_PATH.includes(":") ? DB_PATH : `file:${DB_PATH}`,
+  authToken: DB_TOKEN
+});
 
 /** Run schema migrations on startup */
 export async function initDb() {
