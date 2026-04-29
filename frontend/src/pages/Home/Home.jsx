@@ -14,6 +14,14 @@ const Home = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
 
+  // Sync searchQuery state with URL parameters (e.g. when searching from navbar)
+  useEffect(() => {
+    const q = searchParams.get("q") || "";
+    if (q !== searchQuery) {
+      setSearchQuery(q);
+    }
+  }, [searchParams]);
+
   const categories = [
     "web-development", "backend", "data-science", 
     "cloud-computing", "database", "blockchain", "mobile"
@@ -54,7 +62,7 @@ const Home = () => {
     if (selectedCategories.length > 0) {
       params.set("categories", selectedCategories.join(","));
     }
-    setSearchParams(params);
+    setSearchParams(params, { replace: true });
   }, [searchQuery, selectedCategories, setSearchParams]);
 
   // Load categories from URL on mount
