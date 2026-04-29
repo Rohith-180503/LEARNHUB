@@ -62,9 +62,10 @@ const Login = () => {
 
     setIsLoading(true);
     try {
-      const exists = await checkEmail(email);
-      setMode(exists ? "login" : "signup");
+      const isExistingUser = await checkEmail(email);
+      setMode(isExistingUser ? "login" : "signup");
       setStep("auth");
+      setErrors({});
     } catch (err) {
       toast.error(err.message);
     } finally {
