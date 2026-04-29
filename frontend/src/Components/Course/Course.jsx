@@ -39,6 +39,10 @@ const Course = ({ course }) => {
             src={img}
             alt={`${title} course`}
             loading="lazy"
+            onError={(e) => {
+              e.target.src = "https://placehold.co/600x400?text=No+Image";
+              e.target.onerror = null;
+            }}
           />
           <button 
             type="button"

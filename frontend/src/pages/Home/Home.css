@@ -101,8 +101,220 @@
   font-size: 1.14rem;
   line-height: 1.6;
   color: var(--secondary-text-color);
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   max-width: 58ch;
+}
+
+.home-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 4rem;
+}
+
+.home-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 2rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.home-hero__cta--primary {
+  background: var(--accent-color);
+  color: #fff;
+  box-shadow: 0 10px 25px var(--accent-glow);
+}
+
+.home-hero__cta--primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px var(--accent-glow);
+}
+
+.home-hero__cta--secondary {
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text-color);
+  border: 1px solid var(--border-strong);
+  backdrop-filter: blur(10px);
+}
+
+.home-hero__cta--secondary:hover {
+  background: #fff;
+  transform: translateY(-2px);
+  border-color: var(--accent-color);
+}
+
+.home-hero__metrics {
+  display: flex;
+  gap: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.home-hero__metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.home-hero__metric strong {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-color);
+  letter-spacing: -0.02em;
+}
+
+.home-hero__metric span {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--secondary-text-color);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Hero Side Panel */
+.home-hero__panel {
+  position: relative;
+  padding: 2.5rem;
+  border-radius: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: var(--shadow-xl);
+}
+
+.home-hero__panel-badge {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.4rem 1rem;
+  background: var(--accent-shine);
+  color: var(--accent-warm);
+  font-weight: 800;
+  font-size: 0.75rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.home-hero__panel-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+.home-hero__tracks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.home-hero__track {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease;
+}
+
+.home-hero__track:hover {
+  background: #fff;
+  transform: translateX(8px);
+}
+
+.home-hero__track-dot {
+  flex-shrink: 0;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  margin-top: 0.4rem;
+}
+
+.home-hero__track-dot--amber { background: var(--accent-warm); }
+.home-hero__track-dot--teal { background: var(--accent-color); }
+.home-hero__track-dot--coral { background: var(--accent-violet); }
+
+.home-hero__track h3 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.home-hero__track p {
+  font-size: 0.85rem;
+  color: var(--secondary-text-color);
+  line-height: 1.4;
+}
+
+/* Silhouettes */
+.home-hero__silhouette {
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+  z-index: 0;
+  filter: grayscale(0.5) contrast(1.2);
+}
+
+.home-hero__silhouette--left {
+  bottom: 0;
+  left: 5%;
+  width: 20%;
+  height: 40%;
+}
+
+.home-hero__silhouette--right {
+  top: 10%;
+  right: 10%;
+  width: 15%;
+  height: 30%;
+}
+
+/* Signature Section */
+.home-signature {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 4rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.home-signature__item {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.home-signature__icon {
+  flex-shrink: 0;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--accent-muted);
+  font-family: serif;
+  font-style: italic;
+  line-height: 1;
+}
+
+.home-signature__item h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.home-signature__item p {
+  font-size: 0.95rem;
+  color: var(--secondary-text-color);
+  line-height: 1.5;
 }
 
 /* Catalog Section */
