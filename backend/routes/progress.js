@@ -4,51 +4,58 @@ import { authenticate } from "../middleware/authenticate.js";
 
 const router = Router();
 
-// ── GET /api/progress/:courseId ─────────────────────────────────────────────
-// Returns which lessons the user has completed for a specific course
+// ── GET /api/progress/:courseId ───────────────────────────────────────────────
+// Returns progress (completed lessons) for a specific course for the current user
 router.get("/:courseId", authenticate, async (req, res) => {
   try {
     const { courseId } = req.params;
+    const userId = req.user.id;
+
     const result = await db.execute({
       sql: `
-        SELECT p.lesson_id 
+        SELECT p.lesson_id, p.completed 
         FROM progress p
         JOIN lessons l ON p.lesson_id = l.id
         JOIN modules m ON l.module_id = m.id
-        WHERE p.user_id = ? AND m.course_id = ? AND p.completed = 1
+        WHERE p.user_id = ? AND m.course_id = ?
       `,
-      args: [req.user.id, courseId]
+      args: [userId, courseId]
     });
-    
-    // Return array of completed lesson IDs
-    res.json(result.rows.map(row => row.lesson_id));
+
+    res.json(result.rows);
   } catch (error) {
     console.error("GET /api/progress error:", error);
     res.status(500).json({ error: "Failed to fetch progress" });
   }
 });
 
-// ── POST /api/progress/:lessonId ────────────────────────────────────────────
-// Mark a lesson as completed (or incomplete if status is passed)
-router.post("/:lessonId", authenticate, async (req, res) => {
+// ── POST /api/progress/toggle ────────────────────────────────────────────────
+// Toggles the completion status of a lesson
+router.post("/toggle", authenticate, async (req, res) => {
   try {
-    const { lessonId } = req.params;
-    const { completed = 1 } = req.body;
+    const { lessonId, completed } = req.body;
+    const userId = req.user.id;
+
+    if (!lessonId) {
+      return res.status(400).json({ error: "Lesson ID is required" });
+    }
+
+    const status = completed ? 1 : 0;
 
     await db.execute({
       sql: `
-        INSERT INTO progress (user_id, lesson_id, completed, updated_at) 
-        VALUES (?, ?, ?, datetime('now'))
-        ON CONFLICT(user_id, lesson_id) DO UPDATE SET 
+        INSERT INTO progress (user_id, lesson_id, completed)
+        VALUES (?, ?, ?)
+        ON CONFLICT(user_id, lesson_id) DO UPDATE SET
           completed = excluded.completed,
-          updated_at = excluded.updated_at
+          updated_at = datetime('now')
       `,
-      args: [req.user.id, lessonId, completed]
+      args: [userId, lessonId, status]
     });
 
-    res.json({ message: "Progress updated" });
+    res.json({ success: true, lessonId, completed: status === 1 });
   } catch (error) {
-    console.error("POST /api/progress error:", error);
+    console.error("POST /api/progress/toggle error:", error);
     res.status(500).json({ error: "Failed to update progress" });
   }
 });

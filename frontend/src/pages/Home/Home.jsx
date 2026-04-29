@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { useDebounce } from "../../hooks/useDebounce";
 import Course from "../../Components/Course/Course";
 import { ENDPOINTS } from "../../config";
 import "./Home.css";
@@ -13,6 +14,8 @@ const Home = () => {
   const [error, setError] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
+  const [sortBy, setSortBy] = useState("relevance"); // "relevance" | "price-low" | "price-high" | "rating"
+  const debouncedSearchQuery = useDebounce(searchQuery, 400);
 
   // Sync searchQuery state with URL parameters (e.g. when searching from navbar)
   useEffect(() => {
@@ -33,7 +36,7 @@ const Home = () => {
       setIsLoading(true);
       try {
         const params = new URLSearchParams();
-        if (searchQuery) params.set("search", searchQuery);
+        if (debouncedSearchQuery) params.set("search", debouncedSearchQuery);
         if (selectedCategories.length === 1) {
           params.set("category", selectedCategories[0]);
         }
@@ -53,7 +56,14 @@ const Home = () => {
     };
 
     fetchCourses();
-  }, [searchQuery, selectedCategories]);
+  }, [debouncedSearchQuery, selectedCategories]);
+
+  const sortedCourses = [...courses].sort((a, b) => {
+    if (sortBy === "price-low") return a.price - b.price;
+    if (sortBy === "price-high") return b.price - a.price;
+    if (sortBy === "rating") return b.rating - a.rating;
+    return 0; // Default relevance (API order)
+  });
 
   // Update URL when search or categories change
   useEffect(() => {
@@ -248,13 +258,33 @@ const Home = () => {
             </aside>
 
             <div className="catalog-content">
+              <div className="home-results-header">
+                <div className="results-count">
+                  <h2>{courses.length} programs available</h2>
+                </div>
+                <div className="results-sort">
+                  <label htmlFor="sort">Sort by:</label>
+                  <select 
+                    id="sort" 
+                    value={sortBy} 
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="sort-select"
+                  >
+                    <option value="relevance">Relevance</option>
+                    <option value="rating">Highest Rated</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                  </select>
+                </div>
+              </div>
+
               {isLoading ? (
-                <div className="loading-state">Loading courses...</div>
+                <div className="home-loading">Loading amazing courses...</div>
               ) : error ? (
-                <div className="error-state">{error}</div>
-              ) : courses.length > 0 ? (
-                <div className="course-grid">
-                  {courses.map((course) => (
+                <div className="home-error">{error}</div>
+              ) : sortedCourses.length > 0 ? (
+                <div className="home-course-grid">
+                  {sortedCourses.map((course) => (
                     <Course key={course.id} course={course} />
                   ))}
                 </div>

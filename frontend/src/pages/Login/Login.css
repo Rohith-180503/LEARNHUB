@@ -344,6 +344,25 @@
   transform: none;
 }
 
+.back-btn {
+  background: none;
+  border: none;
+  color: var(--secondary-text-color);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  width: fit-content;
+  margin-inline: auto;
+  transition: color 0.2s ease;
+}
+
+.back-btn:hover {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+
 .spinner {
   width: 20px;
   height: 20px;

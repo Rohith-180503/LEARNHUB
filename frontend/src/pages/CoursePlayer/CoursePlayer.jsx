@@ -32,7 +32,9 @@ export default function CoursePlayer() {
       const pRes = await fetch(`${API}/progress/${courseId}`, { credentials: "include" });
       const pData = await pRes.json();
       if (pRes.ok) {
-        setCompletedLessons(pData); // Array of IDs
+        // Extract lesson IDs that are completed
+        const completedIds = pData.filter(p => p.completed === 1).map(p => p.lesson_id);
+        setCompletedLessons(completedIds);
       }
     } catch (e) {
       console.error("Failed to load player data:", e);
@@ -46,23 +48,31 @@ export default function CoursePlayer() {
   }, [fetchCourseAndProgress]);
 
   const toggleComplete = async (lessonId) => {
-    const isCompleted = completedLessons.includes(lessonId);
+    const isCurrentlyCompleted = completedLessons.includes(lessonId);
     try {
-      const res = await fetch(`${API}/progress/${lessonId}`, {
+      const res = await fetch(`${API}/progress/toggle`, {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ completed: isCompleted ? 0 : 1 }),
+        body: JSON.stringify({ 
+          lessonId,
+          completed: !isCurrentlyCompleted 
+        }),
       });
       if (res.ok) {
         setCompletedLessons(prev => 
-          isCompleted ? prev.filter(id => id !== lessonId) : [...prev, lessonId]
+          isCurrentlyCompleted ? prev.filter(id => id !== lessonId) : [...prev, lessonId]
         );
       }
     } catch (e) {
       console.error("Progress update failed:", e);
     }
   };
+
+  const totalLessons = curriculum.reduce((acc, mod) => acc + (mod.lessons?.length || 0), 0);
+  const progressPercentage = totalLessons > 0 
+    ? Math.round((completedLessons.length / totalLessons) * 100) 
+    : 0;
 
   if (isLoading) return <div className="course-player-layout loading">Loading learning environment...</div>;
   if (!course) return <div className="course-player-error">Course not found.</div>;
@@ -158,6 +168,19 @@ export default function CoursePlayer() {
         <div className="sidebar-header">
           <h3>Course Content</h3>
           <Link to="/" className="back-to-dash">Exit Course</Link>
+        </div>
+
+        <div className="progress-container">
+          <div className="progress-info">
+            <span>{progressPercentage}% Complete</span>
+            <span>{completedLessons.length}/{totalLessons} Lessons</span>
+          </div>
+          <div className="progress-bar-bg">
+            <div 
+              className="progress-bar-fill" 
+              style={{ width: `${progressPercentage}%` }}
+            ></div>
+          </div>
         </div>
         
         <div className="curriculum-list">

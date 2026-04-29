@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useCart } from "../../context/CartContext";
+import { useWishlist } from "../../context/WishlistContext";
 import "./Course.css";
 
 const Course = ({ course }) => {
   const { title, instructor, price, img, id, category, rating } = course;
   const { cart, addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
 
   const isEnrolled = cart.some((item) => item.id === course.id);
+  const isWishlisted = isInWishlist(id);
   const formattedPrice =
     typeof price === "number" ? `$${price.toFixed(2)}` : price;
 
@@ -37,6 +40,19 @@ const Course = ({ course }) => {
             alt={`${title} course`}
             loading="lazy"
           />
+          <button 
+            type="button"
+            className={`course-card__wishlist ${isWishlisted ? "active" : ""}`}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleWishlist(id);
+              toast.success(isWishlisted ? "Removed from wishlist" : "Added to wishlist");
+            }}
+            aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+          >
+            <span className="heart-icon">{isWishlisted ? "❤️" : "🤍"}</span>
+          </button>
         </div>
 
         <div className="course-card__body">

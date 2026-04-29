@@ -2,6 +2,7 @@ import { Navigate, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./styles/App.css";
 import { CartProvider } from "./context/CartContext";
+import { WishlistProvider } from "./context/WishlistContext";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import Navbar from "./Components/Navbar/Navbar";
 import Cart from "./Components/Cart/Cart";
@@ -91,7 +92,9 @@ function App() {
   return (
     <AuthProvider>
       <CartProvider>
-        <AppShell />
+        <WishlistProvider>
+          <AppShell />
+        </WishlistProvider>
       </CartProvider>
     </AuthProvider>
   );

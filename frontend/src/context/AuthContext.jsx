@@ -25,6 +25,13 @@ export function AuthProvider({ children }) {
       .finally(() => setIsLoading(false));
   }, []);
 
+  const checkEmail = useCallback(async (email) => {
+    const res = await fetch(`${API}/check-email/${encodeURIComponent(email)}`);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error ?? "Failed to check email.");
+    return data.exists;
+  }, []);
+
   const register = useCallback(async (name, email, password) => {
     const res = await fetch(`${API}/register`, {
       method: "POST",
@@ -88,9 +95,10 @@ export function AuthProvider({ children }) {
       logout, 
       loginWithGoogle,
       forgotPassword,
-      resetPassword
+      resetPassword,
+      checkEmail
     }),
-    [user, isLoading, login, register, logout, loginWithGoogle, forgotPassword, resetPassword]
+    [user, isLoading, login, register, logout, loginWithGoogle, forgotPassword, resetPassword, checkEmail]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

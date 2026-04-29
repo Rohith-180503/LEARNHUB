@@ -41,6 +41,24 @@ function firstRow(rs) {
   return rs.rows[0];
 }
 
+// ── GET /api/auth/check-email/:email ──────────────────────────────────────────
+// Checks if an email exists in the database
+router.get("/check-email/:email", async (req, res) => {
+  try {
+    const { email } = req.params;
+    const user = firstRow(
+      await db.execute({
+        sql: "SELECT id FROM users WHERE email = ?",
+        args: [email.trim().toLowerCase()],
+      })
+    );
+    res.json({ exists: !!user });
+  } catch (err) {
+    console.error("Check email error:", err);
+    res.status(500).json({ error: "Internal server error." });
+  }
+});
+
 // ── POST /api/auth/register ───────────────────────────────────────────────────
 router.post("/register", async (req, res) => {
   try {
