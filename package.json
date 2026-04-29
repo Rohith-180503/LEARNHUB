@@ -2,11 +2,13 @@
   "name": "learnhub-root",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "cd frontend && npm run dev",
-    "backend": "cd backend && node server.js",
-    "install-frontend": "cd frontend && npm install",
-    "install-backend": "cd backend && npm install",
-    "install-all": "npm run install-frontend && npm run install-backend"
+    "dev": "cd frontend ; npm run dev",
+    "backend": "cd backend ; node server.js",
+    "install-frontend": "cd frontend ; npm install",
+    "install-backend": "cd backend ; npm install",
+    "install-all": "npm run install-frontend ; npm run install-backend",
+    "clean": "Remove-Item -Path frontend/dist, frontend/node_modules/.vite -Recurse -Force -ErrorAction SilentlyContinue"
   }
 }

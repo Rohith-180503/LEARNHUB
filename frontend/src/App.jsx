@@ -1,6 +1,5 @@
 import { Navigate, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import "./styles/App.css";
 import { CartProvider } from "./context/CartContext";
 import { WishlistProvider } from "./context/WishlistContext";
 import { AuthProvider, useAuth } from "./context/AuthContext";

@@ -23,7 +23,7 @@ const Home = () => {
     if (q !== searchQuery) {
       setSearchQuery(q);
     }
-  }, [searchParams]);
+  }, [searchParams, searchQuery]);
 
   const categories = [
     "web-development", "backend", "data-science", 
